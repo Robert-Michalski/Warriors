@@ -10,6 +10,27 @@ public class Battle {
             }
         }
         return warrior1.isAlive();
+    }
 
+    public static boolean fight(Army army1, Army army2) {
+        int army1Length = army1.getArmy().size();
+        int army2Length = army2.getArmy().size();
+
+        int army1WarriorIndex = 0;
+        int army2WarriorIndex = 0;
+
+        Warrior army1LastWarrior = army1.getArmy().get(army1Length - 1);
+        Warrior army2LastWarrior = army2.getArmy().get(army2Length - 1);
+
+        while (army1LastWarrior.isAlive() && army2LastWarrior.isAlive()) {
+            if(fight(army1.getArmy().get(army1WarriorIndex), army2.getArmy().get(army2WarriorIndex))){
+                army2WarriorIndex++;
+            }
+            else {
+                army1WarriorIndex++;
+            }
+        }
+
+        return army1LastWarrior.isAlive();
     }
 }

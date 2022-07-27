@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestSuit {
+class OneOnOneBattleTest {
     @Test
     @DisplayName("Warrior fights knight, warrior should lose")
     void test01() {

@@ -5,4 +5,12 @@ public class Knight extends Warrior {
     public int getAttack() {
         return ATTACK;
     }
+
+    @Override
+    public String toString() {
+        return "Knight{" +
+                "health=" + getHealth() +
+                "attack=" + ATTACK +
+                '}';
+    }
 }
