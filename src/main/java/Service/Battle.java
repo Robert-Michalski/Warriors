@@ -5,6 +5,7 @@ import Model.Warrior;
 
 public class Battle {
     private Battle() {
+        throw new IllegalArgumentException();
     }
 
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
