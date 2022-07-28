@@ -1,3 +1,8 @@
+package Model;
+
+import Model.Knight;
+import Model.Warrior;
+import Service.Battle;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -5,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OneOnOneBattleTest {
     @Test
-    @DisplayName("Warrior fights knight, warrior should lose")
+    @DisplayName("Model.Warrior fights knight, warrior should lose")
     void test01() {
         var carl = new Knight();
         var dave = new Warrior();
@@ -14,7 +19,7 @@ class OneOnOneBattleTest {
     }
 
     @Test
-    @DisplayName("Knight hits Warrior, Warrior health is reduced by Knight' attack")
+    @DisplayName("Model.Knight hits Model.Warrior, Model.Warrior health is reduced by Model.Knight' attack")
     void test02() {
         var carl = new Knight();
         var dave = new Warrior();

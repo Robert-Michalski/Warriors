@@ -1,3 +1,6 @@
+package Model;
+
+import Service.Battle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,7 @@ class Rookie extends Warrior {
 
     @Override
     public String toString() {
-        return "Rookie{" +
+        return "Model.Rookie{" +
                 "health=" + getHealth() +
                 "attack=" + ATTACK +
                 '}';
@@ -35,17 +38,17 @@ public class DefenderTests {
         var lancelot = new Defender();
 
         var myArmy = new Army()
-                .addUnits("Defender", 1);
+                .addUnits("Model.Defender", 1);
 
         var enemyArmy = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits("Model.Warrior", 2);
 
         var army3 = new Army()
-                .addUnits("Warrior", 1)
-                .addUnits("Defender", 1);
+                .addUnits("Model.Warrior", 1)
+                .addUnits("Model.Defender", 1);
 
         var army4 = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits("Model.Warrior", 2);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(Battle.fight(chuck, bruce)),
                 () -> Assertions.assertFalse(Battle.fight(dave, carl)),
@@ -64,11 +67,11 @@ public class DefenderTests {
 
     }
 
-    //class Rookie only for testing
+    //class Model.Rookie only for testing
 
 
     @Test
-    @DisplayName("Given battle between a Warrior and a Knight then Warrior loses")
+    @DisplayName("Given battle between a Model.Warrior and a Model.Knight then Model.Warrior loses")
     void test01() {
         var carl = new Warrior();
         var jim = new Knight();
@@ -77,7 +80,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Knight and a Warrior then Knight wins")
+    @DisplayName("Given battle between a Model.Knight and a Model.Warrior then Model.Knight wins")
     void test02() {
         var ramon = new Knight();
         var slevin = new Warrior();
@@ -86,7 +89,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Warrior and a Warrior then first Warrior to attack survives")
+    @DisplayName("Given battle between a Model.Warrior and a Model.Warrior then first Model.Warrior to attack survives")
     void test03() {
         var bob = new Warrior();
         var mars = new Warrior();
@@ -96,7 +99,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Knight and a Warrior then Knight survives")
+    @DisplayName("Given battle between a Model.Knight and a Model.Warrior then Model.Knight survives")
     void test04() {
         var zeus = new Knight();
         var godkiller = new Warrior();
@@ -106,7 +109,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Warrior and a Warrior then second to attack is dead")
+    @DisplayName("Given battle between a Model.Warrior and a Model.Warrior then second to attack is dead")
     void test05() {
         var husband = new Warrior();
         var wife = new Warrior();
@@ -116,7 +119,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Warrior and a Knight then knight survives")
+    @DisplayName("Given battle between a Model.Warrior and a Model.Knight then knight survives")
     void test06() {
         var dragon = new Warrior();
         var knight = new Knight();
@@ -126,7 +129,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Warrior and a Knight then this Knight and new Warrior then new Warrior wins")
+    @DisplayName("Given battle between a Model.Warrior and a Model.Knight then this Model.Knight and new Model.Warrior then new Model.Warrior wins")
     void test07() {
         var unit1 = new Warrior();
         var unit2 = new Knight();
@@ -137,7 +140,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Defender and a Rookie then the Defender' health is 60")
+    @DisplayName("Given battle between a Model.Defender and a Model.Rookie then the Model.Defender' health is 60")
     void test08() {
         var unit1 = new Defender();
         var unit2 = new Rookie();
@@ -148,8 +151,8 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Defender and a Rookie then a battle between the Rookie and a new Warrior" +
-            "then Defender wins all")
+    @DisplayName("Given battle between a Model.Defender and a Model.Rookie then a battle between the Model.Rookie and a new Model.Warrior" +
+            "then Model.Defender wins all")
     void test09() {
         var unit1 = new Defender();
         var unit2 = new Rookie();
@@ -160,88 +163,88 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 1 Warrior unit and second with 2 Warrior units then" +
+    @DisplayName("Given battle of two armies one with 1 Model.Warrior unit and second with 2 Model.Warrior units then" +
             " first army loses")
     void test10() {
         var army1 = new Army()
-                .addUnits("Warrior", 1);
+                .addUnits("Model.Warrior", 1);
         var army2 = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits("Model.Warrior", 2);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
 
     }
 
     @Test
-    @DisplayName("Given battle of two armies one wtih 2 Warrior units and second with 3 Warrior units" +
+    @DisplayName("Given battle of two armies one wtih 2 Model.Warrior units and second with 3 Model.Warrior units" +
             "then first army loses")
     void test11() {
         var army1 = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits("Model.Warrior", 2);
         var army2 = new Army()
-                .addUnits("Warrior", 3);
+                .addUnits("Model.Warrior", 3);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 5 Warrior units and second with 7 Warrior units" +
+    @DisplayName("Given battle of two armies one with 5 Model.Warrior units and second with 7 Model.Warrior units" +
             "then first army loses")
     void test12() {
         var army1 = new Army()
-                .addUnits("Warrior", 5);
+                .addUnits("Model.Warrior", 5);
         var army2 = new Army()
-                .addUnits("Warrior", 7);
+                .addUnits("Model.Warrior", 7);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 20 Warrior units and second with 21 Warrior units" +
+    @DisplayName("Given battle of two armies one with 20 Model.Warrior units and second with 21 Model.Warrior units" +
             "then first army wins")
     void test13() {
         var army1 = new Army()
-                .addUnits("Warrior", 20);
+                .addUnits("Model.Warrior", 20);
         var army2 = new Army()
-                .addUnits("Warrior", 21);
+                .addUnits("Model.Warrior", 21);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 10 Warrior units and second with 11 Warrior units" +
+    @DisplayName("Given battle of two armies one with 10 Model.Warrior units and second with 11 Model.Warrior units" +
             "then first army wins")
     void test14() {
         var army1 = new Army()
-                .addUnits("Warrior", 10);
+                .addUnits("Model.Warrior", 10);
         var army2 = new Army()
-                .addUnits("Warrior", 11);
+                .addUnits("Model.Warrior", 11);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 11 Warrior units and second with 7 Warrior units" +
+    @DisplayName("Given battle of two armies one with 11 Model.Warrior units and second with 7 Model.Warrior units" +
             "then first army wins")
     void test15() {
         var army1 = new Army()
-                .addUnits("Warrior", 11);
+                .addUnits("Model.Warrior", 11);
         var army2 = new Army()
-                .addUnits("Warrior", 7);
+                .addUnits("Model.Warrior", 7);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
 
     @Test
     @DisplayName("Given battle of two armies one with 5 Warriors, 4 Defenders, 5 Defenders and second " +
-            "with 4 Warrior units then first army wins")
+            "with 4 Model.Warrior units then first army wins")
     void test16() {
         var army1 = new Army()
-                .addUnits("Warrior", 5)
-                .addUnits("Defender", 4)
-                .addUnits("Defender", 5);
+                .addUnits("Model.Warrior", 5)
+                .addUnits("Model.Defender", 4)
+                .addUnits("Model.Defender", 5);
         var army2 = new Army()
-                .addUnits("Warrior", 4);
+                .addUnits("Model.Warrior", 4);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
@@ -251,12 +254,12 @@ public class DefenderTests {
             "with 21 Warriors then first army wins")
     void test17() {
         var army1 = new Army()
-                .addUnits("Defender", 5)
-                .addUnits("Warrior", 20);
+                .addUnits("Model.Defender", 5)
+                .addUnits("Model.Warrior", 20);
         var army2 = new Army()
-                .addUnits("Warrior", 21);
+                .addUnits("Model.Warrior", 21);
 
-        army1.addUnits("Defender", 4);
+        army1.addUnits("Model.Defender", 4);
 
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -267,27 +270,27 @@ public class DefenderTests {
             "with 5 Warriors then first army wins")
     void test18() {
         var army1 = new Army()
-                .addUnits("Warrior", 10)
-                .addUnits("Defender", 5);
+                .addUnits("Model.Warrior", 10)
+                .addUnits("Model.Defender", 5);
         var army2 = new Army()
-                .addUnits("Warrior", 5);
+                .addUnits("Model.Warrior", 5);
 
-        army1.addUnits("Defender", 10);
+        army1.addUnits("Model.Defender", 10);
 
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 2 Defenders, 1 Warrior and 1 Defender and second" +
+    @DisplayName("Given battle of two armies one with 2 Defenders, 1 Model.Warrior and 1 Model.Defender and second" +
             "with 5 Warriors then first army loses")
     void test19() {
         var army1 = new Army()
-                .addUnits("Defender", 2)
-                .addUnits("Warrior", 1)
-                .addUnits("Defender", 1);
+                .addUnits("Model.Defender", 2)
+                .addUnits("Model.Warrior", 1)
+                .addUnits("Model.Defender", 1);
         var army2 = new Army()
-                .addUnits("Warrior", 5);
+                .addUnits("Model.Warrior", 5);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
     }

@@ -1,3 +1,8 @@
+package Service;
+
+import Model.Army;
+import Model.Warrior;
+
 public class Battle {
     private Battle() {
     }

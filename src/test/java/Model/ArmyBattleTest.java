@@ -1,3 +1,9 @@
+package Model;
+
+import Model.Army;
+import Model.Knight;
+import Model.Warrior;
+import Service.Battle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,17 +21,17 @@ class ArmyBattleTest {
         var mark = new Warrior();
 
         var myArmy = new Army();
-        myArmy.addUnits("Knight", 3);
+        myArmy.addUnits("Model.Knight", 3);
 
         var enemyArmy = new Army();
-        enemyArmy.addUnits("Warrior", 3);
+        enemyArmy.addUnits("Model.Warrior", 3);
 
         var army3 = new Army();
-        army3.addUnits("Warrior", 20);
-        army3.addUnits("Knight", 5);
+        army3.addUnits("Model.Warrior", 20);
+        army3.addUnits("Model.Knight", 5);
 
         var army4 = new Army();
-        army4.addUnits("Warrior", 30);
+        army4.addUnits("Model.Warrior", 30);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(Battle.fight(chuck, bruce)),
                 () -> Assertions.assertFalse(Battle.fight(dave, carl)),
@@ -45,10 +51,10 @@ class ArmyBattleTest {
     @DisplayName("Creating warrior creates a warrior")
     void test02() {
         Army army = new Army();
-        army.addUnits("Warrior", 1);
+        army.addUnits("Model.Warrior", 1);
         Assertions.assertAll(
-                () -> Assertions.assertSame("Warrior", army.getTroops().get(0).getClass().getName()),
-                () -> Assertions.assertNotSame("Knight", army.getTroops().get(0).getClass().getName())
+                () -> Assertions.assertSame("Model.Warrior", army.getTroops().get(0).getClass().getName()),
+                () -> Assertions.assertNotSame("Model.Knight", army.getTroops().get(0).getClass().getName())
         );
     }
 
@@ -56,21 +62,21 @@ class ArmyBattleTest {
     @DisplayName("Creating knight creates a knight")
     void test03() {
         Army army = new Army();
-        army.addUnits("Knight", 1);
+        army.addUnits("Model.Knight", 1);
         Assertions.assertAll(
-                () -> Assertions.assertNotSame("Warrior", army.getTroops().get(0).getClass().getName()),
-                () -> Assertions.assertSame("Knight", army.getTroops().get(0).getClass().getName())
+                () -> Assertions.assertNotSame("Model.Warrior", army.getTroops().get(0).getClass().getName()),
+                () -> Assertions.assertSame("Model.Knight", army.getTroops().get(0).getClass().getName())
         );
 
     }
 
     @Test
-    @DisplayName("Given two armies - one having a Warrior second having a Knight then army with Knight should win")
+    @DisplayName("Given two armies - one having a Model.Warrior second having a Model.Knight then army with Model.Knight should win")
     void test04() {
         Army myArmy = new Army();
-        myArmy.addUnits("Warrior", 1);
+        myArmy.addUnits("Model.Warrior", 1);
         Army enemyArmy = new Army();
-        enemyArmy.addUnits("Knight", 1);
+        enemyArmy.addUnits("Model.Knight", 1);
 
         Assertions.assertFalse(Battle.fight(myArmy, enemyArmy));
     }
@@ -79,9 +85,9 @@ class ArmyBattleTest {
     @DisplayName("Given two armies - one with two warriors and second with one warriors then first army should win")
     void test05() {
         Army myArmy = new Army();
-        myArmy.addUnits("Warrior", 2);
+        myArmy.addUnits("Model.Warrior", 2);
         Army enemyArmy = new Army();
-        enemyArmy.addUnits("Warrior", 1);
+        enemyArmy.addUnits("Model.Warrior", 1);
 
         Assertions.assertTrue(Battle.fight(myArmy, enemyArmy));
     }
@@ -90,9 +96,9 @@ class ArmyBattleTest {
     @DisplayName("Given two armies - one with one warrior and second with two warriors then second army should win")
     void test06() {
         Army myArmy = new Army();
-        myArmy.addUnits("Warrior", 1);
+        myArmy.addUnits("Model.Warrior", 1);
         Army enemyArmy = new Army();
-        enemyArmy.addUnits("Warrior", 2);
+        enemyArmy.addUnits("Model.Warrior", 2);
 
         Assertions.assertFalse(Battle.fight(myArmy, enemyArmy));
     }
@@ -102,8 +108,8 @@ class ArmyBattleTest {
     void test07() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 2);
-        army2.addUnits("Warrior", 3);
+        army1.addUnits("Model.Warrior", 2);
+        army2.addUnits("Model.Warrior", 3);
         Assertions.assertFalse(Battle.fight(army1, army2));
     }
 
@@ -112,8 +118,8 @@ class ArmyBattleTest {
     void test08() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 5);
-        army2.addUnits("Warrior", 7);
+        army1.addUnits("Model.Warrior", 5);
+        army2.addUnits("Model.Warrior", 7);
         Assertions.assertFalse(Battle.fight(army1, army2));
     }
 
@@ -122,8 +128,8 @@ class ArmyBattleTest {
     void test09() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 20);
-        army2.addUnits("Warrior", 21);
+        army1.addUnits("Model.Warrior", 20);
+        army2.addUnits("Model.Warrior", 21);
         Assertions.assertTrue(Battle.fight(army1, army2));
     }
 
@@ -132,8 +138,8 @@ class ArmyBattleTest {
     void test10() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 10);
-        army2.addUnits("Warrior", 11);
+        army1.addUnits("Model.Warrior", 10);
+        army2.addUnits("Model.Warrior", 11);
         Assertions.assertTrue(Battle.fight(army1, army2));
     }
 
@@ -142,8 +148,8 @@ class ArmyBattleTest {
     void test11() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 11);
-        army2.addUnits("Warrior", 7);
+        army1.addUnits("Model.Warrior", 11);
+        army2.addUnits("Model.Warrior", 7);
         Assertions.assertTrue(Battle.fight(army1, army2));
     }
 
@@ -152,8 +158,8 @@ class ArmyBattleTest {
     void test12() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 5);
-        army2.addUnits("Knight", 7);
+        army1.addUnits("Model.Warrior", 5);
+        army2.addUnits("Model.Knight", 7);
         Assertions.assertFalse(Battle.fight(army1, army2));
     }
 
@@ -162,9 +168,9 @@ class ArmyBattleTest {
     void test13() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 5);
-        army1.addUnits("Warrior", 6);
-        army2.addUnits("Warrior", 7);
+        army1.addUnits("Model.Warrior", 5);
+        army1.addUnits("Model.Warrior", 6);
+        army2.addUnits("Model.Warrior", 7);
         Assertions.assertTrue(Battle.fight(army1, army2));
     }
 
@@ -173,10 +179,10 @@ class ArmyBattleTest {
     void test14() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 5);
-        army1.addUnits("Knight", 1);
-        army2.addUnits("Warrior", 6);
-        army2.addUnits("Knight", 1);
+        army1.addUnits("Model.Warrior", 5);
+        army1.addUnits("Model.Knight", 1);
+        army2.addUnits("Model.Warrior", 6);
+        army2.addUnits("Model.Knight", 1);
         Assertions.assertFalse(Battle.fight(army1, army2));
     }
 
@@ -185,9 +191,9 @@ class ArmyBattleTest {
     void test15() {
         Army army1 = new Army();
         Army army2 = new Army();
-        army1.addUnits("Warrior", 1);
-        army1.addUnits("Knight", 4);
-        army2.addUnits("Warrior", 6);
+        army1.addUnits("Model.Warrior", 1);
+        army1.addUnits("Model.Knight", 4);
+        army2.addUnits("Model.Warrior", 6);
         Assertions.assertTrue(Battle.fight(army1,army2));
     }
     @Test
@@ -195,10 +201,10 @@ class ArmyBattleTest {
             " but with fluent interface")
     void test16() {
         Army army1 = new Army()
-                .addUnits("Warrior", 1)
-                .addUnits("Knight", 4);
+                .addUnits("Model.Warrior", 1)
+                .addUnits("Model.Knight", 4);
         Army army2 = new Army()
-                .addUnits("Warrior", 6);
+                .addUnits("Model.Warrior", 6);
         Assertions.assertTrue(Battle.fight(army1,army2));
     }
 

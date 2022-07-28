@@ -1,3 +1,7 @@
+package Model;
+
+import Model.Warrior;
+
 public class Knight extends Warrior {
     private static final int ATTACK = 7;
 
@@ -8,7 +12,7 @@ public class Knight extends Warrior {
 
     @Override
     public String toString() {
-        return "Knight{" +
+        return "Model.Knight{" +
                 "health=" + getHealth() +
                 "attack=" + ATTACK +
                 '}';

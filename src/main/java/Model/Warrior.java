@@ -1,3 +1,5 @@
+package Model;
+
 public class Warrior implements Unit {
     private int health = 50;
     private static final int ATTACK = 5;
@@ -10,7 +12,7 @@ public class Warrior implements Unit {
         return ATTACK;
     }
 
-    int getHealth() {
+    public int getHealth() {
         return health;
     }
     public void setHealth(int health) {
@@ -30,7 +32,7 @@ public class Warrior implements Unit {
 
     @Override
     public String toString() {
-        return "Warrior{" +
+        return "Model.Warrior{" +
                 "health=" + health +
                 "attack=" + ATTACK +
                 '}';

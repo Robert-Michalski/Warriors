@@ -1,4 +1,6 @@
-public class Defender extends Warrior{
+package Model;
+
+public class Defender extends Warrior {
     private int health=60;
     private static final int ATTACK = 3;
     private static final int DEFENSE = 2;
@@ -22,7 +24,7 @@ public class Defender extends Warrior{
 
     @Override
     public String toString() {
-        return "Defender{" +
+        return "Model.Defender{" +
                 "health=" + health +
                 "attack=" + ATTACK +
                 "defense=" + DEFENSE +

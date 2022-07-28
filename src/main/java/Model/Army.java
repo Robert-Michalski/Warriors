@@ -1,3 +1,7 @@
+package Model;
+
+import Service.WarriorFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +14,7 @@ public class Army {
         warriorFactory = new WarriorFactory();
     }
 
-    List<Warrior> getTroops() {
+    public List<Warrior> getTroops() {
         return troops;
     }
 
