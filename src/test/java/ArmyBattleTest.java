@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
+//TODO change string types to enum types
 class ArmyBattleTest {
     @Test
     @DisplayName("Smoke show test to check if code works")
@@ -45,8 +47,8 @@ class ArmyBattleTest {
         Army army = new Army();
         army.addUnits("Warrior", 1);
         Assertions.assertAll(
-                () -> Assertions.assertSame("Warrior", army.getArmy().get(0).getClass().getName()),
-                () -> Assertions.assertNotSame("Knight", army.getArmy().get(0).getClass().getName())
+                () -> Assertions.assertSame("Warrior", army.getTroops().get(0).getClass().getName()),
+                () -> Assertions.assertNotSame("Knight", army.getTroops().get(0).getClass().getName())
         );
     }
 
@@ -56,8 +58,8 @@ class ArmyBattleTest {
         Army army = new Army();
         army.addUnits("Knight", 1);
         Assertions.assertAll(
-                () -> Assertions.assertNotSame("Warrior", army.getArmy().get(0).getClass().getName()),
-                () -> Assertions.assertSame("Knight", army.getArmy().get(0).getClass().getName())
+                () -> Assertions.assertNotSame("Warrior", army.getTroops().get(0).getClass().getName()),
+                () -> Assertions.assertSame("Knight", army.getTroops().get(0).getClass().getName())
         );
 
     }
@@ -156,7 +158,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 11 warriors second iwth 7 warriors then first wins")
+    @DisplayName("Given two armies - one with 11 warriors second with 7 warriors then first wins")
     void test13() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -188,4 +190,16 @@ class ArmyBattleTest {
         army2.addUnits("Warrior", 6);
         Assertions.assertTrue(Battle.fight(army1,army2));
     }
+    @Test
+    @DisplayName("Given two armies - one with 1 warrior and 4 knights and second with 6 warriors then first wins" +
+            " but with fluent interface")
+    void test16() {
+        Army army1 = new Army()
+                .addUnits("Warrior", 1)
+                .addUnits("Knight", 4);
+        Army army2 = new Army()
+                .addUnits("Warrior", 6);
+        Assertions.assertTrue(Battle.fight(army1,army2));
+    }
+
 }

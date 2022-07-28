@@ -2,9 +2,8 @@ public class Warrior implements Unit {
     private int health = 50;
     private static final int ATTACK = 5;
 
-
     public boolean isAlive() {
-        return health > 0;
+        return getHealth() > 0;
     }
 
     public int getAttack() {
@@ -14,9 +13,19 @@ public class Warrior implements Unit {
     int getHealth() {
         return health;
     }
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     public void attack(Warrior enemy) {
-        enemy.health -= getAttack();
+        if(enemy instanceof Defender){
+            if(getAttack() > ((Defender) enemy).getDefense()){
+                enemy.setHealth(enemy.getHealth() - (getAttack() - ((Defender) enemy).getDefense()));
+            }
+        }
+        else {
+            enemy.setHealth(enemy.getHealth()-getAttack());
+        }
     }
 
     @Override

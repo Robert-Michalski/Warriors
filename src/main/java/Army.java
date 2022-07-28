@@ -2,21 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Army {
-    private final List<Warrior> army;
+    private final List<Warrior> troops;
     WarriorFactory warriorFactory;
 
     public Army() {
-        army = new ArrayList<>();
+        troops = new ArrayList<>();
         warriorFactory = new WarriorFactory();
     }
 
-    List<Warrior> getArmy() {
-        return army;
+    List<Warrior> getTroops() {
+        return troops;
     }
 
-    public void addUnits(String type, int quantity) {
+    public Army addUnits(String type, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            army.add(warriorFactory.getInstance(type));
+            troops.add(warriorFactory.getInstance(type));
         }
+        return this;
     }
 }

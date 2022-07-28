@@ -8,6 +8,9 @@ public class WarriorFactory {
             case "Knight" -> {
                 return new Knight();
             }
+            case "Defender" -> {
+                return new Defender();
+            }
             default -> throw new IllegalArgumentException();
         }
     }
