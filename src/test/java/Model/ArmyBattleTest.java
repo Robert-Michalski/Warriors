@@ -1,8 +1,5 @@
 package Model;
 
-import Model.Army;
-import Model.Knight;
-import Model.Warrior;
 import Service.Battle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -53,8 +50,8 @@ class ArmyBattleTest {
         Army army = new Army();
         army.addUnits("Warrior", 1);
         Assertions.assertAll(
-                () -> Assertions.assertSame("Warrior", army.getTroops().get(0).getClass().getName()),
-                () -> Assertions.assertNotSame("Knight", army.getTroops().get(0).getClass().getName())
+                () -> Assertions.assertSame("Model.Warrior", army.getTroops().get(0).getClass().getName()),
+                () -> Assertions.assertNotSame("Model.Knight", army.getTroops().get(0).getClass().getName())
         );
     }
 
@@ -64,8 +61,8 @@ class ArmyBattleTest {
         Army army = new Army();
         army.addUnits("Knight", 1);
         Assertions.assertAll(
-                () -> Assertions.assertNotSame("Warrior", army.getTroops().get(0).getClass().getName()),
-                () -> Assertions.assertSame("Knight", army.getTroops().get(0).getClass().getName())
+                () -> Assertions.assertNotSame("Model.Warrior", army.getTroops().get(0).getClass().getName()),
+                () -> Assertions.assertSame("Model.Knight", army.getTroops().get(0).getClass().getName())
         );
 
     }
