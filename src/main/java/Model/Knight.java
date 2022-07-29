@@ -1,6 +1,5 @@
 package Model;
 
-import Model.Warrior;
 
 public class Knight extends Warrior {
     private static final int ATTACK = 7;

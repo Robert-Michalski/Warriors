@@ -10,6 +10,7 @@ public class Defender extends Warrior {
         return health;
     }
 
+    @Override
     public void setHealth(int health) {
         this.health = health;
     }
