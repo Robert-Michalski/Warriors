@@ -51,7 +51,7 @@ class ArmyBattleTest {
         army.addUnits("Warrior", 1);
         Assertions.assertAll(
                 () -> Assertions.assertSame("Model.Warrior", army.getTroops().get(0).getClass().getName()),
-                () -> Assertions.assertNotSame("Model.Knight", army.getTroops().get(0).getClass().getName())
+                () -> Assertions.assertNotSame("Knight", army.getTroops().get(0).getClass().getName())
         );
     }
 
@@ -68,7 +68,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one having a Model.Warrior second having a Model.Knight then army with Model.Knight should win")
+    @DisplayName("Given two armies - one having a Warrior second having a Knight then army with Knight should win")
     void test04() {
         Army myArmy = new Army();
         myArmy.addUnits("Warrior", 1);

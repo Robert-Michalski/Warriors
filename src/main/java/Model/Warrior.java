@@ -32,7 +32,7 @@ public class Warrior implements Unit {
 
     @Override
     public String toString() {
-        return "Model.Warrior{" +
+        return "Warrior{" +
                 "health=" + health +
                 "attack=" + ATTACK +
                 '}';

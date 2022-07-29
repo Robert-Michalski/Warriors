@@ -12,7 +12,7 @@ public class Knight extends Warrior {
 
     @Override
     public String toString() {
-        return "Model.Knight{" +
+        return "Knight{" +
                 "health=" + getHealth() +
                 "attack=" + ATTACK +
                 '}';

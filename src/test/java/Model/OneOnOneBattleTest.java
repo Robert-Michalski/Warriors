@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OneOnOneBattleTest {
     @Test
-    @DisplayName("Model.Warrior fights knight, warrior should lose")
+    @DisplayName("Warrior fights knight, warrior should lose")
     void test01() {
         var carl = new Knight();
         var dave = new Warrior();
@@ -19,7 +19,7 @@ class OneOnOneBattleTest {
     }
 
     @Test
-    @DisplayName("Model.Knight hits Model.Warrior, Model.Warrior health is reduced by Model.Knight' attack")
+    @DisplayName("Knight hits Warrior, Warrior health is reduced by Knight' attack")
     void test02() {
         var carl = new Knight();
         var dave = new Warrior();

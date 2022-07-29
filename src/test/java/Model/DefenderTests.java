@@ -4,6 +4,8 @@ import Service.Battle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 class Rookie extends Warrior {
@@ -23,7 +25,9 @@ class Rookie extends Warrior {
     }
 }
 
-public class DefenderTests {
+class DefenderTests {
+
+    Logger logger = LoggerFactory.getLogger(DefenderTests.class);
     @Test
     @DisplayName("Smoke show test to check if code works")
     void smokeShow() {
@@ -74,8 +78,9 @@ public class DefenderTests {
 
 
     @Test
-    @DisplayName("Given battle between a Model.Warrior and a Model.Knight then Model.Warrior loses")
+    @DisplayName("Given battle between a Warrior and a Knight then Warrior loses")
     void test01() {
+
         //GIVEN
         var carl = new Warrior();
         var jim = new Knight();
@@ -85,7 +90,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Knight and a Model.Warrior then Model.Knight wins")
+    @DisplayName("Given battle between a Knight and a Warrior then Knight wins")
     void test02() {
         //GIVEN
         var ramon = new Knight();
@@ -96,7 +101,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Warrior and a Model.Warrior then first Model.Warrior to attack survives")
+    @DisplayName("Given battle between a Warrior and a Warrior then first Warrior to attack survives")
     void test03() {
         //GIVEN
         var bob = new Warrior();
@@ -108,7 +113,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Knight and a Model.Warrior then Model.Knight survives")
+    @DisplayName("Given battle between a Knight and a Warrior then Knight survives")
     void test04() {
         //GIVEN
         var zeus = new Knight();
@@ -120,7 +125,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Warrior and a Model.Warrior then second to attack is dead")
+    @DisplayName("Given battle between a Warrior and a Warrior then second to attack is dead")
     void test05() {
         //GIVEN
         var husband = new Warrior();
@@ -132,7 +137,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Warrior and a Model.Knight then knight survives")
+    @DisplayName("Given battle between a Warrior and a Knight then knight survives")
     void test06() {
         //GIVEN
         var dragon = new Warrior();
@@ -144,7 +149,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Warrior and a Model.Knight then this Model.Knight and new Model.Warrior then new Model.Warrior wins")
+    @DisplayName("Given battle between a Warrior and a Knight then this Knight and new Warrior then new Warrior wins")
     void test07() {
         //GIVEN
         var unit1 = new Warrior();
@@ -157,7 +162,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Defender and a Model.Rookie then the Model.Defender' health is 60")
+    @DisplayName("Given battle between a Defender and a Model.Rookie then the Defender' health is 60")
     void test08() {
         //GIVEN
         var unit1 = new Defender();
@@ -170,8 +175,8 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle between a Model.Defender and a Model.Rookie then a battle between the Model.Rookie and a new Model.Warrior" +
-            "then Model.Defender wins all")
+    @DisplayName("Given battle between a Defender and a Model.Rookie then a battle between the Model.Rookie and a new Warrior" +
+            "then Defender wins all")
     void test09() {
         //GIVEN
         var unit1 = new Defender();
@@ -184,7 +189,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 1 Model.Warrior unit and second with 2 Model.Warrior units then" +
+    @DisplayName("Given battle of two armies one with 1 Warrior unit and second with 2 Warrior units then" +
             " first army loses")
     void test10() {
         //GIVEN
@@ -199,7 +204,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one wtih 2 Model.Warrior units and second with 3 Model.Warrior units" +
+    @DisplayName("Given battle of two armies one wtih 2 Warrior units and second with 3 Warrior units" +
             "then first army loses")
     void test11() {
         //GIVEN
@@ -213,7 +218,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 5 Model.Warrior units and second with 7 Model.Warrior units" +
+    @DisplayName("Given battle of two armies one with 5 Warrior units and second with 7 Warrior units" +
             "then first army loses")
     void test12() {
         //GIVEN
@@ -227,7 +232,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 20 Model.Warrior units and second with 21 Model.Warrior units" +
+    @DisplayName("Given battle of two armies one with 20 Warrior units and second with 21 Warrior units" +
             "then first army wins")
     void test13() {
         //GIVEN
@@ -241,7 +246,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 10 Model.Warrior units and second with 11 Model.Warrior units" +
+    @DisplayName("Given battle of two armies one with 10 Warrior units and second with 11 Warrior units" +
             "then first army wins")
     void test14() {
         //GIVEN
@@ -255,7 +260,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 11 Model.Warrior units and second with 7 Model.Warrior units" +
+    @DisplayName("Given battle of two armies one with 11 Warrior units and second with 7 Warrior units" +
             "then first army wins")
     void test15() {
         //GIVEN
@@ -270,7 +275,7 @@ public class DefenderTests {
 
     @Test
     @DisplayName("Given battle of two armies one with 5 Warriors, 4 Defenders, 5 Defenders and second " +
-            "with 4 Model.Warrior units then first army wins")
+            "with 4 Warrior units then first army wins")
     void test16() {
         //GIVEN
         var army1 = new Army()
@@ -319,7 +324,7 @@ public class DefenderTests {
     }
 
     @Test
-    @DisplayName("Given battle of two armies one with 2 Defenders, 1 Model.Warrior and 1 Model.Defender and second" +
+    @DisplayName("Given battle of two armies one with 2 Defenders, 1 Warrior and 1 Defender and second" +
             "with 5 Warriors then first army loses")
     void test19() {
         //GIVEN

@@ -24,7 +24,7 @@ public class Defender extends Warrior {
 
     @Override
     public String toString() {
-        return "Model.Defender{" +
+        return "Defender{" +
                 "health=" + health +
                 "attack=" + ATTACK +
                 "defense=" + DEFENSE +
