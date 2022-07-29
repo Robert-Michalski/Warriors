@@ -80,10 +80,10 @@ class DefenderTests {
     @Test
     @DisplayName("Given battle between a Warrior and a Knight then Warrior loses")
     void test01() {
-
         //GIVEN
         var carl = new Warrior();
         var jim = new Knight();
+        logger.info("Warrior {} vs Knight {}", carl.getClass().getName(), jim.getClass().getName());
         //THEN
         var result = Battle.fight(carl, jim);
         Assertions.assertFalse(result);
