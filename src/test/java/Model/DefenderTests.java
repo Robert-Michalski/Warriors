@@ -43,17 +43,17 @@ class DefenderTests {
         var lancelot = new Defender();
 
         var myArmy = new Army()
-                .addUnits("Defender", 1);
+                .addUnits(Unit.UnitType.DEFENDER, 1);
 
         var enemyArmy = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits(Unit.UnitType.WARRIOR, 2);
 
         var army3 = new Army()
-                .addUnits("Warrior", 1)
-                .addUnits("Defender", 1);
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 1);
 
         var army4 = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits(Unit.UnitType.WARRIOR, 2);
 
         //THEN
         Assertions.assertAll(
@@ -194,9 +194,9 @@ class DefenderTests {
     void test10() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 1);
+                .addUnits(Unit.UnitType.WARRIOR, 1);
         var army2 = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits(Unit.UnitType.WARRIOR, 2);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
@@ -209,9 +209,9 @@ class DefenderTests {
     void test11() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 2);
+                .addUnits(Unit.UnitType.WARRIOR, 2);
         var army2 = new Army()
-                .addUnits("Warrior", 3);
+                .addUnits(Unit.UnitType.WARRIOR, 3);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
@@ -223,9 +223,9 @@ class DefenderTests {
     void test12() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 5);
+                .addUnits(Unit.UnitType.WARRIOR, 5);
         var army2 = new Army()
-                .addUnits("Warrior", 7);
+                .addUnits(Unit.UnitType.WARRIOR, 7);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
@@ -237,9 +237,9 @@ class DefenderTests {
     void test13() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 20);
+                .addUnits(Unit.UnitType.WARRIOR, 20);
         var army2 = new Army()
-                .addUnits("Warrior", 21);
+                .addUnits(Unit.UnitType.WARRIOR, 21);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -251,9 +251,9 @@ class DefenderTests {
     void test14() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 10);
+                .addUnits(Unit.UnitType.WARRIOR, 10);
         var army2 = new Army()
-                .addUnits("Warrior", 11);
+                .addUnits(Unit.UnitType.WARRIOR, 11);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -265,9 +265,9 @@ class DefenderTests {
     void test15() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 11);
+                .addUnits(Unit.UnitType.WARRIOR, 11);
         var army2 = new Army()
-                .addUnits("Warrior", 7);
+                .addUnits(Unit.UnitType.WARRIOR, 7);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -279,11 +279,11 @@ class DefenderTests {
     void test16() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 5)
-                .addUnits("Defender", 4)
-                .addUnits("Defender", 5);
+                .addUnits(Unit.UnitType.WARRIOR, 5)
+                .addUnits(Unit.UnitType.DEFENDER, 4)
+                .addUnits(Unit.UnitType.DEFENDER, 5);
         var army2 = new Army()
-                .addUnits("Warrior", 4);
+                .addUnits(Unit.UnitType.WARRIOR, 4);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -295,12 +295,12 @@ class DefenderTests {
     void test17() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Defender", 5)
-                .addUnits("Warrior", 20);
+                .addUnits(Unit.UnitType.DEFENDER, 5)
+                .addUnits(Unit.UnitType.WARRIOR, 20);
         var army2 = new Army()
-                .addUnits("Warrior", 21);
+                .addUnits(Unit.UnitType.WARRIOR, 21);
 
-        army1.addUnits("Defender", 4);
+        army1.addUnits(Unit.UnitType.DEFENDER, 4);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -312,12 +312,12 @@ class DefenderTests {
     void test18() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Warrior", 10)
-                .addUnits("Defender", 5);
+                .addUnits(Unit.UnitType.WARRIOR, 10)
+                .addUnits(Unit.UnitType.DEFENDER, 5);
         var army2 = new Army()
-                .addUnits("Warrior", 5);
+                .addUnits(Unit.UnitType.WARRIOR, 5);
 
-        army1.addUnits("Defender", 10);
+        army1.addUnits(Unit.UnitType.DEFENDER, 10);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -329,13 +329,14 @@ class DefenderTests {
     void test19() {
         //GIVEN
         var army1 = new Army()
-                .addUnits("Defender", 2)
-                .addUnits("Warrior", 1)
-                .addUnits("Defender", 1);
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 1);
         var army2 = new Army()
-                .addUnits("Warrior", 5);
+                .addUnits(Unit.UnitType.WARRIOR, 5);
         //THEN
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
     }
+    
 }

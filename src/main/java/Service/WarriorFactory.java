@@ -2,19 +2,20 @@ package Service;
 
 import Model.Defender;
 import Model.Knight;
+import Model.Unit;
 import Model.Warrior;
 
 public class WarriorFactory {
 
-    public Warrior getInstance(String type) {
+    public Warrior getInstance(Unit.UnitType type) {
         switch (type) {
-            case "Warrior" -> {
+            case WARRIOR -> {
                 return new Warrior();
             }
-            case "Knight" -> {
+            case KNIGHT -> {
                 return new Knight();
             }
-            case "Defender" -> {
+            case DEFENDER -> {
                 return new Defender();
             }
             default -> throw new IllegalArgumentException();
