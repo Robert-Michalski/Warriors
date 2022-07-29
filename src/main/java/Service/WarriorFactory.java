@@ -8,13 +8,13 @@ public class WarriorFactory {
 
     public Warrior getInstance(String type) {
         switch (type) {
-            case "Model.Warrior" -> {
+            case "Warrior" -> {
                 return new Warrior();
             }
-            case "Model.Knight" -> {
+            case "Knight" -> {
                 return new Knight();
             }
-            case "Model.Defender" -> {
+            case "Defender" -> {
                 return new Defender();
             }
             default -> throw new IllegalArgumentException();

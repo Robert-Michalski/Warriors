@@ -38,17 +38,17 @@ public class DefenderTests {
         var lancelot = new Defender();
 
         var myArmy = new Army()
-                .addUnits("Model.Defender", 1);
+                .addUnits("Defender", 1);
 
         var enemyArmy = new Army()
-                .addUnits("Model.Warrior", 2);
+                .addUnits("Warrior", 2);
 
         var army3 = new Army()
-                .addUnits("Model.Warrior", 1)
-                .addUnits("Model.Defender", 1);
+                .addUnits("Warrior", 1)
+                .addUnits("Defender", 1);
 
         var army4 = new Army()
-                .addUnits("Model.Warrior", 2);
+                .addUnits("Warrior", 2);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(Battle.fight(chuck, bruce)),
                 () -> Assertions.assertFalse(Battle.fight(dave, carl)),
@@ -167,9 +167,9 @@ public class DefenderTests {
             " first army loses")
     void test10() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 1);
+                .addUnits("Warrior", 1);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 2);
+                .addUnits("Warrior", 2);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
 
@@ -180,9 +180,9 @@ public class DefenderTests {
             "then first army loses")
     void test11() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 2);
+                .addUnits("Warrior", 2);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 3);
+                .addUnits("Warrior", 3);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
     }
@@ -192,9 +192,9 @@ public class DefenderTests {
             "then first army loses")
     void test12() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 5);
+                .addUnits("Warrior", 5);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 7);
+                .addUnits("Warrior", 7);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
     }
@@ -204,9 +204,9 @@ public class DefenderTests {
             "then first army wins")
     void test13() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 20);
+                .addUnits("Warrior", 20);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 21);
+                .addUnits("Warrior", 21);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
@@ -216,9 +216,9 @@ public class DefenderTests {
             "then first army wins")
     void test14() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 10);
+                .addUnits("Warrior", 10);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 11);
+                .addUnits("Warrior", 11);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
@@ -228,9 +228,9 @@ public class DefenderTests {
             "then first army wins")
     void test15() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 11);
+                .addUnits("Warrior", 11);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 7);
+                .addUnits("Warrior", 7);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
@@ -240,11 +240,11 @@ public class DefenderTests {
             "with 4 Model.Warrior units then first army wins")
     void test16() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 5)
-                .addUnits("Model.Defender", 4)
-                .addUnits("Model.Defender", 5);
+                .addUnits("Warrior", 5)
+                .addUnits("Defender", 4)
+                .addUnits("Defender", 5);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 4);
+                .addUnits("Warrior", 4);
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
     }
@@ -254,12 +254,12 @@ public class DefenderTests {
             "with 21 Warriors then first army wins")
     void test17() {
         var army1 = new Army()
-                .addUnits("Model.Defender", 5)
-                .addUnits("Model.Warrior", 20);
+                .addUnits("Defender", 5)
+                .addUnits("Warrior", 20);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 21);
+                .addUnits("Warrior", 21);
 
-        army1.addUnits("Model.Defender", 4);
+        army1.addUnits("Defender", 4);
 
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -270,12 +270,12 @@ public class DefenderTests {
             "with 5 Warriors then first army wins")
     void test18() {
         var army1 = new Army()
-                .addUnits("Model.Warrior", 10)
-                .addUnits("Model.Defender", 5);
+                .addUnits("Warrior", 10)
+                .addUnits("Defender", 5);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 5);
+                .addUnits("Warrior", 5);
 
-        army1.addUnits("Model.Defender", 10);
+        army1.addUnits("Defender", 10);
 
         var result = Battle.fight(army1, army2);
         Assertions.assertTrue(result);
@@ -286,11 +286,11 @@ public class DefenderTests {
             "with 5 Warriors then first army loses")
     void test19() {
         var army1 = new Army()
-                .addUnits("Model.Defender", 2)
-                .addUnits("Model.Warrior", 1)
-                .addUnits("Model.Defender", 1);
+                .addUnits("Defender", 2)
+                .addUnits("Warrior", 1)
+                .addUnits("Defender", 1);
         var army2 = new Army()
-                .addUnits("Model.Warrior", 5);
+                .addUnits("Warrior", 5);
         var result = Battle.fight(army1, army2);
         Assertions.assertFalse(result);
     }

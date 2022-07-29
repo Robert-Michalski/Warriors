@@ -18,7 +18,7 @@ public class Warrior implements Unit {
     public void setHealth(int health) {
         this.health = health;
     }
-
+    //TODO override to Defender
     public void attack(Warrior enemy) {
         if(enemy instanceof Defender){
             if(getAttack() > ((Defender) enemy).getDefense()){
