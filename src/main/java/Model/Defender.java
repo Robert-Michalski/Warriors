@@ -1,19 +1,14 @@
 package Model;
 
 public class Defender extends Warrior {
-    private int health=60;
+    private final int INITIAL_HEALTH = 60;
     private static final int ATTACK = 3;
     private static final int DEFENSE = 2;
 
-    @Override
-    public int getHealth() {
-        return health;
+    public Defender() {
+        setHealth(INITIAL_HEALTH);
     }
 
-    @Override
-    public void setHealth(int health) {
-        this.health = health;
-    }
     @Override
     public int getAttack() {
         return ATTACK;
@@ -28,9 +23,9 @@ public class Defender extends Warrior {
     @Override
     public String toString() {
         return "Defender{" +
-                "health=" + health +
-                "attack=" + ATTACK +
-                "defense=" + DEFENSE +
+                "health=" + getHealth() +
+                "attack=" + getAttack() +
+                "defense=" + getDefense() +
                 '}';
     }
 }

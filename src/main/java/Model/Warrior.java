@@ -1,8 +1,14 @@
 package Model;
 
 public class Warrior implements Unit {
-    private int health = 50;
+    private final int INITIAL_HEALTH = 50;
+    private int health;
     private static final int ATTACK = 5;
+
+    public Warrior() {
+        setHealth(INITIAL_HEALTH);
+    }
+
 
     public boolean isAlive() {
         return getHealth() > 0;
@@ -20,7 +26,7 @@ public class Warrior implements Unit {
     }
     public void attack(Warrior enemy) {
         if(enemy instanceof Defender defender){
-            if(getAttack() > ((Defender) enemy).getDefense()){
+            if(getAttack() > (defender.getDefense())){
                 enemy.setHealth(enemy.getHealth() - (getAttack() - defender.getDefense()));
             }
         }
