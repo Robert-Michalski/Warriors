@@ -4,6 +4,11 @@ import Service.Battle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 class VampireTest {
     @Test
@@ -180,129 +185,60 @@ class VampireTest {
         Assertions.assertTrue(result);
     }
 
-    @Test
-    @DisplayName("Given battle of two armies one with 1 Warrior unit and second with 2 Warrior units then" +
-            " first army loses")
-    void GivenBattleOfTwoArmiesOneWith1WarriorAndSecondWith2WarriorsThenFirstArmyLoses() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 1);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 2);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertFalse(result);
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("Given battle of two armies check if expected output matches real output")
+    void provideWarriorsForArmies(Army army1, Army army2, boolean expected) {
+        Assertions.assertSame(Battle.fight(army1, army2), expected);
     }
 
-    @Test
-    @DisplayName("Given battle of two armies one with 2 Warrior units and second with 3 Warrior units" +
-            "then first army loses")
-    void GivenBattleOfTwoArmiesOneWith2WarriorsAndSecondWith3WarriorsThenFirstArmyLoses() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 2);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 3);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    @DisplayName("Given battle of two armies one with 5 Warrior units and second with 7 Warrior units" +
-            "then first army loses")
-    void GivenBattleOfTwoArmiesOneWith5WarriorsAndSecondWith7WarriorsThenFirstArmyLoses() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 5);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 7);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    @DisplayName("Given battle of two armies one with 20 Warrior units and second with 21 Warrior units" +
-            "then first army wins")
-    void GivenBattleOfTwoArmiesOneWith20WarriosAndSecondWith21WarriorsThenFirstArmyWins() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 20);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 21);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    @DisplayName("Given battle of two armies one with 10 Warrior units and second with 11 Warrior units" +
-            "then first army wins")
-    void GivenBattleOfTwoArmiesOneWith10WarriorsAndSecondWith11WarriorsThenFirstArmyWins() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 10);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 11);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    @DisplayName("Given battle of two armies one with 11 Warrior units and second with 7 Warrior units" +
-            "then first army wins")
-    void GivenBattleOfTwoArmiesOneWith11WarriorsAndSecondWith7WarriorsThenFirstArmyWins() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 11);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 7);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    @DisplayName("Given battle of two armies one with 5 Warriors, 4 Defenders, 5 Defenders and second " +
-            "with 4 Warrior units then first army wins")
-    void GivenBattleOfTwoArmiesOneWith5Warriors4Defenders5DefendersAndSecondWith4WarriorsThenFirstArmyWins() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 5)
-                .addUnits(Unit.UnitType.DEFENDER, 4)
-                .addUnits(Unit.UnitType.DEFENDER, 5);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 4);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    @DisplayName("Given battle of two armies one with 5 Defenders, 20 Warriors, 4 Defenders and second" +
-            "with 21 Warriors then first army wins")
-    void GivenBattleOfTwoArmiesOneWith9DefendersAnd41WarriorsAndSecondWith21WarriorsThenFirstArmyWins() {
-        //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.DEFENDER, 5)
-                .addUnits(Unit.UnitType.WARRIOR, 20);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 21);
-
-        army1.addUnits(Unit.UnitType.DEFENDER, 4);
-        //WHEN
-        var result = Battle.fight(army1, army2);
-        //THEN
-        Assertions.assertTrue(result);
+    private static Stream<Arguments> provideWarriorsForArmies() {
+        return Stream.of(
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 1),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 2)
+                        , false),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 2),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 3)
+                        , false),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 5),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 7),
+                        false),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 20),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 21)
+                        , true),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 10),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 11)
+                        , true),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 11),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 7)
+                        , true),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 5)
+                                .addUnits(Unit.UnitType.DEFENDER, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 5),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                        , true),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.DEFENDER, 5)
+                                .addUnits(Unit.UnitType.WARRIOR, 20)
+                                .addUnits(Unit.UnitType.DEFENDER,4),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 21)
+                        , true)
+        );
     }
 
     @Test
@@ -451,13 +387,14 @@ class VampireTest {
         //WHEN
         var healthBeforeAttack = vampire.getHealth();
         vampire.attack(warrior);
-        var expectedHealth = healthBeforeAttack+healAmount;
+        var expectedHealth = healthBeforeAttack + healAmount;
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());
     }
+
     @Test
     @DisplayName("Given Vampire with no full health attacks Defender then Vampire heals for half of damage done")
-    void GivenVampireWithNoFullHealthAttacksDefenderThenVampireHealsForHalfOfDamageDone(){
+    void GivenVampireWithNoFullHealthAttacksDefenderThenVampireHealsForHalfOfDamageDone() {
         //GIVEN
         var vampire = new Vampire();
         var defender = new Defender();
@@ -467,22 +404,24 @@ class VampireTest {
         //WHEN
         var healthBeforeAttack = vampire.getHealth();
         vampire.attack(defender);
-        var expectedHealth = healthBeforeAttack+healAmount;
+        var expectedHealth = healthBeforeAttack + healAmount;
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());
     }
+
     @Test
     @DisplayName("Given Knight attacks Defender then Defender loses correct amount of health")
-    void GivenKnightAttacksDefenderThenDefenderLosesCorrectAmountOfHealth(){
+    void GivenKnightAttacksDefenderThenDefenderLosesCorrectAmountOfHealth() {
         //GIVEN
         var knight = new Knight();
         var defender = new Defender();
-        var actualDamage = knight.getAttack()-defender.getDefense();
-        var expectedHealth = defender.getHealth()-actualDamage;
+        var actualDamage = knight.getAttack() - defender.getDefense();
+        var expectedHealth = defender.getHealth() - actualDamage;
         //WHEN
         knight.attack(defender);
         //THEN
         Assertions.assertSame(expectedHealth, defender.getHealth());
     }
+
 
 }
