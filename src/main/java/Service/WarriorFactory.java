@@ -1,9 +1,6 @@
 package Service;
 
-import Model.Defender;
-import Model.Knight;
-import Model.Unit;
-import Model.Warrior;
+import Model.*;
 
 public class WarriorFactory {
 
@@ -17,6 +14,9 @@ public class WarriorFactory {
             }
             case DEFENDER -> {
                 return new Defender();
+            }
+            case VAMPIRE -> {
+                return new Vampire();
             }
             default -> throw new IllegalArgumentException();
         }
