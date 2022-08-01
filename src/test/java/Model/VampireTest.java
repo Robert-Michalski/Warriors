@@ -234,7 +234,7 @@ class VampireTest {
                 Arguments.of(new Army()
                                 .addUnits(Unit.UnitType.DEFENDER, 5)
                                 .addUnits(Unit.UnitType.WARRIOR, 20)
-                                .addUnits(Unit.UnitType.DEFENDER,4),
+                                .addUnits(Unit.UnitType.DEFENDER, 4),
                         new Army()
                                 .addUnits(Unit.UnitType.WARRIOR, 21)
                         , true)
@@ -423,5 +423,35 @@ class VampireTest {
         Assertions.assertSame(expectedHealth, defender.getHealth());
     }
 
+    @Test
+    @DisplayName("Given Vampire with 39 health when he hits warrior then vampire' health is no higher than his" +
+            "initial health")
+    void GivenVampireWithAlmostFullHealthWhenHeHitsWarriorThenVampiresHealthIsNoHigherThanHisInitialHealth() {
+        //GIVEN
+        var vampire = new Vampire();
+        vampire.setHealth(39);
+        var warrior = new Warrior();
+        //WHEN
+        vampire.attack(warrior);
+        //THEN
+        Assertions.assertSame(vampire.getInitial_Health(), vampire.getHealth());
+    }
+
+    @Test
+    @DisplayName("Given a Vampire with 37 health when he hits a Warrior with 1 health then vampire's health is 39")
+    void GivenVampireWith37HeathWhenHeHitsWarriorWith1HealthThenVampiresHealthIs39() {
+        //GIVEN
+        var vampire = new Vampire();
+        vampire.setHealth(37);
+        var healthBeforeAttack = vampire.getHealth();
+        var warrior = new Warrior();
+        warrior.setHealth(1);
+        var amountToHeal = (vampire.getAttack() * vampire.getVAMPIRISM()) / 100;
+        //WHEN
+        vampire.attack(warrior);
+        var expectedHealth = healthBeforeAttack+amountToHeal;
+        //THEN
+        Assertions.assertSame(expectedHealth, vampire.getHealth());
+    }
 
 }
