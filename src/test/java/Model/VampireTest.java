@@ -381,7 +381,7 @@ class VampireTest {
         //GIVEN
         var vampire = new Vampire();
         var warrior = new Warrior();
-        var healAmount = vampire.getAttack() - 2;
+        var healAmount = (vampire.getAttack() * vampire.getVAMPIRISM()) / 100;
         warrior.attack(vampire);
         //vampire health is 35
         //WHEN
