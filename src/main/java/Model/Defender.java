@@ -23,6 +23,8 @@ public class Defender extends Warrior {
         return DEFENSE;
     }
 
+
+
     @Override
     public String toString() {
         return "Defender{" +

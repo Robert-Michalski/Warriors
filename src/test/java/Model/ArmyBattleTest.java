@@ -68,7 +68,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one having a Warrior second having a Knight then army with Knight should win")
+    @DisplayName("Given two armies - one having a Warrior second having a Knight WHEN army with Knight should win")
     void test04() {
         Army myArmy = new Army();
         myArmy.addUnits(Unit.UnitType.WARRIOR, 1);
@@ -79,7 +79,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with two warriors and second with one warriors then first army should win")
+    @DisplayName("Given two armies - one with two warriors and second with one warriors WHEN first army should win")
     void test05() {
         Army myArmy = new Army();
         myArmy.addUnits(Unit.UnitType.WARRIOR, 2);
@@ -90,7 +90,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with one warrior and second with two warriors then second army should win")
+    @DisplayName("Given two armies - one with one warrior and second with two warriors WHEN second army should win")
     void test06() {
         Army myArmy = new Army();
         myArmy.addUnits(Unit.UnitType.WARRIOR, 1);
@@ -101,7 +101,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 2 warriors second with 3 warriors then first loses")
+    @DisplayName("Given two armies - one with 2 warriors second with 3 warriors WHEN first loses")
     void test07() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -111,7 +111,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 5 warriors second with 7 warriors then first loses")
+    @DisplayName("Given two armies - one with 5 warriors second with 7 warriors WHEN first loses")
     void test08() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -121,7 +121,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 20 warriors second with 21 warriors then first wins")
+    @DisplayName("Given two armies - one with 20 warriors second with 21 warriors WHEN first wins")
     void test09() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -131,7 +131,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 10 warriors second with 11 warriors then first wins")
+    @DisplayName("Given two armies - one with 10 warriors second with 11 warriors WHEN first wins")
     void test10() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -141,7 +141,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 11 warriors second with 7 warriors then first wins")
+    @DisplayName("Given two armies - one with 11 warriors second with 7 warriors WHEN first wins")
     void test11() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -151,7 +151,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 5 warriors second with 4 knights then first loses")
+    @DisplayName("Given two armies - one with 5 warriors second with 4 knights WHEN first loses")
     void test12() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -161,7 +161,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 11 warriors second with 7 warriors then first wins")
+    @DisplayName("Given two armies - one with 11 warriors second with 7 warriors WHEN first wins")
     void test13() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -172,7 +172,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 5 warriors and a knight and second with 6 warriors and a knight then first loses")
+    @DisplayName("Given two armies - one with 5 warriors and a knight and second with 6 warriors and a knight WHEN first loses")
     void test14() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -184,7 +184,7 @@ class ArmyBattleTest {
     }
 
     @Test
-    @DisplayName("Given two armies - one with 1 warrior and 4 knights and second with 6 warriors then first wins")
+    @DisplayName("Given two armies - one with 1 warrior and 4 knights and second with 6 warriors WHEN first wins")
     void test15() {
         Army army1 = new Army();
         Army army2 = new Army();
@@ -194,7 +194,7 @@ class ArmyBattleTest {
         Assertions.assertTrue(Battle.fight(army1,army2));
     }
     @Test
-    @DisplayName("Given two armies - one with 1 warrior and 4 knights and second with 6 warriors then first wins" +
+    @DisplayName("Given two armies - one with 1 warrior and 4 knights and second with 6 warriors WHEN first wins" +
             " but with fluent interface")
     void test16() {
         Army army1 = new Army()
