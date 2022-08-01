@@ -21,6 +21,9 @@ public class Warrior implements Unit {
     public int getHealth() {
         return health;
     }
+    public int getInitial_Health(){
+        return INITIAL_HEALTH;
+    }
     public void setHealth(int health) {
         this.health = health;
     }

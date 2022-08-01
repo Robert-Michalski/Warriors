@@ -14,11 +14,11 @@ public class Vampire extends Warrior {
         if (enemy instanceof Defender defender) {
             if (getAttack() > (defender.getDefense())) {
                 enemy.setHealth(enemy.getHealth() - (getAttack() - defender.getDefense()));
-                healSelfByAmount((actualDamage - defender.getDefense() * 50) / 100);
+                healSelfByAmount(((actualDamage - defender.getDefense()) * VAMPIRISM) / 100);
             }
         } else {
             enemy.setHealth(enemy.getHealth() - getAttack());
-            healSelfByAmount((actualDamage * 50) / 100);
+            healSelfByAmount((actualDamage * VAMPIRISM) / 100);
         }
     }
 
@@ -36,7 +36,9 @@ public class Vampire extends Warrior {
     public int getAttack() {
         return ATTACK;
     }
-
+    public int getInitial_Health(){
+        return INITIAL_HEALTH;
+    }
     @Override
     public String toString() {
         return "Vampire{" +
