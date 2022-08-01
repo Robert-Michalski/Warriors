@@ -17,6 +17,9 @@ public class Defender extends Warrior {
     public int getDefense() {
         return DEFENSE;
     }
+    public int getInitial_Health(){
+        return INITIAL_HEALTH;
+    }
 
 
 
