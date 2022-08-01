@@ -1,0 +1,394 @@
+package Model;
+
+import Service.Battle;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class VampireTest {
+    @Test
+    @DisplayName("Smoke show for Vampire")
+    void smokeShow() {
+        //GIVEN
+        var chuck = new Warrior();
+        var bruce = new Warrior();
+        var carl = new Knight();
+        var dave = new Warrior();
+        var mark = new Warrior();
+        var bob = new Defender();
+        var mike = new Knight();
+        var rog = new Warrior();
+        var lancelot = new Defender();
+        var eric = new Vampire();
+        var adam = new Vampire();
+        var richard = new Defender();
+        var ogre = new Warrior();
+
+        var myArmy = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .addUnits(Unit.UnitType.VAMPIRE, 2)
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        var enemyArmy = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .addUnits(Unit.UnitType.VAMPIRE, 3);
+        var army3 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 4);
+        var army4 = new Army()
+                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                .addUnits(Unit.UnitType.WARRIOR, 2);
+
+        //WHEN + THEN
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(Battle.fight(chuck, bruce)),
+                () -> Assertions.assertFalse(Battle.fight(dave, carl)),
+                () -> Assertions.assertTrue(chuck.isAlive()),
+                () -> Assertions.assertFalse(bruce.isAlive()),
+                () -> Assertions.assertTrue(carl.isAlive()),
+                () -> Assertions.assertFalse(dave.isAlive()),
+                () -> Assertions.assertFalse(Battle.fight(carl, mark)),
+                () -> Assertions.assertFalse(carl.isAlive()),
+                () -> Assertions.assertFalse(Battle.fight(bob, mike)),
+                () -> Assertions.assertTrue(Battle.fight(lancelot, rog)),
+                () -> Assertions.assertFalse(Battle.fight(eric, richard)),
+                () -> Assertions.assertTrue(Battle.fight(ogre, adam)),
+                () -> Assertions.assertFalse(Battle.fight(myArmy, enemyArmy)),
+                () -> Assertions.assertTrue(Battle.fight(army3, army4))
+
+
+        );
+
+    }
+
+    @Test
+    @DisplayName("Given battle between a Warrior and a Knight then Warrior should lose")
+    void GivenBattleBetweenWarriorAndKnightThenWarriorLoses() {
+        //GIVEN
+        var warrior = new Warrior();
+        var knight = new Knight();
+        //WHEN
+        var result = Battle.fight(warrior, knight);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Knight and a Warrior then Knight wins")
+    void GivenBattleBetweenKnightAndWarriorThenKnightWins() {
+        //GIVEN
+        var ramon = new Knight();
+        var slevin = new Warrior();
+        //WHEN
+        var result = Battle.fight(ramon, slevin);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Warrior and a Warrior then first Warrior to attack survives")
+    void GivenBattleBetweenWarriorAndWarriorThenFirstToAttackSurvives() {
+        //GIVEN
+        var bob = new Warrior();
+        var mars = new Warrior();
+        //WHEN
+        Battle.fight(bob, mars);
+        var result = bob.isAlive();
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Knight and a Warrior then Knight survives")
+    void GivenBattleBetweenKnightAndWarriorThenKnightSurvives() {
+        //GIVEN
+        var zeus = new Knight();
+        var godkiller = new Warrior();
+        //WHEN
+        Battle.fight(zeus, godkiller);
+        var result = zeus.isAlive();
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Warrior and a Warrior then second to attack is dead")
+    void GivenBattleBetweenWarriorAndWarriorThenSecondToAttackIsDead() {
+        //GIVEN
+        var husband = new Warrior();
+        var wife = new Warrior();
+        //WHEN
+        Battle.fight(husband, wife);
+        var result = wife.isAlive();
+        //THEN
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Warrior and a Knight then knight survives")
+    void GivenBattleBetweenWarriorAndKnightThenKnightSurvives() {
+        //GIVEN
+        var dragon = new Warrior();
+        var knight = new Knight();
+        //WHEN
+        Battle.fight(dragon, knight);
+        var result = knight.isAlive();
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Warrior and a Knight then this Knight and new Warrior then new Warrior wins")
+    void GivenBattleBetweenWarriorAndKnightThenBattleBetweenThisKnightAndNewWarriorThenNewWarriorWins() {
+        //GIVEN
+        var unit1 = new Warrior();
+        var unit2 = new Knight();
+        var unit3 = new Warrior();
+        //WHEN
+        Battle.fight(unit1, unit2);
+        var result = Battle.fight(unit2, unit3);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Defender and a Rookie then the Defender' health is his initial health")
+    void GivenBattleBetweenDefenderAndRookieThenDefendersHealthIsHisInitialHealth() {
+        //GIVEN
+        var unit1 = new Defender();
+        var unit2 = new Rookie();
+        var expectedHealth = unit1.getInitial_Health();
+        //WHEN
+        Battle.fight(unit1, unit2);
+        var result = unit1.getHealth();
+        //THEN
+        Assertions.assertSame(expectedHealth, result);
+    }
+
+    @Test
+    @DisplayName("Given battle between a Defender and a Rookie then a battle between the Defender and a new Warrior" +
+            "then Defender wins all")
+    void GivenBattleBetweenDefenderAndRookieThenBattleBetweenDefenderAndNewWarriorThenDefenderWinsAll() {
+        //GIVEN
+        var unit1 = new Defender();
+        var unit2 = new Rookie();
+        var unit3 = new Warrior();
+        //WHEN
+        Battle.fight(unit1, unit2);
+        var result = Battle.fight(unit1, unit3);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given battle of two armies one with 1 Warrior unit and second with 2 Warrior units then" +
+            " first army loses")
+    void GivenBattleOfTwoArmiesOneWith1WarriorAndSecondWith2WarriorsThenFirstArmyLoses() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 2);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 2 Warrior units and second with 3 Warrior units" +
+            "then first army loses")
+    void GivenBattleOfTwoArmiesOneWith2WarriorsAndSecondWith3WarriorsThenFirstArmyLoses() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 2);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 3);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 5 Warrior units and second with 7 Warrior units" +
+            "then first army loses")
+    void GivenBattleOfTwoArmiesOneWith5WarriorsAndSecondWith7WarriorsThenFirstArmyLoses() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 5);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 7);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Given battle of two armies one with 20 Warrior units and second with 21 Warrior units" +
+            "then first army wins")
+    void GivenBattleOfTwoArmiesOneWith20WarriosAndSecondWith21WarriorsThenFirstArmyWins() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 20);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 21);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given battle of two armies one with 10 Warrior units and second with 11 Warrior units" +
+            "then first army wins")
+    void GivenBattleOfTwoArmiesOneWith10WarriorsAndSecondWith11WarriorsThenFirstArmyWins() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 10);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 11);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given battle of two armies one with 11 Warrior units and second with 7 Warrior units" +
+            "then first army wins")
+    void GivenBattleOfTwoArmiesOneWith11WarriorsAndSecondWith7WarriorsThenFirstArmyWins() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 11);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 7);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 5 Warriors, 4 Defenders, 5 Defenders and second " +
+            "with 4 Warrior units then first army wins")
+    void GivenBattleOfTwoArmiesOneWith5Warriors4Defenders5DefendersAndSecondWith4WarriorsThenFirstArmyWins() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 5)
+                .addUnits(Unit.UnitType.DEFENDER, 4)
+                .addUnits(Unit.UnitType.DEFENDER, 5);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 4);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 5 Defenders, 20 Warriors, 4 Defenders and second" +
+            "with 21 Warriors then first army wins")
+    void GivenBattleOfTwoArmiesOneWith9DefendersAnd41WarriorsAndSecondWith21WarriorsThenFirstArmyWins() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 5)
+                .addUnits(Unit.UnitType.WARRIOR, 20);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 21);
+
+        army1.addUnits(Unit.UnitType.DEFENDER, 4);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 10 Warriors, 5 Defenders, 10 Defenders and second" +
+            "with 5 Warriors then first army wins")
+    void GivenBattleOfTwoArmiesOneWith10Warriors15DefendersAndSecondWith5WarriorsThenFirstArmyWins() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 10)
+                .addUnits(Unit.UnitType.DEFENDER, 5);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 5);
+
+        army1.addUnits(Unit.UnitType.DEFENDER, 10);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 5 Defenders, 6 Vampires, 7 Warriors and second army" +
+            "with 6 Warriors, 6 Defenders, 6 Vampires then first army loses")
+    void GivenBattleOfTwoArmiesOneWith5Defenders6Vampires7WarriorsAndSecondWith6Warriors6Defenders6VampiresThenFirstArmyLoses(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 5)
+                .addUnits(Unit.UnitType.VAMPIRE, 6)
+                .addUnits(Unit.UnitType.WARRIOR, 7);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 6)
+                .addUnits(Unit.UnitType.DEFENDER, 6)
+                .addUnits(Unit.UnitType.VAMPIRE, 6);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 2 Defenders 3 Vampires 4 Warriors and second army" +
+            "with 4 Warriors 4 Defenders and 3 Vampires then first army loses")
+    void GivenBattleOfTwoArmiesOneWith2Defenders3Vampires4WarriorsAndSecondWith4Warriors4Defenders3VampiresThenFirstArmyLoses(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                .addUnits(Unit.UnitType.WARRIOR, 4);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 4)
+                .addUnits(Unit.UnitType.DEFENDER, 4)
+                .addUnits(Unit.UnitType.VAMPIRE,3);
+        //WHEN
+        var result = Battle.fight(army1,army2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 11 Defenders, 3 Vampires 4 Warriors and second army" +
+            "with 4 Warriors 4 Defenders and 13 Vampires then first army wins")
+    void GivenBattleOfTwoArmiesOneWith11Defenders3Vampires4WarriorsAndSecondWith4Warriors4Defenders13VampiresThenFirstArmyWins(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 11)
+                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                .addUnits(Unit.UnitType.WARRIOR, 4);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 4)
+                .addUnits(Unit.UnitType.DEFENDER, 4)
+                .addUnits(Unit.UnitType.VAMPIRE, 13);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("Given battle of two armies one with 9 Defenders 3 Vampires 8 Warriors and second army" +
+            "with 4 Warriors 4 Defenders 13 Vampires then first army wins")
+    void GivenBAttleOfTwoArmiesOneWith9Defenders3Vampires8WarriorsAndSecondWith4Warriors4Defenders13VampiresThenFirstArmyWins(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 9)
+                .addUnits(Unit.UnitType.VAMPIRE,3)
+                .addUnits(Unit.UnitType.WARRIOR, 8);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 4)
+                .addUnits(Unit.UnitType.DEFENDER, 4)
+                .addUnits(Unit.UnitType.VAMPIRE, 13);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+
+}
