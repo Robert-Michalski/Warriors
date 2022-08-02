@@ -40,7 +40,7 @@ public class LancerTests {
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 2);
         //WHEN
-        Battle.fight(army1.getTroops().get(0),army2.getTroops().get(0));
+        army1.getTroops().get(0).hit(army2.getTroops().get(0));
         //THEN
         Assertions.assertNotSame(50,army2.getTroops().get(1).getHealth());
     }
