@@ -1,6 +1,10 @@
 package Model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Defender extends Warrior {
+    Logger logger = LoggerFactory.getLogger(Defender.class);
     private final int INITIAL_HEALTH = 60;
     private static final int ATTACK = 3;
     private static final int DEFENSE = 2;
@@ -24,10 +28,14 @@ public class Defender extends Warrior {
 
     @Override
     public void reduceHealthBasedOnDamage(int damage) {
-        if (damage < getDefense())
+        if (damage < getDefense()) {
             super.reduceHealthBasedOnDamage(0);
-        else
-            super.reduceHealthBasedOnDamage(damage-getDefense());
+            logger.info("{} lost 0 health", this);
+        }
+        else {
+            super.reduceHealthBasedOnDamage(damage - getDefense());
+            logger.info("{} lost {} health", this, damage-getDefense());
+        }
     }
 
     @Override
