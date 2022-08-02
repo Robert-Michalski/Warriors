@@ -344,7 +344,7 @@ class VampireTest {
         var damageReduction = vampire.getAttack() - defender.getDefense();
         var expectedHealth = defender.getInitial_Health() - damageReduction;
         //WHEN
-        vampire.attack(defender);
+        vampire.hit(defender);
         //THEN
         Assertions.assertSame(expectedHealth, defender.getHealth());
     }
@@ -357,7 +357,7 @@ class VampireTest {
         var defender = new Defender();
         var expectedHealth = defender.getInitial_Health();
         //WHEN
-        rookie.attack(defender);
+        rookie.hit(defender);
         //THEN
         Assertions.assertSame(expectedHealth, defender.getInitial_Health());
     }
@@ -370,7 +370,7 @@ class VampireTest {
         var warrior = new Warrior();
         var expectedHealth = vampire.getInitial_Health();
         //WHEN
-        vampire.attack(warrior);
+        vampire.hit(warrior);
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());
     }
@@ -382,11 +382,11 @@ class VampireTest {
         var vampire = new Vampire();
         var warrior = new Warrior();
         var healAmount = (vampire.getAttack() * vampire.getVAMPIRISM()) / 100;
-        warrior.attack(vampire);
+        warrior.hit(vampire);
         //vampire health is 35
         //WHEN
         var healthBeforeAttack = vampire.getHealth();
-        vampire.attack(warrior);
+        vampire.hit(warrior);
         var expectedHealth = healthBeforeAttack + healAmount;
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());
@@ -399,11 +399,11 @@ class VampireTest {
         var vampire = new Vampire();
         var defender = new Defender();
         var healAmount = ((vampire.getAttack() - defender.getDefense()) * vampire.getVAMPIRISM()) / 100; //1
-        defender.attack(vampire);
+        defender.hit(vampire);
         //vampire health is 37
         //WHEN
         var healthBeforeAttack = vampire.getHealth();
-        vampire.attack(defender);
+        vampire.hit(defender);
         var expectedHealth = healthBeforeAttack + healAmount;
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());
@@ -418,7 +418,7 @@ class VampireTest {
         var actualDamage = knight.getAttack() - defender.getDefense();
         var expectedHealth = defender.getHealth() - actualDamage;
         //WHEN
-        knight.attack(defender);
+        knight.hit(defender);
         //THEN
         Assertions.assertSame(expectedHealth, defender.getHealth());
     }
@@ -432,7 +432,7 @@ class VampireTest {
         vampire.setHealth(39);
         var warrior = new Warrior();
         //WHEN
-        vampire.attack(warrior);
+        vampire.hit(warrior);
         //THEN
         Assertions.assertSame(vampire.getInitial_Health(), vampire.getHealth());
     }
@@ -448,7 +448,7 @@ class VampireTest {
         warrior.setHealth(1);
         var amountToHeal = (vampire.getAttack() * vampire.getVAMPIRISM()) / 100;
         //WHEN
-        vampire.attack(warrior);
+        vampire.hit(warrior);
         var expectedHealth = healthBeforeAttack+amountToHeal;
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());

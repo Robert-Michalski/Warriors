@@ -17,11 +17,18 @@ public class Defender extends Warrior {
     public int getDefense() {
         return DEFENSE;
     }
-    public int getInitial_Health(){
+
+    public int getInitial_Health() {
         return INITIAL_HEALTH;
     }
 
-
+    @Override
+    public void reduceHealthBasedOnDamage(int damage) {
+        if (damage < getDefense())
+            super.reduceHealthBasedOnDamage(0);
+        else
+            super.reduceHealthBasedOnDamage(damage-getDefense());
+    }
 
     @Override
     public String toString() {
