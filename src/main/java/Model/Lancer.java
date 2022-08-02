@@ -9,6 +9,11 @@ public class Lancer extends Warrior{
     }
 
     @Override
+    public void hit(IWarrior opponent) {
+        super.hit(opponent);
+    }
+
+    @Override
     public int getAttack() {
         return ATTACK;
     }
