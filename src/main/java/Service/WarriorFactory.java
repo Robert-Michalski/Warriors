@@ -18,6 +18,9 @@ public class WarriorFactory {
             case VAMPIRE -> {
                 return new Vampire();
             }
+            case LANCER -> {
+                return new Lancer();
+            }
             default -> throw new IllegalArgumentException();
         }
     }
