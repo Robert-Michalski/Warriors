@@ -23,8 +23,8 @@ public class Army {
         for (int i = 0; i < quantity; i++) {
             troops.add(warriorFactory.getInstance(type));
         }
-        for (int i = 0; i < quantity; i++){
-            if (i + 1 < quantity) {
+        for (int i = 0; i < troops.size(); i++){
+            if (i + 1 < troops.size()) {
                 troops.get(i).setWarriorBehind(troops.get(i + 1));
             }
         }

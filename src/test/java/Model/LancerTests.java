@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
+
 class Rookie extends Warrior {
     private static final int ATTACK = 1;
 
@@ -25,6 +26,7 @@ class Rookie extends Warrior {
                 '}';
     }
 }
+
 public class LancerTests {
     @Test
     @DisplayName("Smoke show")
@@ -78,8 +80,8 @@ public class LancerTests {
                 () -> Assertions.assertTrue(Battle.fight(ogre, adam)),
                 () -> Assertions.assertTrue(Battle.fight(freelancer, vampire)),
                 () -> Assertions.assertTrue(freelancer.isAlive()),
-                () -> Assertions.assertTrue(Battle.fight(myArmy,enemyArmy)),
-                () -> Assertions.assertFalse(Battle.fight(army3,army4))
+                () -> Assertions.assertTrue(Battle.fight(myArmy, enemyArmy)),
+                () -> Assertions.assertFalse(Battle.fight(army3, army4))
         );
 
     }
@@ -125,6 +127,7 @@ public class LancerTests {
         System.out.println(army2.getTroops());
         Assertions.assertNotSame(50, army2.getTroops().get(1).getHealth());
     }
+
     @Test
     @DisplayName("Given battle between a Warrior and a Knight then Warrior should lose")
     void GivenBattleBetweenWarriorAndKnightThenWarriorLoses() {
@@ -508,22 +511,39 @@ public class LancerTests {
         var amountToHeal = (vampire.getAttack() * vampire.getVAMPIRISM()) / 100;
         //WHEN
         vampire.hit(warrior);
-        var expectedHealth = healthBeforeAttack+amountToHeal;
+        var expectedHealth = healthBeforeAttack + amountToHeal;
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());
     }
+
     @Test
-    @DisplayName("Given ")
-    void test02(){
+    @DisplayName("Given battle of two armies one with 2 warriors and second with 1 Lancer and 1 Warrior then first army loses")
+    void test02() {
         //GIVEN
         var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR,2);
+                .addUnits(Unit.UnitType.WARRIOR, 2);
         var army2 = new Army()
-                .addUnits(Unit.UnitType.LANCER,1)
-                .addUnits(Unit.UnitType.WARRIOR,1);
+                .addUnits(Unit.UnitType.LANCER, 1)
+                .addUnits(Unit.UnitType.WARRIOR, 1);
         //WHEN
-        var result = Battle.fight(army1,army2);
+        var result = Battle.fight(army1, army2);
         //THEN
         Assertions.assertFalse(result);
     }
+
+    @Test
+    @DisplayName("Given army with defender and warrior and army with lancer then warrior looses correct amount of health")
+    void test03() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 1)
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.LANCER, 1);
+        //WHEN
+        army2.getTroops().get(0).hit(army1.getTroops().get(0));
+        //THEN
+        Assertions.assertSame(48, army1.getTroops().get(1).getHealth());
+    }
+
 }
