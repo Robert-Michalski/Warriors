@@ -27,14 +27,11 @@ public class Defender extends Warrior {
     }
 
     @Override
-    public void reduceHealthBasedOnDamage(int damage) {
-        if (damage < getDefense()) {
-            super.reduceHealthBasedOnDamage(0);
-            logger.info("{} lost 0 health", this);
-        }
+    public void receiveHit(CanAttack damageDealer) {
+        if(damageDealer.getAttack() < getDefense())
+            reduceHealthBasedOnDamage(0);
         else {
-            super.reduceHealthBasedOnDamage(damage - getDefense());
-            logger.info("{} lost {} health", this, damage-getDefense());
+            super.reduceHealthBasedOnDamage(damageDealer.getAttack()-getDefense());
         }
     }
 

@@ -1,6 +1,7 @@
 package Service;
 
 import Model.Army;
+import Model.Lancer;
 import Model.Warrior;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,8 @@ public class Battle {
                 army1WarriorIndex++;
             }
         }
+
+
         logger.debug("{} won fight", army1LastWarrior.isAlive() ? army1 : army2);
         return army1LastWarrior.isAlive();
     }

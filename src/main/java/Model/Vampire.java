@@ -23,7 +23,7 @@ public class Vampire extends Warrior {
     }
 
     @Override
-    public void hit(IWarrior opponent) {
+    public void hit(Warrior opponent) {
         int x1 = opponent.getHealth();
         super.hit(opponent);
         int x2 = opponent.getHealth();

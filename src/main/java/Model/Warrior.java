@@ -12,7 +12,14 @@ public class Warrior implements Unit, IWarrior {
     public void reduceHealthBasedOnDamage(int damage) {
         health -= damage;
     }
+    Warrior warriorBehind = null;
 
+    public Warrior getWarriorBehind(){
+        return warriorBehind;
+    }
+    public void setWarriorBehind(Warrior warriorBehind){
+        this.warriorBehind = warriorBehind;
+    }
     public int getInitial_Health() {
         return INITIAL_HEALTH;
     }
