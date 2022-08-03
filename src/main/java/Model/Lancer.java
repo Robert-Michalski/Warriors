@@ -16,7 +16,6 @@ public class Lancer extends Warrior{
     @Override
     public void hit(Warrior opponent) {
         super.hit(opponent);
-        logger.info("{} hits {}", this, opponent);
         if(opponent.getWarriorBehind()!=null){
             logger.info("{} pierces and hits {}", this, opponent.getWarriorBehind());
             super.hit(opponent.getWarriorBehind());

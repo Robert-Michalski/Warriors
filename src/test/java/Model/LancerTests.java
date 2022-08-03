@@ -9,7 +9,22 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
+class Rookie extends Warrior {
+    private static final int ATTACK = 1;
 
+    @Override
+    public int getAttack() {
+        return ATTACK;
+    }
+
+    @Override
+    public String toString() {
+        return "Model.Rookie{" +
+                "health=" + getHealth() +
+                "attack=" + ATTACK +
+                '}';
+    }
+}
 public class LancerTests {
     @Test
     @DisplayName("Smoke show")
@@ -105,8 +120,9 @@ public class LancerTests {
                 .addUnits(Unit.UnitType.WARRIOR, 2);
         //WHEN
         Battle.fight(army1.getTroops().get(0), army2
-                .getTroops().get(1));
+                .getTroops().get(0));
         //THEN
+        System.out.println(army2.getTroops());
         Assertions.assertNotSame(50, army2.getTroops().get(1).getHealth());
     }
     @Test
@@ -496,6 +512,18 @@ public class LancerTests {
         //THEN
         Assertions.assertSame(expectedHealth, vampire.getHealth());
     }
-    
-
+    @Test
+    @DisplayName("Given ")
+    void test02(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR,2);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.LANCER,1)
+                .addUnits(Unit.UnitType.WARRIOR,1);
+        //WHEN
+        var result = Battle.fight(army1,army2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
 }

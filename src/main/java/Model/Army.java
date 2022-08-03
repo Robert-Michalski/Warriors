@@ -22,7 +22,9 @@ public class Army {
     public Army addUnits(Unit.UnitType type, int quantity) {
         for (int i = 0; i < quantity; i++) {
             troops.add(warriorFactory.getInstance(type));
-            if (i + 1 < troops.size()) {
+        }
+        for (int i = 0; i < quantity; i++){
+            if (i + 1 < quantity) {
                 troops.get(i).setWarriorBehind(troops.get(i + 1));
             }
         }
