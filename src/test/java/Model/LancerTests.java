@@ -299,6 +299,39 @@ public class LancerTests {
                                 .addUnits(Unit.UnitType.DEFENDER, 4),
                         new Army()
                                 .addUnits(Unit.UnitType.WARRIOR, 21)
+                        , true),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.LANCER,5)
+                                .addUnits(Unit.UnitType.VAMPIRE,3)
+                                .addUnits(Unit.UnitType.WARRIOR,4)
+                                .addUnits(Unit.UnitType.DEFENDER,2),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 4)
+                                .addUnits(Unit.UnitType.VAMPIRE,6)
+                                .addUnits(Unit.UnitType.LANCER,5)
+                        , false),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.LANCER,7)
+                                .addUnits(Unit.UnitType.VAMPIRE,3)
+                                .addUnits(Unit.UnitType.WARRIOR,4)
+                                .addUnits(Unit.UnitType.DEFENDER,2),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR,4)
+                                .addUnits(Unit.UnitType.DEFENDER,4)
+                                .addUnits(Unit.UnitType.VAMPIRE,6)
+                                .addUnits(Unit.UnitType.LANCER,4)
+                        , true),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.LANCER,7)
+                                .addUnits(Unit.UnitType.VAMPIRE,3)
+                                .addUnits(Unit.UnitType.WARRIOR,4)
+                                .addUnits(Unit.UnitType.DEFENDER,2),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR,4)
+                                .addUnits(Unit.UnitType.DEFENDER,4)
+                                .addUnits(Unit.UnitType.VAMPIRE,6)
+                                .addUnits(Unit.UnitType.LANCER,4)
                         , true)
         );
     }
@@ -558,6 +591,5 @@ public class LancerTests {
         //THEN
         Assertions.assertSame(60,army1.getTroops().get(1).getHealth());
     }
-
 
 }

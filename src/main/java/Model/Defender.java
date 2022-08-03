@@ -28,10 +28,12 @@ public class Defender extends Warrior {
 
     @Override
     public void receiveHit(int damage) {
-        if(damage < getDefense())
+        if (damage < getDefense()) {
             reduceHealthBasedOnDamage(0);
-        else {
-            super.reduceHealthBasedOnDamage(damage-getDefense());
+            logger.info("Too little damage to go through defense");
+        } else {
+            super.reduceHealthBasedOnDamage(damage - getDefense());
+            logger.info("Defender took {} damage", damage - getDefense());
         }
     }
 

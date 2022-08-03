@@ -38,7 +38,7 @@ public class Warrior implements Unit, IWarrior {
 
     @Override
     public String toString() {
-        return getClass().getName()+"{" +
+        return getClass().getName().substring(6)+"{" +
                 "health=" + getHealth() +
                 "attack=" + getAttack() +
                 '}';

@@ -14,6 +14,7 @@ public interface IWarrior extends HasHealth, CanAttack {
     }
     default void receiveHit(int damage) {
         reduceHealthBasedOnDamage(damage);
+        logger.info("{} took {} damage", this, damage);
     }
 
 
