@@ -24,9 +24,9 @@ public class Lancer extends Warrior {
 
     public void hitWithPenalty(Warrior opponent) {
         if (!(opponent instanceof Defender defender)) {
-            opponent.getWarriorBehind().setHealth((opponent.getWarriorBehind().getHealth() - (getAttack() * 50) / 100));
+            opponent.getWarriorBehind().receiveHit((getAttack()*PIERCING)/100);
         } else {
-            opponent.getWarriorBehind().setHealth((opponent.getWarriorBehind().getHealth() - ((getAttack()- defender.getDefense()) * 50) / 100));
+            opponent.getWarriorBehind().receiveHit(((getAttack()-defender.getDefense())*PIERCING)/100);
         }
 
     }

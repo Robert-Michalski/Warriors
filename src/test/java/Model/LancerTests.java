@@ -545,5 +545,19 @@ public class LancerTests {
         //THEN
         Assertions.assertSame(48, army1.getTroops().get(1).getHealth());
     }
+    @Test
+    @DisplayName("Given army of two defenders and army of 1 lancer when lancer hits first defender then second gets no damage")
+    void test04(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 2);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.LANCER, 1);
+        //WHEN
+        army2.getTroops().get(0).hit(army1.getTroops().get(0));
+        //THEN
+        Assertions.assertSame(60,army1.getTroops().get(1).getHealth());
+    }
+
 
 }

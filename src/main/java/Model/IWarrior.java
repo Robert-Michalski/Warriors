@@ -10,10 +10,10 @@ public interface IWarrior extends HasHealth, CanAttack {
 
     default void hit(Warrior opponent) {
         logger.info("{} hits {}", this, opponent);
-        opponent.receiveHit(this);
+        opponent.receiveHit(this.getAttack());
     }
-    default void receiveHit(CanAttack damageDealer) {
-        reduceHealthBasedOnDamage(damageDealer.getAttack());
+    default void receiveHit(int damage) {
+        reduceHealthBasedOnDamage(damage);
     }
 
 
