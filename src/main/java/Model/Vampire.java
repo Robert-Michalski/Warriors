@@ -12,17 +12,19 @@ public class Vampire extends Warrior {
     @Override
     public void hit(Warrior opponent) {
         int x1 = opponent.getHealth();
+        int healthBeforeAttack = getHealth();
         super.hit(opponent);
         int x2 = opponent.getHealth();
         healSelfByAmount(((x1-x2)*VAMPIRISM)/100);
-        logger.info("{} heals for {} units", this,((x1-x2)*VAMPIRISM)/100);
+        int healthAfterAttack = getHealth();
+        logger.info("{} heals for {} units", this,healthAfterAttack-healthBeforeAttack);
     }
 
     public void healSelfByAmount(int amount) {
         this.setHealth(this.getHealth() + amount);
         if (this.getHealth() > this.INITIAL_HEALTH) {
             this.setHealth(this.INITIAL_HEALTH);
-            logger.info("{} will not overheal, his health is ful", this);
+            logger.info("{} will not overheal, his health is full", this);
         }
 
     }
