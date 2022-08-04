@@ -1,9 +1,9 @@
 package Model;
 
-public class Warrior implements Unit, IWarrior, Chain {
+public class Warrior implements Unit, IWarrior {
     private final int INITIAL_HEALTH = 50;
     private int health;
-    private Chain nextInChain;
+
     Warrior warriorBehind = null;
     Warrior warriorInFront = null;
 
@@ -63,10 +63,6 @@ public class Warrior implements Unit, IWarrior, Chain {
     }
 
 
-    @Override
-    public void setNext(Chain nextInChain) {
-        this.nextInChain = nextInChain;
-    }
 
     @Override
     public void process(Warrior warrior) {

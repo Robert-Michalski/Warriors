@@ -651,4 +651,23 @@ public class LancerTests {
         //THEN
         Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
     }
+    @Test
+    @DisplayName("Given warrior in front makes his move, everyone in front of healer gets healed")
+    void test10() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.WARRIOR,1)
+                .addUnits(Unit.UnitType.HEALER,1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        army1.getTroops().get(0).setHealth(48);
+        army1.getTroops().get(2).setHealth(48);
+        //WHEN
+        army1.getTroops().get(0).hit(army2.getTroops().get(0));
+        //THEN
+        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
+        Assertions.assertSame(army1.getTroops().get(2).getInitial_Health(), army1.getTroops().get(2).getHealth());
+    }
 }

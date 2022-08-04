@@ -18,7 +18,6 @@ public class Army {
         return troops;
     }
 
-
     public Army addUnits(Unit.UnitType type, int quantity) {
         for (int i = 0; i < quantity; i++) {
             troops.add(warriorFactory.getInstance(type));
