@@ -18,10 +18,7 @@ public class Army {
         return troops;
     }
 
-    public Army addUnits(Unit.UnitType type, int quantity) {
-        for (int i = 0; i < quantity; i++) {
-            troops.add(warriorFactory.getInstance(type));
-        }
+    public Army lineUp(){
         for (int i = 0; i < troops.size(); i++){
             if (i + 1 < troops.size()) {
                 troops.get(i).setWarriorBehind(troops.get(i + 1));
@@ -30,7 +27,13 @@ public class Army {
                 troops.get(i).setWarriorInFront(troops.get(i-1));
             }
         }
+        return this;
+    }
 
+    public Army addUnits(Unit.UnitType type, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            troops.add(warriorFactory.getInstance(type));
+        }
         return this;
     }
 

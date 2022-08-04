@@ -119,7 +119,8 @@ public class LancerTests {
         var army1 = new Army()
                 .addUnits(Unit.UnitType.LANCER, 1);
         var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 2);
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .lineUp();
         //WHEN
         Battle.fight(army1.getTroops().get(0), army2
                 .getTroops().get(0));
@@ -570,7 +571,8 @@ public class LancerTests {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.DEFENDER, 1)
-                .addUnits(Unit.UnitType.WARRIOR, 1);
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .lineUp();
         var army2 = new Army()
                 .addUnits(Unit.UnitType.LANCER, 1);
         //WHEN
@@ -599,7 +601,8 @@ public class LancerTests {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.HEALER, 1);
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .lineUp();
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1);
         army1.getTroops().get(0).setHealth(48);
@@ -642,7 +645,8 @@ public class LancerTests {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.HEALER, 1);
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .lineUp();
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1);
         army1.getTroops().get(0).setHealth(49);
@@ -659,9 +663,11 @@ public class LancerTests {
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .addUnits(Unit.UnitType.HEALER, 1)
                 .addUnits(Unit.UnitType.WARRIOR,1)
-                .addUnits(Unit.UnitType.HEALER,1);
+                .addUnits(Unit.UnitType.HEALER,1)
+                .lineUp();
         var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 1);
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .lineUp();
         army1.getTroops().get(0).setHealth(48);
         army1.getTroops().get(2).setHealth(48);
         //WHEN
