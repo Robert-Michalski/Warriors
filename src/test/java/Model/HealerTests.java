@@ -27,7 +27,7 @@ class Rookie extends Warrior {
     }
 }
 
-public class LancerTests {
+public class HealerTests {
     @Test
     @DisplayName("Smoke show")
     void smokeShow() {

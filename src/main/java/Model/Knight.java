@@ -9,11 +9,5 @@ public class Knight extends Warrior {
         return ATTACK;
     }
 
-    @Override
-    public String toString() {
-        return "Knight{" +
-                "health=" + getHealth() +
-                "attack=" + ATTACK +
-                '}';
-    }
+
 }
