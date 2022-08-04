@@ -592,7 +592,7 @@ public class LancerTests {
         Assertions.assertSame(60,army1.getTroops().get(1).getHealth());
     }
     @Test
-    @DisplayName("dd")
+    @DisplayName("Given warrior with no full hp is in front of healer, after attacking he (warrior) is healed")
     void test05(){
         //GIVEN
         var army1 = new Army()
@@ -601,18 +601,22 @@ public class LancerTests {
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR,1);
         army1.getTroops().get(0).setHealth(48);
+        //WHEN
         army1.getTroops().get(0).hit(army2.getTroops().get(0));
-        System.out.println(army1.getTroops().get(0).getHealth());
+        //THEN
+        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(),army1.getTroops().get(0).getHealth());
 
     }
+
     @Test
-    @DisplayName("DD")
-    void test06(){
+    @DisplayName("Given duel between Healer and Warrior then warrior looses no hp")
+    void test07(){
         //GIVEN
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.HEALER,1);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR,1);
-        Battle.fight(army1,army2);
+        var healer = new Healer();
+        var warrior = new Warrior();
+        //WHEN
+        Battle.fight(healer,warrior);
+        //THEN
+        Assertions.assertSame(warrior.getInitial_Health(), warrior.getHealth());
     }
 }
