@@ -4,6 +4,7 @@ import Service.WarriorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class Army {
     private final List<Warrior> troops;
@@ -18,13 +19,13 @@ public class Army {
         return troops;
     }
 
-    public Army lineUp(){
-        for (int i = 0; i < troops.size(); i++){
+    public Army lineUp() {
+        for (int i = 0; i < troops.size(); i++) {
             if (i + 1 < troops.size()) {
                 troops.get(i).setWarriorBehind(troops.get(i + 1));
             }
-            if (i-1>=0){
-                troops.get(i).setWarriorInFront(troops.get(i-1));
+            if (i - 1 >= 0) {
+                troops.get(i).setWarriorInFront(troops.get(i - 1));
             }
         }
         return this;
@@ -36,5 +37,4 @@ public class Army {
         }
         return this;
     }
-
 }
