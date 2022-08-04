@@ -27,7 +27,11 @@ public class Army {
             if (i + 1 < troops.size()) {
                 troops.get(i).setWarriorBehind(troops.get(i + 1));
             }
+            if (i-1>=0){
+                troops.get(i).setWarriorInFront(troops.get(i-1));
+            }
         }
+
         return this;
     }
 

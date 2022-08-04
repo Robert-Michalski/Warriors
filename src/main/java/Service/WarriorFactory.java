@@ -21,6 +21,9 @@ public class WarriorFactory {
             case LANCER -> {
                 return new Lancer();
             }
+            case HEALER -> {
+                return new Healer();
+            }
             default -> throw new IllegalArgumentException();
         }
     }

@@ -591,5 +591,28 @@ public class LancerTests {
         //THEN
         Assertions.assertSame(60,army1.getTroops().get(1).getHealth());
     }
+    @Test
+    @DisplayName("dd")
+    void test05(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER,1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR,1);
+        army1.getTroops().get(0).setHealth(48);
+        army1.getTroops().get(0).hit(army2.getTroops().get(0));
+        System.out.println(army1.getTroops().get(0).getHealth());
 
+    }
+    @Test
+    @DisplayName("DD")
+    void test06(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.HEALER,1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR,1);
+        Battle.fight(army1,army2);
+    }
 }
