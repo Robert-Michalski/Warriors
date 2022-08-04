@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Army {
     private final List<Warrior> troops;
-    private WarriorFactory warriorFactory;
+    private final WarriorFactory warriorFactory;
 
     public Army() {
         troops = new ArrayList<>();
