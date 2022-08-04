@@ -301,37 +301,37 @@ public class LancerTests {
                                 .addUnits(Unit.UnitType.WARRIOR, 21)
                         , true),
                 Arguments.of(new Army()
-                                .addUnits(Unit.UnitType.LANCER,5)
-                                .addUnits(Unit.UnitType.VAMPIRE,3)
-                                .addUnits(Unit.UnitType.WARRIOR,4)
-                                .addUnits(Unit.UnitType.DEFENDER,2),
+                                .addUnits(Unit.UnitType.LANCER, 5)
+                                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 2),
                         new Army()
                                 .addUnits(Unit.UnitType.WARRIOR, 4)
                                 .addUnits(Unit.UnitType.DEFENDER, 4)
-                                .addUnits(Unit.UnitType.VAMPIRE,6)
-                                .addUnits(Unit.UnitType.LANCER,5)
+                                .addUnits(Unit.UnitType.VAMPIRE, 6)
+                                .addUnits(Unit.UnitType.LANCER, 5)
                         , false),
                 Arguments.of(new Army()
-                                .addUnits(Unit.UnitType.LANCER,7)
-                                .addUnits(Unit.UnitType.VAMPIRE,3)
-                                .addUnits(Unit.UnitType.WARRIOR,4)
-                                .addUnits(Unit.UnitType.DEFENDER,2),
+                                .addUnits(Unit.UnitType.LANCER, 7)
+                                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 2),
                         new Army()
-                                .addUnits(Unit.UnitType.WARRIOR,4)
-                                .addUnits(Unit.UnitType.DEFENDER,4)
-                                .addUnits(Unit.UnitType.VAMPIRE,6)
-                                .addUnits(Unit.UnitType.LANCER,4)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 4)
+                                .addUnits(Unit.UnitType.VAMPIRE, 6)
+                                .addUnits(Unit.UnitType.LANCER, 4)
                         , true),
                 Arguments.of(new Army()
-                                .addUnits(Unit.UnitType.LANCER,7)
-                                .addUnits(Unit.UnitType.VAMPIRE,3)
-                                .addUnits(Unit.UnitType.WARRIOR,4)
-                                .addUnits(Unit.UnitType.DEFENDER,2),
+                                .addUnits(Unit.UnitType.LANCER, 7)
+                                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 2),
                         new Army()
-                                .addUnits(Unit.UnitType.WARRIOR,4)
-                                .addUnits(Unit.UnitType.DEFENDER,4)
-                                .addUnits(Unit.UnitType.VAMPIRE,6)
-                                .addUnits(Unit.UnitType.LANCER,4)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 4)
+                                .addUnits(Unit.UnitType.VAMPIRE, 6)
+                                .addUnits(Unit.UnitType.LANCER, 4)
                         , true)
         );
     }
@@ -578,9 +578,10 @@ public class LancerTests {
         //THEN
         Assertions.assertSame(48, army1.getTroops().get(1).getHealth());
     }
+
     @Test
     @DisplayName("Given army of two defenders and army of 1 lancer when lancer hits first defender then second gets no damage")
-    void test04(){
+    void test04() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.DEFENDER, 2);
@@ -589,34 +590,65 @@ public class LancerTests {
         //WHEN
         army2.getTroops().get(0).hit(army1.getTroops().get(0));
         //THEN
-        Assertions.assertSame(60,army1.getTroops().get(1).getHealth());
+        Assertions.assertSame(60, army1.getTroops().get(1).getHealth());
     }
+
     @Test
     @DisplayName("Given warrior with no full hp is in front of healer, after attacking he (warrior) is healed")
-    void test05(){
+    void test05() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.HEALER,1);
+                .addUnits(Unit.UnitType.HEALER, 1);
         var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR,1);
+                .addUnits(Unit.UnitType.WARRIOR, 1);
         army1.getTroops().get(0).setHealth(48);
         //WHEN
         army1.getTroops().get(0).hit(army2.getTroops().get(0));
         //THEN
-        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(),army1.getTroops().get(0).getHealth());
+        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
 
     }
 
     @Test
     @DisplayName("Given duel between Healer and Warrior then warrior looses no hp")
-    void test07(){
+    void test07() {
         //GIVEN
         var healer = new Healer();
         var warrior = new Warrior();
         //WHEN
-        Battle.fight(healer,warrior);
+        Battle.fight(healer, warrior);
         //THEN
         Assertions.assertSame(warrior.getInitial_Health(), warrior.getHealth());
+    }
+
+    @Test
+    @DisplayName("If warrior in front has full hp after attack his hp does not exceed his initial health")
+    void test08() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        //WHEN
+        army1.getTroops().get(0).hit(army2.getTroops().get(0));
+        //THEN
+        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
+    }
+    @Test
+    @DisplayName("aaa")
+    void test09() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        army1.getTroops().get(0).setHealth(49);
+        //WHEN
+        army1.getTroops().get(0).hit(army2.getTroops().get(0));
+        //THEN
+        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
     }
 }

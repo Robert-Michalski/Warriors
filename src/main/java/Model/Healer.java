@@ -14,13 +14,15 @@ public class Healer extends Warrior {
         warrior.setHealth(warrior.getHealth() + getHealUnits());
         if (warrior.getHealth() > warrior.getInitial_Health()) {
             warrior.setHealth(warrior.getInitial_Health());
+            logger.info("{} has full hp}", warrior);
+        } else {
+            logger.info("{} was healed and now has {} health}", warrior, warrior.getHealth());
         }
-        logger.info("{} was healed and now has {} health}", warrior, warrior.getHealth());
     }
 
     @Override
     public void process(Warrior warrior) {
-        if(warriorInFront!=null){
+        if (warriorInFront != null) {
             heal(warriorInFront);
         }
         super.process(warrior);
