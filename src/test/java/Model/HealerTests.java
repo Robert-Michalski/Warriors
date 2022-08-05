@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.w3c.dom.ls.LSOutput;
 
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 class Rookie extends Warrior {
@@ -552,7 +554,7 @@ public class HealerTests {
 
     @Test
     @DisplayName("Given battle of two armies one with 2 warriors and second with 1 Lancer and 1 Warrior then first army loses")
-    void test02() {
+    void GivenBattleOfTwoArmiesOneWith2WarriorsAndSecondWith1Lancer1WarriorThenFirstArmyLooses() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 2);
@@ -567,7 +569,7 @@ public class HealerTests {
 
     @Test
     @DisplayName("Given army with defender and warrior and army with lancer then warrior looses correct amount of health")
-    void test03() {
+    void GivenLancerAttacksDefenderThatHasWarriorBehindHimThenThisWarriorLoosesCorrectAmountOfHealth() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.DEFENDER, 1)
@@ -583,7 +585,7 @@ public class HealerTests {
 
     @Test
     @DisplayName("Given army of two defenders and army of 1 lancer when lancer hits first defender then second gets no damage")
-    void test04() {
+    void GivenArmyOf2DefendersAndArmyOf1LancerThenWhenLancerHitsFirstDefenderSecondLoosesNoHealth() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.DEFENDER, 2);
@@ -596,8 +598,8 @@ public class HealerTests {
     }
 
     @Test
-    @DisplayName("Given warrior with no full hp is in front of healer, after attacking he (warrior) is healed")
-    void test05() {
+    @DisplayName("Given warrior with no full health is in front of healer, after attacking he (warrior) is healed")
+    void GivenWarriorWithNoFullHealthInFrontOfHealerAttacksEnemyThisWarriorIsBeingHealedByHealerBehindHim() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
@@ -614,8 +616,8 @@ public class HealerTests {
     }
 
     @Test
-    @DisplayName("Given duel between Healer and Warrior then warrior looses no hp")
-    void test07() {
+    @DisplayName("Given duel between Healer and Warrior then warrior looses no health")
+    void GivenDuelBetweenHealerAndWarriorThenWarriorLoosesNoHealth() {
         //GIVEN
         var healer = new Healer();
         var warrior = new Warrior();
@@ -627,7 +629,7 @@ public class HealerTests {
 
     @Test
     @DisplayName("If warrior in front has full hp after attack his hp does not exceed his initial health")
-    void test08() {
+    void GivenWarriorWithFullHealthHasHealerBehindHimThenAfterThisWarriorAttacksHisHealthIsBelowInitialHealth() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
@@ -639,9 +641,11 @@ public class HealerTests {
         //THEN
         Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
     }
+
     @Test
-    @DisplayName("aaa")
-    void test09() {
+    @DisplayName("Given Warrior with almost full health that has healer behind then after this Warriors hits then he is being" +
+            "healed to initial health")
+    void GivenWarriorWithAlmostFullHealthAttacksEnemyThenHeIsBeingHealerButNotOverInitialHealth() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
@@ -655,15 +659,16 @@ public class HealerTests {
         //THEN
         Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
     }
+
     @Test
-    @DisplayName("Given warrior in front makes his move, everyone in front of healer gets healed")
-    void test10() {
+    @DisplayName("Given warrior in front makes his move then everyone in front of any healer gets healed")
+    void GivenWarriorInFrontOfArmyMakesHisMoveThenEveryoneInFrontOfAnyHealerGetsHealed() {
         //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.WARRIOR,1)
-                .addUnits(Unit.UnitType.HEALER,1)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
                 .lineUp();
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
@@ -676,4 +681,6 @@ public class HealerTests {
         Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
         Assertions.assertSame(army1.getTroops().get(2).getInitial_Health(), army1.getTroops().get(2).getHealth());
     }
+
+
 }

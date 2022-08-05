@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Optional;
+
 public class Warrior implements Unit, IWarrior {
     private final int INITIAL_HEALTH = 50;
     private int health;
@@ -10,7 +12,6 @@ public class Warrior implements Unit, IWarrior {
     public Warrior() {
         setHealth(INITIAL_HEALTH);
     }
-
 
 
     @Override
@@ -24,12 +25,14 @@ public class Warrior implements Unit, IWarrior {
         process(this);
     }
 
-    public Warrior getWarriorBehind(){
+    public Warrior getWarriorBehind() {
         return warriorBehind;
     }
-    public void setWarriorBehind(Warrior warriorBehind){
+
+    public void setWarriorBehind(Warrior warriorBehind) {
         this.warriorBehind = warriorBehind;
     }
+
     public int getInitial_Health() {
         return INITIAL_HEALTH;
     }
@@ -56,17 +59,17 @@ public class Warrior implements Unit, IWarrior {
 
     @Override
     public String toString() {
-        return getClass().getName().substring(6)+"{" +
+        return getClass().getName().substring(6) + "{" +
                 "health=" + getHealth() +
                 "attack=" + getAttack() +
                 '}';
     }
 
 
-
     @Override
     public void process(Warrior warrior) {
-            if(warriorBehind!=null)
+        if (warriorBehind != null) {
             warrior.process(warrior.getWarriorBehind());
+        }
     }
 }

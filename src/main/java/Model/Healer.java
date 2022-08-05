@@ -21,6 +21,11 @@ public class Healer extends Warrior {
     }
 
     @Override
+    public void hit(Warrior opponent) {
+        logger.info("Healer does not hit");
+    }
+
+    @Override
     public void process(Warrior warrior) {
         if (warriorInFront != null) {
             heal(warriorInFront);

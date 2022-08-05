@@ -16,8 +16,6 @@ public interface IWarrior extends HasHealth, CanAttack {
         reduceHealthBasedOnDamage(damage);
         logger.info("{} took {} damage", this, damage);
     }
-
-
 }
 
 interface HasHealth {
