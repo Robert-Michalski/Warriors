@@ -1,6 +1,7 @@
 package Service;
 
 import Model.Army;
+import Model.Healer;
 import Model.Lancer;
 import Model.Warrior;
 import org.slf4j.Logger;
@@ -43,9 +44,45 @@ public class Battle {
                 army1WarriorIndex++;
             }
         }
-
-
         logger.debug("{} won fight", army1LastWarrior.isAlive() ? army1 : army2);
         return army1LastWarrior.isAlive();
+    }
+
+    public static boolean straightFight(Army army1, Army army2) {
+        if(army1.getTroops().isEmpty()){
+            return false;
+        }
+        if(army2.getTroops().isEmpty()){
+            return true;
+        }
+        Logger logger = LoggerFactory.getLogger("Straight Fight");
+        logger.info("Straight Fight started !");
+        Warrior army1FirstWarrior;
+        if(army1.getTroops().get(0)!=null) {
+            army1FirstWarrior = army1.getTroops().get(0);
+        }
+        else {
+            return false;
+        }
+        while(!army1.getTroops().isEmpty()){
+            for(int i = 0; i<army1.getTroops().size(); i++){
+                if(!(army1.getTroops().get(i)instanceof Healer) && !(army2.getTroops().get(i) instanceof  Healer))
+                fight(army1.getTroops().get(i), army2.getTroops().get(0));
+            }
+            army1.removeDeadWarriors();
+            army2.removeDeadWarriors();
+            if(!army1.getTroops().isEmpty() && !army2.getTroops().isEmpty()) {
+                straightFight(army1,army2);
+            }
+            if(army1.getTroops().isEmpty()){
+                return false;
+            }
+            if(army2.getTroops().isEmpty()){
+                return true;
+            }
+        }
+
+
+        return army1.getTroops().get(0).isAlive();
     }
 }

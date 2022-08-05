@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.w3c.dom.ls.LSOutput;
 
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 class Rookie extends Warrior {
@@ -29,7 +27,7 @@ class Rookie extends Warrior {
     }
 }
 
-public class HealerTests {
+public class StraightFightTests {
     @Test
     @DisplayName("Smoke show")
     void smokeShow() {
@@ -51,22 +49,35 @@ public class HealerTests {
         var vampire = new Vampire();
         var myArmy = new Army()
                 .addUnits(Unit.UnitType.DEFENDER, 2)
+                .addUnits(Unit.UnitType.HEALER, 1)
                 .addUnits(Unit.UnitType.VAMPIRE, 2)
-                .addUnits(Unit.UnitType.LANCER, 4)
+                .addUnits(Unit.UnitType.LANCER, 2)
+                .addUnits(Unit.UnitType.HEALER, 1)
                 .addUnits(Unit.UnitType.WARRIOR, 1);
         var enemyArmy = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 2)
-                .addUnits(Unit.UnitType.LANCER, 2)
+                .addUnits(Unit.UnitType.LANCER, 4)
+                .addUnits(Unit.UnitType.HEALER, 1)
                 .addUnits(Unit.UnitType.DEFENDER, 2)
-                .addUnits(Unit.UnitType.VAMPIRE, 3);
+                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                .addUnits(Unit.UnitType.HEALER, 1);
         var army3 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .addUnits(Unit.UnitType.LANCER, 1)
-                .addUnits(Unit.UnitType.DEFENDER, 2);
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .lineUp();
         var army4 = new Army()
                 .addUnits(Unit.UnitType.VAMPIRE, 3)
                 .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.LANCER, 2);
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.LANCER, 2)
+                .lineUp();
+        var army5 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 10);
+        var army6 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 6)
+                .addUnits(Unit.UnitType.LANCER, 5);
         Assertions.assertAll(
                 () -> Assertions.assertTrue(Battle.fight(chuck, bruce)),
                 () -> Assertions.assertFalse(Battle.fight(dave, carl)),
@@ -82,8 +93,9 @@ public class HealerTests {
                 () -> Assertions.assertTrue(Battle.fight(ogre, adam)),
                 () -> Assertions.assertTrue(Battle.fight(freelancer, vampire)),
                 () -> Assertions.assertTrue(freelancer.isAlive()),
-                () -> Assertions.assertTrue(Battle.fight(myArmy, enemyArmy)),
-                () -> Assertions.assertFalse(Battle.fight(army3, army4))
+                () -> Assertions.assertFalse(Battle.fight(myArmy, enemyArmy)),
+                () -> Assertions.assertTrue(Battle.fight(army3, army4)),
+                () -> Assertions.assertFalse(Battle.straightFight(army5, army6))
         );
 
     }
@@ -249,6 +261,60 @@ public class HealerTests {
         //THEN
         Assertions.assertTrue(result);
     }
+
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("Given battle of two armies check if expected output of straight fight matches real output")
+    void straightFightProvider(Army army1, Army army2, boolean expected) {
+        Assertions.assertSame(Battle.straightFight(army1, army2), expected);
+    }
+
+    private static Stream<Arguments> straightFightProvider() {
+        return Stream.of(
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.LANCER, 7)
+                                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 2),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 4)
+                                .addUnits(Unit.UnitType.VAMPIRE, 6)
+                                .addUnits(Unit.UnitType.LANCER, 4),
+                        true),
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.LANCER, 7)
+                                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                                .addUnits(Unit.UnitType.HEALER, 1)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.HEALER, 1)
+                                .addUnits(Unit.UnitType.DEFENDER, 2),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 4)
+                                .addUnits(Unit.UnitType.HEALER, 1)
+                                .addUnits(Unit.UnitType.VAMPIRE, 6)
+                                .addUnits(Unit.UnitType.LANCER, 4),
+                        false),
+                        Arguments.of(new Army()
+                                        .addUnits(Unit.UnitType.LANCER, 4)
+                                        .addUnits(Unit.UnitType.WARRIOR, 3)
+                                        .addUnits(Unit.UnitType.HEALER, 1)
+                                        .addUnits(Unit.UnitType.WARRIOR, 4)
+                                        .addUnits(Unit.UnitType.HEALER, 1)
+                                        .addUnits(Unit.UnitType.KNIGHT, 2),
+                                new Army()
+                                        .addUnits(Unit.UnitType.WARRIOR, 4)
+                                        .addUnits(Unit.UnitType.DEFENDER, 4)
+                                        .addUnits(Unit.UnitType.HEALER, 1)
+                                        .addUnits(Unit.UnitType.VAMPIRE, 2)
+                                        .addUnits(Unit.UnitType.LANCER, 4),
+                                true)
+                        );
+
+    }
+
+
 
     @ParameterizedTest
     @MethodSource
@@ -682,5 +748,82 @@ public class HealerTests {
         Assertions.assertSame(army1.getTroops().get(2).getInitial_Health(), army1.getTroops().get(2).getHealth());
     }
 
+    @Test
+    @DisplayName("Given straight fight between armies of 2 warriors then first army wins")
+    void test01() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        var result = Battle.straightFight(army1, army2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Given straight fight between two armies one having 1 warrior second having 2 warriors then second army wins")
+    void test02() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 2);
+        var result = Battle.straightFight(army1, army2);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Given straight fight between two armies one having 1 lancer second having 2 warriors" +
+            " then lancer attacks only one enemy")
+    void test03() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.LANCER, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 2);
+        var result = Battle.straightFight(army1, army2);
+        Assertions.assertFalse(result);
+        //TODO how to check it ?
+    }
+
+    @Test
+    @DisplayName("Given straight fight between two armies one having warrior second having" +
+            "warrior and heaelr then healer will not heal warrior so they will loose")
+    void test04() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1);
+        var result = Battle.straightFight(army1, army2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    void test05() {
+        var army5 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 10);
+        var army6 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 6)
+                .addUnits(Unit.UnitType.LANCER, 5);
+        var result = Battle.straightFight(army5, army6);
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Given empty army vs army of two warriors then army 2 wins")
+    void test06() {
+        var army1 = new Army();
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 2);
+        var result = Battle.straightFight(army1, army2);
+        Assertions.assertFalse(result);
+    }
+    @Test
+    void test07(){
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.HEALER,1)
+                .addUnits(Unit.UnitType.WARRIOR,1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.HEALER, 1);
+        Battle.straightFight(army1, army2);
+    }
 
 }

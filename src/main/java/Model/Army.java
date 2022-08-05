@@ -31,6 +31,16 @@ public class Army {
         return this;
     }
 
+
+    public Army removeDeadWarriors(){
+        for(int i = 0; i< troops.size(); i++){
+            if (!troops.get(i).isAlive()){
+                troops.remove(getTroops().get(i));
+            }
+        }
+        return this;
+    }
+
     public Army addUnits(Unit.UnitType type, int quantity) {
         for (int i = 0; i < quantity; i++) {
             troops.add(warriorFactory.getInstance(type));
