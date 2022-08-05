@@ -1,9 +1,5 @@
-package Service;
+package model;
 
-import Model.Army;
-import Model.Healer;
-import Model.Lancer;
-import Model.Warrior;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

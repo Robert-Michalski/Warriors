@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Healer extends Warrior {
     private static final int ATTACK = 0;

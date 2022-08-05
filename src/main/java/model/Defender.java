@@ -1,7 +1,4 @@
-package Model;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package model;
 
 public class Defender extends Warrior {
     private final int INITIAL_HEALTH = 60;

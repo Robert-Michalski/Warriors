@@ -1,6 +1,6 @@
-package Service;
+package service;
 
-import Model.*;
+import model.*;
 
 public class WarriorFactory {
 

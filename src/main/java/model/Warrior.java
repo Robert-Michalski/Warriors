@@ -1,6 +1,4 @@
-package Model;
-
-import java.util.Optional;
+package model;
 
 public class Warrior implements Unit, IWarrior {
     private final int INITIAL_HEALTH = 50;

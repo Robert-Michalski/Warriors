@@ -1,10 +1,9 @@
-package Model;
+package model;
 
-import Service.WarriorFactory;
+import service.WarriorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class Army {
     private final List<Warrior> troops;

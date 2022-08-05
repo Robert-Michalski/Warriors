@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Vampire extends Warrior {
     private final int INITIAL_HEALTH = 40;
