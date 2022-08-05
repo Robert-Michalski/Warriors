@@ -9,10 +9,10 @@ public class Battle {
     }
 
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
-        if(warrior2==null){
+        if (warrior2 == null) {
             return true;
         }
-        if(warrior1==null){
+        if (warrior1 == null) {
             return false;
         }
         Logger logger = LoggerFactory.getLogger("FIGHT");
@@ -51,28 +51,33 @@ public class Battle {
     }
 
     public static boolean straightFight(Army army1, Army army2) {
-        if(army1.getTroops().isEmpty()){
+        if (army1.getTroops().isEmpty()) {
             return false;
         }
-        if(army2.getTroops().isEmpty()){
+        if (army2.getTroops().isEmpty()) {
             return true;
         }
         Logger logger = LoggerFactory.getLogger("Straight Fight");
         logger.info("Straight Fight started !");
-        while(!army1.getTroops().isEmpty() || !army2.getTroops().isEmpty()){
-            for(int i = 0; i<army1.getTroops().size(); i++){
-                if(i==army2.getTroops().size()){
+        int round = 1;
+        while (!army1.getTroops().isEmpty() || !army2.getTroops().isEmpty()) {
+
+            logger.info("Round {}", round);
+            for (int i = 0; i < army1.getTroops().size(); i++) {
+                fight(army1.getTroops().get(i), army2.getTroops().get(i));
+                if (i + 1 >= army2.getTroops().size()) {
                     break;
                 }
-                fight(army1.getTroops().get(i), army2.getTroops().get(i));
             }
+            round++;
             army1.removeDeadWarriors();
             army2.removeDeadWarriors();
-
-            if(army1.getTroops().isEmpty()){
+            logger.info("Army 1 after round {} : {}", round, army1.getTroops());
+            logger.info("Army 2 after round {} : {}", round, army2.getTroops());
+            if (army1.getTroops().isEmpty()) {
                 return false;
             }
-            if(army2.getTroops().isEmpty()){
+            if (army2.getTroops().isEmpty()) {
                 return true;
             }
         }

@@ -793,17 +793,7 @@ public class StraightFightTests {
         var result = Battle.straightFight(army1, army2);
         Assertions.assertTrue(result);
     }
-
-    @Test
-    void test05() {
-        var army5 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 10);
-        var army6 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 6)
-                .addUnits(Unit.UnitType.LANCER, 5);
-        var result = Battle.straightFight(army5, army6);
-        Assertions.assertFalse(result);
-    }
+    
 
     @Test
     @DisplayName("Given empty army vs army of two warriors then army 2 wins")
@@ -815,24 +805,25 @@ public class StraightFightTests {
         Assertions.assertFalse(result);
     }
 
-    @Test
-    void test08() {
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.LANCER, 7)
-                .addUnits(Unit.UnitType.VAMPIRE, 3)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.WARRIOR, 4)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.DEFENDER, 2);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 4)
-                .addUnits(Unit.UnitType.DEFENDER, 4)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.VAMPIRE, 6)
-                .addUnits(Unit.UnitType.LANCER, 4);
-        var result = Battle.straightFight(army1, army2);
-        System.out.println("army1 "+army1.getTroops());
-        System.out.println("army2 "+army2.getTroops());
-        Assertions.assertFalse(result);
-    }
+//    @Test
+//    @DisplayName("Test from site")
+//    void test08() {
+//        var army1 = new Army()
+//                .addUnits(Unit.UnitType.LANCER, 7)
+//                .addUnits(Unit.UnitType.VAMPIRE, 3)
+//                .addUnits(Unit.UnitType.HEALER, 1)
+//                .addUnits(Unit.UnitType.WARRIOR, 4)
+//                .addUnits(Unit.UnitType.HEALER, 1)
+//                .addUnits(Unit.UnitType.DEFENDER, 2);
+//        var army2 = new Army()
+//                .addUnits(Unit.UnitType.WARRIOR, 4)
+//                .addUnits(Unit.UnitType.DEFENDER, 4)
+//                .addUnits(Unit.UnitType.HEALER, 1)
+//                .addUnits(Unit.UnitType.VAMPIRE, 6)
+//                .addUnits(Unit.UnitType.LANCER, 4);
+//        var result = Battle.straightFight(army1, army2);
+//        System.out.println("army1 "+army1.getTroops());
+//        System.out.println("army2 "+army2.getTroops());
+//        Assertions.assertFalse(result);
+//    }
 }
