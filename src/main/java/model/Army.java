@@ -6,6 +6,7 @@ import service.WarriorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Army {
     Logger logger = LoggerFactory.getLogger(Army.class);
@@ -35,13 +36,11 @@ public class Army {
 
 
     public Army removeDeadWarriors(){
-        for(int i = 0; i< troops.size(); i++){
-            if (!troops.get(i).isAlive()){
-                logger.info("removing {}", getTroops().get(i));
-                troops.remove(getTroops().get(i));
-                logger.info("Now army is {}", getTroops());
+        for(ListIterator<Warrior> iterator = troops.listIterator(); iterator.hasNext();){
+            Warrior warrior = iterator.next();
+            if(!warrior.isAlive()){
+                iterator.remove();
             }
-
         }
         return this;
     }
