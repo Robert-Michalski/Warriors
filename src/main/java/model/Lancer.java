@@ -13,7 +13,7 @@ public class Lancer extends Warrior {
     public void hit(Warrior opponent) {
         super.hit(opponent);
         if (opponent.getWarriorBehind() != null) {
-            logger.info("{} pierces and hits {}", this, opponent.getWarriorBehind());
+            logger.trace("{} pierces and hits {}", this, opponent.getWarriorBehind());
             hitWithPenalty(opponent);
         }
     }

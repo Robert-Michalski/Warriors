@@ -26,10 +26,10 @@ public class Defender extends Warrior {
     public void receiveHit(int damage) {
         if (damage < getDefense()) {
             reduceHealthBasedOnDamage(0);
-            logger.info("Too little damage to go through defense");
+            logger.trace("Too little damage to go through defense");
         } else {
             super.reduceHealthBasedOnDamage(damage - getDefense());
-            logger.info("Defender took {} damage", damage - getDefense());
+            logger.trace("Defender took {} damage", damage - getDefense());
         }
     }
 

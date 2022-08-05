@@ -17,14 +17,14 @@ public class Vampire extends Warrior {
         int x2 = opponent.getHealth();
         healSelfByAmount(((x1-x2)*VAMPIRISM)/100);
         int healthAfterAttack = getHealth();
-        logger.info("{} heals for {} units", this,healthAfterAttack-healthBeforeAttack);
+        logger.trace("{} heals for {} units", this,healthAfterAttack-healthBeforeAttack);
     }
 
     public void healSelfByAmount(int amount) {
         this.setHealth(this.getHealth() + amount);
         if (this.getHealth() > this.INITIAL_HEALTH) {
             this.setHealth(this.INITIAL_HEALTH);
-            logger.info("{} will not overheal, his health is full", this);
+            logger.trace("{} will not overheal, his health is full", this);
         }
 
     }

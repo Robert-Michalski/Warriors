@@ -10,13 +10,13 @@ public interface IWarrior extends HasHealth, CanAttack {
     public abstract void process(Warrior warrior);
 
     default void hit(Warrior opponent) {
-        logger.info("{} hits {}", this, opponent);
+        logger.trace("{} hits {}", this, opponent);
         opponent.receiveHit(this.getAttack());
     }
 
     default void receiveHit(int damage) {
         reduceHealthBasedOnDamage(damage);
-        logger.info("{} took {} damage", this, damage);
+        logger.trace("{} took {} damage", this, damage);
     }
 }
 

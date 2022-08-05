@@ -9,6 +9,12 @@ public class Battle {
     }
 
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
+        if(warrior2==null){
+            return true;
+        }
+        if(warrior1==null){
+            return false;
+        }
         Logger logger = LoggerFactory.getLogger("FIGHT");
         logger.debug("Fight between {} and {} has started", warrior1, warrior2);
         while (warrior1.isAlive() && warrior2.isAlive()) {
@@ -53,23 +59,16 @@ public class Battle {
         }
         Logger logger = LoggerFactory.getLogger("Straight Fight");
         logger.info("Straight Fight started !");
-        Warrior army1FirstWarrior;
-        if(army1.getTroops().get(0)!=null) {
-            army1FirstWarrior = army1.getTroops().get(0);
-        }
-        else {
-            return false;
-        }
-        while(!army1.getTroops().isEmpty()){
+        while(!army1.getTroops().isEmpty() || !army2.getTroops().isEmpty()){
             for(int i = 0; i<army1.getTroops().size(); i++){
-                if(!(army1.getTroops().get(i)instanceof Healer) && !(army2.getTroops().get(i) instanceof  Healer))
-                fight(army1.getTroops().get(i), army2.getTroops().get(0));
+                if(i==army2.getTroops().size()){
+                    break;
+                }
+                fight(army1.getTroops().get(i), army2.getTroops().get(i));
             }
             army1.removeDeadWarriors();
             army2.removeDeadWarriors();
-            if(!army1.getTroops().isEmpty() && !army2.getTroops().isEmpty()) {
-                straightFight(army1,army2);
-            }
+
             if(army1.getTroops().isEmpty()){
                 return false;
             }
@@ -79,6 +78,6 @@ public class Battle {
         }
 
 
-        return army1.getTroops().get(0).isAlive();
+        return army2.getTroops().isEmpty();
     }
 }

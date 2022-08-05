@@ -295,24 +295,23 @@ public class StraightFightTests {
                                 .addUnits(Unit.UnitType.VAMPIRE, 6)
                                 .addUnits(Unit.UnitType.LANCER, 4),
                         false),
-                        Arguments.of(new Army()
-                                        .addUnits(Unit.UnitType.LANCER, 4)
-                                        .addUnits(Unit.UnitType.WARRIOR, 3)
-                                        .addUnits(Unit.UnitType.HEALER, 1)
-                                        .addUnits(Unit.UnitType.WARRIOR, 4)
-                                        .addUnits(Unit.UnitType.HEALER, 1)
-                                        .addUnits(Unit.UnitType.KNIGHT, 2),
-                                new Army()
-                                        .addUnits(Unit.UnitType.WARRIOR, 4)
-                                        .addUnits(Unit.UnitType.DEFENDER, 4)
-                                        .addUnits(Unit.UnitType.HEALER, 1)
-                                        .addUnits(Unit.UnitType.VAMPIRE, 2)
-                                        .addUnits(Unit.UnitType.LANCER, 4),
-                                true)
-                        );
+                Arguments.of(new Army()
+                                .addUnits(Unit.UnitType.LANCER, 4)
+                                .addUnits(Unit.UnitType.WARRIOR, 3)
+                                .addUnits(Unit.UnitType.HEALER, 1)
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.HEALER, 1)
+                                .addUnits(Unit.UnitType.KNIGHT, 2),
+                        new Army()
+                                .addUnits(Unit.UnitType.WARRIOR, 4)
+                                .addUnits(Unit.UnitType.DEFENDER, 4)
+                                .addUnits(Unit.UnitType.HEALER, 1)
+                                .addUnits(Unit.UnitType.VAMPIRE, 2)
+                                .addUnits(Unit.UnitType.LANCER, 4),
+                        true)
+        );
 
     }
-
 
 
     @ParameterizedTest
@@ -815,14 +814,25 @@ public class StraightFightTests {
         var result = Battle.straightFight(army1, army2);
         Assertions.assertFalse(result);
     }
-    @Test
-    void test07(){
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.HEALER,1)
-                .addUnits(Unit.UnitType.WARRIOR,1);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.HEALER, 1);
-        Battle.straightFight(army1, army2);
-    }
 
+    @Test
+    void test08() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.LANCER, 7)
+                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.WARRIOR, 4)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 2);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 4)
+                .addUnits(Unit.UnitType.DEFENDER, 4)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.VAMPIRE, 6)
+                .addUnits(Unit.UnitType.LANCER, 4);
+        var result = Battle.straightFight(army1, army2);
+        System.out.println("army1 "+army1.getTroops());
+        System.out.println("army2 "+army2.getTroops());
+        Assertions.assertFalse(result);
+    }
 }

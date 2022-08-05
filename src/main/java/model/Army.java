@@ -1,11 +1,14 @@
 package model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.WarriorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Army {
+    Logger logger = LoggerFactory.getLogger(Army.class);
     private final List<Warrior> troops;
     private final WarriorFactory warriorFactory;
 
@@ -34,8 +37,11 @@ public class Army {
     public Army removeDeadWarriors(){
         for(int i = 0; i< troops.size(); i++){
             if (!troops.get(i).isAlive()){
+                logger.info("removing {}", getTroops().get(i));
                 troops.remove(getTroops().get(i));
+                logger.info("Now army is {}", getTroops());
             }
+
         }
         return this;
     }

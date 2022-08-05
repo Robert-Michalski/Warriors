@@ -10,19 +10,19 @@ public class Healer extends Warrior {
     }
 
     public void heal(Warrior warrior) {
-        logger.info("Healing {} for {} units", warrior, getHealUnits());
+        logger.trace("Healing {} for {} units", warrior, getHealUnits());
         warrior.setHealth(warrior.getHealth() + getHealUnits());
         if (warrior.getHealth() > warrior.getInitial_Health()) {
             warrior.setHealth(warrior.getInitial_Health());
-            logger.info("{} has full hp}", warrior);
+            logger.trace("{} has full hp}", warrior);
         } else {
-            logger.info("{} was healed and now has {} health}", warrior, warrior.getHealth());
+            logger.trace("{} was healed and now has {} health}", warrior, warrior.getHealth());
         }
     }
 
     @Override
     public void hit(Warrior opponent) {
-        logger.info("Healer does not hit");
+        logger.trace("Healer does not hit");
     }
 
     @Override
