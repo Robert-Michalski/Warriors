@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 class Rookie extends Warrior {
@@ -793,7 +794,7 @@ public class StraightFightTests {
         var result = Battle.straightFight(army1, army2);
         Assertions.assertTrue(result);
     }
-    
+
 
     @Test
     @DisplayName("Given empty army vs army of two warriors then army 2 wins")
@@ -805,7 +806,7 @@ public class StraightFightTests {
         Assertions.assertFalse(result);
     }
 
-//    @Test
+    //    @Test
 //    @DisplayName("Test from site")
 //    void test08() {
 //        var army1 = new Army()
@@ -826,4 +827,5 @@ public class StraightFightTests {
 //        System.out.println("army2 "+army2.getTroops());
 //        Assertions.assertFalse(result);
 //    }
+
 }
