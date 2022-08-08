@@ -11,7 +11,6 @@ import service.Battle;
 import java.util.stream.Stream;
 
 
-
 class StraightFightTests {
     @Test
     @DisplayName("Smoke show")
@@ -1191,24 +1190,78 @@ class StraightFightTests {
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .addUnits(Unit.UnitType.DEFENDER, 2)
                 .lineUp();
-        army1.equipWarriorAtPosition(0,weapon1);
-        army1.equipWarriorAtPosition(1,weapon1);
-        army1.equipWarriorAtPosition(2,weapon2);
+        army1.equipWarriorAtPosition(0, weapon1);
+        army1.equipWarriorAtPosition(1, weapon1);
+        army1.equipWarriorAtPosition(2, weapon2);
         army2.equipWarriorAtPosition(0, weapon1);
         army2.equipWarriorAtPosition(1, weapon2);
         army2.equipWarriorAtPosition(2, weapon2);
         //WHEN
-        var result = Battle.fight(army1,army2);
+        var result = Battle.fight(army1, army2);
         //THEN
         Assertions.assertFalse(result);
     }
+
     @Test
     @DisplayName("10. Weapon: ")
-    void test27(){
+    void test27() {
         var weapon1 = Weapon.newKatana();
         var weapon2 = Weapon.newShield();
-        var army1=new Army()
-                .addUnits(Unit.UnitType.VAMPIRE,2)
-                .addUnits(Rooki)
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.VAMPIRE, 2)
+                .addUnits(Unit.UnitType.ROOKIE, 2)
+                .lineUp();
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .lineUp();
+        army1.equipWarriorAtPosition(0, weapon1);
+        army1.equipWarriorAtPosition(1, weapon1);
+        army1.equipWarriorAtPosition(2, weapon2);
+        army2.equipWarriorAtPosition(0, weapon1);
+        army2.equipWarriorAtPosition(1, weapon2);
+        army2.equipWarriorAtPosition(2, weapon2);
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("11. Weapon: ")
+    void test28() {
+        var weapon1 = Weapon.newSword();
+        var weapon2 = Weapon.newGreatAxe();
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.VAMPIRE, 3);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 1);
+        army1.equipWarriorAtPosition(0, weapon2);
+        army1.equipWarriorAtPosition(1, weapon2);
+        army1.equipWarriorAtPosition(2, weapon2);
+        army2.equipWarriorAtPosition(0, weapon1);
+        army2.equipWarriorAtPosition(1, weapon1);
+        var result = Battle.straightFight(army1, army2);
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("12. Weapon: ")
+    void test29() {
+        var weapon1 = Weapon.newKatana();
+        var weapon2 = Weapon.newMagicWand();
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.ROOKIE, 3);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.DEFENDER, 1)
+                .addUnits(Unit.UnitType.HEALER, 1);
+        army1.equipWarriorAtPosition(0, weapon1);
+        army1.equipWarriorAtPosition(1, weapon1);
+        army1.equipWarriorAtPosition(2, weapon1);
+        army2.equipWarriorAtPosition(0, weapon2);
+        army2.equipWarriorAtPosition(1, weapon2);
+        var result = Battle.straightFight(army1, army2);
+        Assertions.assertFalse(result);
     }
 }
