@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import service.Battle;
 
-import java.util.Scanner;
 import java.util.stream.Stream;
 
 class Rookie extends Warrior {
@@ -827,5 +827,10 @@ public class StraightFightTests {
 //        System.out.println("army2 "+army2.getTroops());
 //        Assertions.assertFalse(result);
 //    }
-
+    @Test
+    @DisplayName("Warrior equips a sword and has proper statistics")
+    void test10(){
+        var warrior = new Warrior();
+        warrior.equipWeapon(Weapon.newSword());
+    }
 }

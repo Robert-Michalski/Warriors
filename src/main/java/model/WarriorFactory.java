@@ -1,9 +1,8 @@
-package service;
+package model;
 
 import model.*;
 
 public class WarriorFactory {
-
     public Warrior getInstance(Unit.UnitType type) {
         switch (type) {
             case WARRIOR -> {

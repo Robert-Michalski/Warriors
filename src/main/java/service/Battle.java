@@ -1,5 +1,7 @@
-package model;
+package service;
 
+import model.Army;
+import model.Warrior;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
