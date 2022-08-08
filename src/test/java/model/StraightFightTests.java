@@ -27,7 +27,7 @@ class Rookie extends Warrior {
     }
 }
 
-public class StraightFightTests {
+class StraightFightTests {
     @Test
     @DisplayName("Smoke show")
     void smokeShow() {
@@ -98,6 +98,65 @@ public class StraightFightTests {
                 () -> Assertions.assertFalse(Battle.straightFight(army5, army6))
         );
 
+    }
+
+    @Test
+    void SmokeShowWeapons() {
+        var ogre = new Warrior();
+        var lancelot = new Knight();
+        var richard = new Defender();
+        var eric = new Vampire();
+        var freelancer = new Lancer();
+        var priest = new Healer();
+        var sword = Weapon.newSword();
+        var shield = Weapon.newShield();
+        var axe = Weapon.newGreatAxe();
+        var katana = Weapon.newKatana();
+        var wand = Weapon.newMagicWand();
+        var wunderWaffe = Weapon.builder()
+                .health(50)
+                .attack(10)
+                .defense(5)
+                .vampirism(150)
+                .healPower(8)
+                .build();
+        ogre.equipWeapon(sword);
+        ogre.equipWeapon(shield);
+        ogre.equipWeapon(wunderWaffe);
+        lancelot.equipWeapon(wunderWaffe);
+        richard.equipWeapon(shield);
+        eric.equipWeapon(wunderWaffe);
+        freelancer.equipWeapon(axe);
+        freelancer.equipWeapon(katana);
+        priest.equipWeapon(wand);
+        priest.equipWeapon(shield);
+
+        var myArmy = new Army()
+                .addUnits(Unit.UnitType.KNIGHT, 1)
+                .addUnits(Unit.UnitType.LANCER, 1)
+                .lineUp();
+        var enemyArmy = new Army()
+                .addUnits(Unit.UnitType.VAMPIRE, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .lineUp();
+        myArmy.equipWarriorAtPosition(0, axe);
+        myArmy.equipWarriorAtPosition(1, wunderWaffe);
+        enemyArmy.equipWarriorAtPosition(0, katana);
+        enemyArmy.equipWarriorAtPosition(1, wand);
+
+        Assertions.assertAll(
+                () -> Assertions.assertSame(125, ogre.getHealth()),
+                () -> Assertions.assertSame(17, lancelot.getAttack()),
+                () -> Assertions.assertSame(4, richard.getDefense()),
+                () -> Assertions.assertTrue(200 == eric.getVampirism()),
+                () -> Assertions.assertSame(15, freelancer.getHealth()),
+                () -> Assertions.assertSame(5, priest.getHealPower()),
+                () -> Assertions.assertFalse(Battle.fight(ogre, eric)),
+                () -> Assertions.assertFalse(Battle.fight(priest, richard)),
+                () -> Assertions.assertTrue(Battle.fight(lancelot, freelancer)),
+                () -> Assertions.assertTrue(Battle.fight(myArmy, enemyArmy))
+        );
+        System.out.println(myArmy.getTroops());
     }
 
     @Test
@@ -622,7 +681,8 @@ public class StraightFightTests {
     void GivenBattleOfTwoArmiesOneWith2WarriorsAndSecondWith1Lancer1WarriorThenFirstArmyLooses() {
         //GIVEN
         var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 2);
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .lineUp();
         var army2 = new Army()
                 .addUnits(Unit.UnitType.LANCER, 1)
                 .addUnits(Unit.UnitType.WARRIOR, 1);
@@ -915,12 +975,83 @@ public class StraightFightTests {
         var expectedHealPower = healer.getHealPower() + wand.getHealPower();
         healer.equipWeapon(wand);
     }
+
     @Test
     @DisplayName("Lancer equips Sword and has proper statistics")
-    void test16(){
+    void test16() {
         var lancer = new Lancer();
         var sword = Weapon.newSword();
         lancer.equipWeapon(sword);
+    }
+
+    @Test
+    @DisplayName("Knight gets 2 super weapons")
+    void test17() {
+        var knight = new Knight();
+        var superWeapon = Weapon.builder()
+                .health(50)
+                .attack(10)
+                .defense(5)
+                .vampirism(150)
+                .healPower(8)
+                .build();
+        knight.equipWeapon(superWeapon);
+        knight.equipWeapon(superWeapon);
+    }
+
+    @Test
+    @DisplayName("1. Weapon: ")
+    void test18() {
+        //GIVEN
+        var unit1 = new Warrior();
+        var unit2 = new Vampire();
+        var weapon1 = Weapon.builder()
+                .health(-10)
+                .attack(5)
+                .defense(0)
+                .vampirism(40)
+                .healPower(0)
+                .build();
+        var weapon2 = Weapon.newSword();
+        unit1.equipWeapon(weapon1);
+        unit2.equipWeapon(weapon2);
+        //WHEN
+        var result = Battle.fight(unit1, unit2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("2. Weapon: ")
+    void test19() {
+        //GIVEN
+        var unit1 = new Defender();
+        var unit2 = new Lancer();
+        var weapon1 = Weapon.newShield();
+        var weapon2 = Weapon.newGreatAxe();
+        unit1.equipWeapon(weapon1);
+        unit2.equipWeapon(weapon2);
+        //WHEN
+        var result = Battle.fight(unit1, unit2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("3. Weapon: ")
+    void test20() {
+        //GIVEN
+        var unit1 = new Healer();
+        var unit2 = new Knight();
+        var weapon1 = Weapon.newMagicWand();
+        var weapon2 = Weapon.newKatana();
+        unit1.equipWeapon(weapon1);
+        unit2.equipWeapon(weapon2);
+        //WHEN
+        var result = Battle.fight(unit1, unit2);
+        //THEN
+        Assertions.assertFalse(result);
+
     }
     
 }

@@ -2,12 +2,28 @@ package model;
 
 
 public class Knight extends Warrior {
-    private static final int ATTACK = 7;
+    private int attack = 7;
+
+    @Override
+    public void equipWeapon(IWeapon weapon) {
+        super.equipWeapon(weapon);
+    }
+
+    @Override
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
 
     @Override
     public int getAttack() {
-        return ATTACK;
+        return attack;
     }
 
-
+    @Override
+    public String toString() {
+        return "Knight{" +
+                "health=" + getHealth() +
+                "attack=" + attack +
+                '}';
+    }
 }

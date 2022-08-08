@@ -45,7 +45,9 @@ public class Army {
         }
         return this;
     }
-
+    public void equipWarriorAtPosition(int position, IWeapon weapon){
+        getWarrior(position).equipWeapon(weapon);
+    }
     public Army addUnits(Unit.UnitType type, int quantity) {
         for (int i = 0; i < quantity; i++) {
             troops.add(warriorFactory.getInstance(type));

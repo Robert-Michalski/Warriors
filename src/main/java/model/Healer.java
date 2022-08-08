@@ -62,10 +62,10 @@ public class Healer extends Warrior {
 
     @Override
     public String toString() {
-        String toPrint = super.toString().substring(0, super.toString().length() - 1);
-        return toPrint +
-                " healPower=" + getHealPower()
-                + "}";
-
+        return "Healer{" +
+                "health=" + getHealth() +
+                ", attack=" + getAttack() +
+                ", healPower=" + getHealPower() +
+                '}';
     }
 }

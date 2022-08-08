@@ -72,9 +72,10 @@ public class Vampire extends Warrior {
 
     @Override
     public String toString() {
-        String toPrint = super.toString().substring(0, super.toString().length() - 1);
-        return toPrint +
-                " vampirism=" + getVampirism()
-                + "}";
+        return "Vampire{" +
+                "health=" + getHealth() +
+                ", attack=" + attack +
+                ", vampirism=" + vampirism +
+                '}';
     }
 }

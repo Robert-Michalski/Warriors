@@ -2,7 +2,7 @@ package model;
 
 public class Lancer extends Warrior {
 
-    private int initialHealth = 60;
+    private int initialHealth = 50;
     private int attack = 6;
     private final int PIERCING = 50;
 
@@ -55,5 +55,14 @@ public class Lancer extends Warrior {
 
     public int getPIERCING() {
         return PIERCING;
+    }
+
+    @Override
+    public String toString() {
+        return "Lancer{" +
+                "health=" + getHealth() +
+                ", attack=" + attack +
+                ", PIERCING=" + PIERCING +
+                '}';
     }
 }
