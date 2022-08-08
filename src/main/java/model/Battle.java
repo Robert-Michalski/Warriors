@@ -46,6 +46,7 @@ public class Battle {
                 army1WarriorIndex++;
             }
         }
+
         logger.debug("{} won fight", army1LastWarrior.isAlive() ? army1 : army2);
         return army1LastWarrior.isAlive();
     }
@@ -60,26 +61,18 @@ public class Battle {
         Logger logger = LoggerFactory.getLogger("Straight Fight");
         logger.info("Straight Fight started !");
         int round = 1;
-        while (!army1.getTroops().isEmpty() || !army2.getTroops().isEmpty()) {
-
+        while (!army1.getTroops().isEmpty() && !army2.getTroops().isEmpty()) {
+        //army.isEmpty()
             logger.info("Round {}", round);
-            for (int i = 0; i < army1.getTroops().size(); i++) {
-                fight(army1.getTroops().get(i), army2.getTroops().get(i));
-                if (i + 1 >= army2.getTroops().size()) {
-                    break;
-                }
+            for (int i = 0; i < army1.getTroops().size() && i<army2.getTroops().size(); i++) {
+                fight(army1.getWarrior(i), army2.getWarrior(i));
             }
+            //TODO log army after fight
             round++;
             army1.removeDeadWarriors();
             army2.removeDeadWarriors();
             logger.info("Army 1 after round {} : {}", round, army1.getTroops());
             logger.info("Army 2 after round {} : {}", round, army2.getTroops());
-            if (army1.getTroops().isEmpty()) {
-                return false;
-            }
-            if (army2.getTroops().isEmpty()) {
-                return true;
-            }
         }
 
 
