@@ -33,7 +33,9 @@ public class Army {
         }
         return this;
     }
-
+    public Warrior getWarrior(int index){
+        return troops.get(index);
+    }
 
     public Army removeDeadWarriors(){
         for(ListIterator<Warrior> iterator = troops.listIterator(); iterator.hasNext();){
