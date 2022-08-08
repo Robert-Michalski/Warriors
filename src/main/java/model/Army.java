@@ -54,4 +54,11 @@ public class Army {
         }
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Army{" +
+                "troops=" + troops +
+                '}';
+    }
 }

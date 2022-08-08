@@ -17,7 +17,7 @@ public class Vampire extends Warrior {
         int x2 = opponent.getHealth();
         healSelfByAmount(((x1 - x2) * vampirism) / 100);
         int healthAfterAttack = getHealth();
-        logger.trace("{} heals for {} units", this, healthAfterAttack - healthBeforeAttack);
+        logger.trace("{} heals himself for {} units", this, ((x1 - x2) * vampirism) / 100);
     }
 
     public void healSelfByAmount(int amount) {
