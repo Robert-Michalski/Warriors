@@ -1,12 +1,13 @@
 package model;
 
 public class Lancer extends Warrior {
-    private final int INITIAL_HEALTH = 60;
-    private final int ATTACK = 6;
+
+    private int initialHealth = 60;
+    private int attack = 6;
     private final int PIERCING = 50;
 
     public Lancer() {
-        setHealth(INITIAL_HEALTH);
+        setHealth(initialHealth);
     }
 
     @Override
@@ -28,7 +29,31 @@ public class Lancer extends Warrior {
     }
 
     @Override
+    public void equipWeapon(IWeapon weapon) {
+        super.equipWeapon(weapon);
+    }
+
+    @Override
+    public int getInitialHealth() {
+        return initialHealth;
+    }
+
+    @Override
+    public void setInitialHealth(int initialHealth) {
+        this.initialHealth = initialHealth;
+    }
+
+    @Override
     public int getAttack() {
-        return ATTACK;
+        return attack;
+    }
+
+    @Override
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getPIERCING() {
+        return PIERCING;
     }
 }

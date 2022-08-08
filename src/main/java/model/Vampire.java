@@ -1,12 +1,12 @@
 package model;
 
 public class Vampire extends Warrior {
-    private final int INITIAL_HEALTH = 40;
-    private final int ATTACK = 4;
-    private final int VAMPIRISM = 50;
+    private int initialHealth = 40;
+    private int attack = 4;
+    private int vampirism = 50;
 
     public Vampire() {
-        setHealth(INITIAL_HEALTH);
+        setHealth(initialHealth);
     }
 
     @Override
@@ -15,30 +15,66 @@ public class Vampire extends Warrior {
         int healthBeforeAttack = getHealth();
         super.hit(opponent);
         int x2 = opponent.getHealth();
-        healSelfByAmount(((x1-x2)*VAMPIRISM)/100);
+        healSelfByAmount(((x1 - x2) * vampirism) / 100);
         int healthAfterAttack = getHealth();
-        logger.trace("{} heals for {} units", this,healthAfterAttack-healthBeforeAttack);
+        logger.trace("{} heals for {} units", this, healthAfterAttack - healthBeforeAttack);
     }
 
     public void healSelfByAmount(int amount) {
         this.setHealth(this.getHealth() + amount);
-        if (this.getHealth() > this.INITIAL_HEALTH) {
-            this.setHealth(this.INITIAL_HEALTH);
+        if (this.getHealth() > this.initialHealth) {
+            this.setHealth(this.initialHealth);
             logger.trace("{} will not overheal, his health is full", this);
         }
 
     }
 
-    public int getVAMPIRISM() {
-        return VAMPIRISM;
+    @Override
+    public void equipWeapon(IWeapon weapon) {
+        growVampirismByAmount(weapon.getVampirism());
+        super.equipWeapon(weapon);
+    }
+
+    public void growVampirismByAmount(int amount) {
+        setVampirism(getVampirism() + amount);
+    }
+
+    public void setVampirism(int vampirism) {
+        this.vampirism = vampirism;
+        if (this.vampirism < 0) {
+            this.vampirism = 0;
+        }
+    }
+
+    public int getVampirism() {
+        return vampirism;
     }
 
     @Override
     public int getAttack() {
-        return ATTACK;
-    }
-    public int getInitial_Health(){
-        return INITIAL_HEALTH;
+        return attack;
     }
 
+    @Override
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    @Override
+    public int getInitialHealth() {
+        return initialHealth;
+    }
+
+    @Override
+    public void setInitialHealth(int initialHealth) {
+        this.initialHealth = initialHealth;
+    }
+
+    @Override
+    public String toString() {
+        String toPrint = super.toString().substring(0, super.toString().length() - 1);
+        return toPrint +
+                " vampirism=" + getVampirism()
+                + "}";
+    }
 }

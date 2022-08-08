@@ -18,9 +18,7 @@ public interface IWarrior extends HasHealth, CanAttack {
         reduceHealthBasedOnDamage(damage);
         logger.trace("{} took {} damage", this, damage);
     }
-    default void equipWeapon(IWeapon weapon){
-        logger.info("{} equipped {} weapon", this, weapon);
-    }
+   void equipWeapon(IWeapon weapon);
 }
 
 interface HasHealth {

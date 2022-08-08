@@ -239,7 +239,7 @@ public class StraightFightTests {
         //GIVEN
         var unit1 = new Defender();
         var unit2 = new Rookie();
-        var expectedHealth = unit1.getInitial_Health();
+        var expectedHealth = unit1.getInitialHealth();
         //WHEN
         Battle.fight(unit1, unit2);
         var result = unit1.getHealth();
@@ -505,7 +505,7 @@ public class StraightFightTests {
         var vampire = new Vampire();
         var defender = new Defender();
         var damageReduction = vampire.getAttack() - defender.getDefense();
-        var expectedHealth = defender.getInitial_Health() - damageReduction;
+        var expectedHealth = defender.getInitialHealth() - damageReduction;
         //WHEN
         vampire.hit(defender);
         //THEN
@@ -518,11 +518,11 @@ public class StraightFightTests {
         //GIVEN
         var rookie = new Rookie();
         var defender = new Defender();
-        var expectedHealth = defender.getInitial_Health();
+        var expectedHealth = defender.getInitialHealth();
         //WHEN
         rookie.hit(defender);
         //THEN
-        Assertions.assertSame(expectedHealth, defender.getInitial_Health());
+        Assertions.assertSame(expectedHealth, defender.getInitialHealth());
     }
 
     @Test
@@ -531,7 +531,7 @@ public class StraightFightTests {
         //GIVEN
         var vampire = new Vampire();
         var warrior = new Warrior();
-        var expectedHealth = vampire.getInitial_Health();
+        var expectedHealth = vampire.getInitialHealth();
         //WHEN
         vampire.hit(warrior);
         //THEN
@@ -544,7 +544,7 @@ public class StraightFightTests {
         //GIVEN
         var vampire = new Vampire();
         var warrior = new Warrior();
-        var healAmount = (vampire.getAttack() * vampire.getVAMPIRISM()) / 100;
+        var healAmount = (vampire.getAttack() * vampire.getVampirism()) / 100;
         warrior.hit(vampire);
         //vampire health is 35
         //WHEN
@@ -561,7 +561,7 @@ public class StraightFightTests {
         //GIVEN
         var vampire = new Vampire();
         var defender = new Defender();
-        var healAmount = ((vampire.getAttack() - defender.getDefense()) * vampire.getVAMPIRISM()) / 100; //1
+        var healAmount = ((vampire.getAttack() - defender.getDefense()) * vampire.getVampirism()) / 100; //1
         defender.hit(vampire);
         //vampire health is 37
         //WHEN
@@ -597,7 +597,7 @@ public class StraightFightTests {
         //WHEN
         vampire.hit(warrior);
         //THEN
-        Assertions.assertSame(vampire.getInitial_Health(), vampire.getHealth());
+        Assertions.assertSame(vampire.getInitialHealth(), vampire.getHealth());
     }
 
     @Test
@@ -609,7 +609,7 @@ public class StraightFightTests {
         var healthBeforeAttack = vampire.getHealth();
         var warrior = new Warrior();
         warrior.setHealth(1);
-        var amountToHeal = (vampire.getAttack() * vampire.getVAMPIRISM()) / 100;
+        var amountToHeal = (vampire.getAttack() * vampire.getVampirism()) / 100;
         //WHEN
         vampire.hit(warrior);
         var expectedHealth = healthBeforeAttack + amountToHeal;
@@ -653,7 +653,8 @@ public class StraightFightTests {
     void GivenArmyOf2DefendersAndArmyOf1LancerThenWhenLancerHitsFirstDefenderSecondLoosesNoHealth() {
         //GIVEN
         var army1 = new Army()
-                .addUnits(Unit.UnitType.DEFENDER, 2);
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .lineUp();
         var army2 = new Army()
                 .addUnits(Unit.UnitType.LANCER, 1);
         //WHEN
@@ -676,7 +677,7 @@ public class StraightFightTests {
         //WHEN
         army1.getTroops().get(0).hit(army2.getTroops().get(0));
         //THEN
-        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
+        Assertions.assertSame(army1.getTroops().get(0).getInitialHealth(), army1.getTroops().get(0).getHealth());
 
     }
 
@@ -689,7 +690,7 @@ public class StraightFightTests {
         //WHEN
         Battle.fight(healer, warrior);
         //THEN
-        Assertions.assertSame(warrior.getInitial_Health(), warrior.getHealth());
+        Assertions.assertSame(warrior.getInitialHealth(), warrior.getHealth());
     }
 
     @Test
@@ -704,7 +705,7 @@ public class StraightFightTests {
         //WHEN
         army1.getTroops().get(0).hit(army2.getTroops().get(0));
         //THEN
-        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
+        Assertions.assertSame(army1.getTroops().get(0).getInitialHealth(), army1.getTroops().get(0).getHealth());
     }
 
     @Test
@@ -722,7 +723,7 @@ public class StraightFightTests {
         //WHEN
         army1.getTroops().get(0).hit(army2.getTroops().get(0));
         //THEN
-        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
+        Assertions.assertSame(army1.getTroops().get(0).getInitialHealth(), army1.getTroops().get(0).getHealth());
     }
 
     @Test
@@ -743,8 +744,8 @@ public class StraightFightTests {
         //WHEN
         army1.getTroops().get(0).hit(army2.getTroops().get(0));
         //THEN
-        Assertions.assertSame(army1.getTroops().get(0).getInitial_Health(), army1.getTroops().get(0).getHealth());
-        Assertions.assertSame(army1.getTroops().get(2).getInitial_Health(), army1.getTroops().get(2).getHealth());
+        Assertions.assertSame(army1.getTroops().get(0).getInitialHealth(), army1.getTroops().get(0).getHealth());
+        Assertions.assertSame(army1.getTroops().get(2).getInitialHealth(), army1.getTroops().get(2).getHealth());
     }
 
     @Test
@@ -829,8 +830,97 @@ public class StraightFightTests {
 //    }
     @Test
     @DisplayName("Warrior equips a sword and has proper statistics")
-    void test10(){
+    void test10() {
         var warrior = new Warrior();
-        warrior.equipWeapon(Weapon.newSword());
+        var sword = Weapon.newSword();
+        var expectedHealth = warrior.getHealth() + sword.getHealth();
+        var expectedAttack = warrior.getAttack() + sword.getAttack();
+        warrior.equipWeapon(sword);
+        Assertions.assertSame(expectedHealth, warrior.getHealth());
+        Assertions.assertSame(expectedAttack, warrior.getAttack());
     }
+
+    @Test
+    @DisplayName("Defender equips a Shield and has proper statistics")
+    void test11() {
+        var defender = new Defender();
+        var shield = Weapon.newShield();
+        var expectedHealth = defender.getHealth() + shield.getHealth();
+        var expectedAttack = defender.getAttack() + shield.getAttack();
+        var expectedDefense = defender.getDefense() + shield.getDefense();
+        defender.equipWeapon(shield);
+        Assertions.assertAll(
+                () -> Assertions.assertSame(expectedHealth, defender.getHealth()),
+                () -> Assertions.assertSame(expectedAttack, defender.getAttack()),
+                () -> Assertions.assertSame(expectedDefense, defender.getDefense())
+        );
+        //TODO fix log why he knows about defense = 4 before it should happen ?
+    }
+
+    @Test
+    @DisplayName("Vampire equips GreatAxe and has proper statistics")
+    void test12() {
+        var vampire = new Vampire();
+        var greatAxe = Weapon.newGreatAxe();
+        var expectedHealth = vampire.getHealth() + greatAxe.getHealth();
+        var expectedAttack = vampire.getAttack() + greatAxe.getAttack();
+        var expectedVampirism = vampire.getVampirism() + greatAxe.getVampirism();
+        vampire.equipWeapon(greatAxe);
+        Assertions.assertAll(
+                () -> Assertions.assertSame(expectedHealth, vampire.getHealth()),
+                () -> Assertions.assertSame(expectedAttack, vampire.getAttack()),
+                () -> Assertions.assertSame(expectedVampirism, vampire.getVampirism())
+        );
+    }
+
+    @Test
+    @DisplayName("Vampire equips Katana and has proper statistics")
+    void test13() {
+        var vampire = new Vampire();
+        var katana = Weapon.newKatana();
+        var expectedHealth = vampire.getHealth() + katana.getHealth();
+        var expectedAttack = vampire.getAttack() + katana.getAttack();
+        var expectedVampirism = vampire.getVampirism() + katana.getVampirism();
+        vampire.equipWeapon(katana);
+        Assertions.assertAll(
+                () -> Assertions.assertSame(expectedHealth, vampire.getHealth()),
+                () -> Assertions.assertSame(expectedAttack, vampire.getAttack()),
+                () -> Assertions.assertSame(expectedVampirism, vampire.getVampirism())
+        );
+    }
+
+    @Test
+    @DisplayName("Defender equips Katana and has proper statistics")
+    void test14() {
+        var defender = new Defender();
+        var katana = Weapon.newKatana();
+        var expectedHealth = defender.getHealth() + katana.getHealth();
+        var expectedAttack = defender.getAttack() + katana.getAttack();
+        var expectedDefense = 0;
+        defender.equipWeapon(katana);
+        Assertions.assertAll(
+                () -> Assertions.assertSame(expectedHealth, defender.getHealth()),
+                () -> Assertions.assertSame(expectedAttack, defender.getAttack()),
+                () -> Assertions.assertSame(expectedDefense, defender.getDefense())
+        );
+    }
+
+    @Test
+    @DisplayName("Healer equips MagicWand and has proper statistics")
+    void test15() {
+        var healer = new Healer();
+        var wand = Weapon.newMagicWand();
+        var expectedHealth = healer.getHealth() + wand.getHealth();
+        var expectedAttack = healer.getAttack() + wand.getAttack();
+        var expectedHealPower = healer.getHealPower() + wand.getHealPower();
+        healer.equipWeapon(wand);
+    }
+    @Test
+    @DisplayName("Lancer equips Sword and has proper statistics")
+    void test16(){
+        var lancer = new Lancer();
+        var sword = Weapon.newSword();
+        lancer.equipWeapon(sword);
+    }
+    
 }
