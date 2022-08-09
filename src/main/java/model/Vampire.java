@@ -12,11 +12,9 @@ public class Vampire extends Warrior {
     @Override
     public void hit(Warrior opponent) {
         int x1 = opponent.getHealth();
-        int healthBeforeAttack = getHealth();
         super.hit(opponent);
         int x2 = opponent.getHealth();
         healSelfByAmount(((x1 - x2) * vampirism) / 100);
-        int healthAfterAttack = getHealth();
         logger.trace("{} heals himself for {} units", this, ((x1 - x2) * vampirism) / 100);
     }
 

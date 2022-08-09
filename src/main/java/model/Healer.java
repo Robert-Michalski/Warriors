@@ -4,7 +4,6 @@ public class Healer extends Warrior {
     private int initialHealth = 60;
     private int attack = 0;
     private int healPower = 2;
-    private static final int HEAL_UNITS = 2;
 
     public Healer() {
         setHealth(initialHealth);
@@ -54,6 +53,16 @@ public class Healer extends Warrior {
     @Override
     public void setAttack(int attack) {
         this.attack = attack;
+    }
+
+    @Override
+    public int getInitialHealth() {
+        return initialHealth;
+    }
+
+    @Override
+    public void setInitialHealth(int initialHealth) {
+        this.initialHealth = initialHealth;
     }
 
     public int getHealPower() {

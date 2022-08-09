@@ -69,7 +69,6 @@ public class Battle {
             for (int i = 0; i < army1.getTroops().size() && i<army2.getTroops().size(); i++) {
                 fight(army1.getWarrior(i), army2.getWarrior(i));
             }
-            //TODO log army after fight
             round++;
             army1.removeDeadWarriors();
             army2.removeDeadWarriors();

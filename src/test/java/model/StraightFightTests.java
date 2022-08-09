@@ -132,7 +132,7 @@ class StraightFightTests {
                 () -> Assertions.assertSame(125, ogre.getHealth()),
                 () -> Assertions.assertSame(17, lancelot.getAttack()),
                 () -> Assertions.assertSame(4, richard.getDefense()),
-                () -> Assertions.assertTrue(200 == eric.getVampirism()),
+                () -> Assertions.assertEquals(200, eric.getVampirism()),
                 () -> Assertions.assertSame(15, freelancer.getHealth()),
                 () -> Assertions.assertSame(5, priest.getHealPower()),
                 () -> Assertions.assertFalse(Battle.fight(ogre, eric)),
@@ -958,6 +958,12 @@ class StraightFightTests {
         var expectedAttack = healer.getAttack() + wand.getAttack();
         var expectedHealPower = healer.getHealPower() + wand.getHealPower();
         healer.equipWeapon(wand);
+        Assertions.assertAll(
+                () -> Assertions.assertSame(expectedHealth, healer.getHealth()),
+                () -> Assertions.assertSame(expectedAttack, healer.getAttack()),
+                () -> Assertions.assertSame(expectedHealPower, healer.getHealPower())
+        );
+
     }
 
     @Test
@@ -965,7 +971,14 @@ class StraightFightTests {
     void test16() {
         var lancer = new Lancer();
         var sword = Weapon.newSword();
+        var expectedHealth = lancer.getHealth() + sword.getHealth();
+        var expectedAttack = lancer.getAttack() + sword.getAttack();
         lancer.equipWeapon(sword);
+        Assertions.assertAll(
+                () -> Assertions.assertSame(expectedHealth, lancer.getHealth()),
+                () -> Assertions.assertSame(expectedAttack, lancer.getAttack())
+        );
+
     }
 
     @Test
@@ -979,8 +992,14 @@ class StraightFightTests {
                 .vampirism(150)
                 .healPower(8)
                 .build();
+        var expectedHealth = knight.getHealth() + superWeapon.getHealth() + superWeapon.getHealth();
+        var expectedAttack = knight.getAttack() + superWeapon.getAttack() + superWeapon.getAttack();
         knight.equipWeapon(superWeapon);
         knight.equipWeapon(superWeapon);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(expectedHealth, knight.getHealth()),
+                () -> Assertions.assertEquals(expectedAttack, knight.getAttack())
+        );
     }
 
     @Test
