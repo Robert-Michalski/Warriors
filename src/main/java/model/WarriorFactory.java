@@ -27,7 +27,7 @@ public class WarriorFactory {
                 return new Rookie();
             }
             case WARLORD -> {
-                return new Warlorld();
+                return Warlorld.getInstance();
             }
             default -> throw new IllegalArgumentException();
         }

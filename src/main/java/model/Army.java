@@ -55,8 +55,30 @@ public class Army {
         }
         return this;
     }
-    public void processStrategy(WarStrategy strategy){
-        strategy.moveUnits();
+    public void processStrategy(){
+        removeRedundantWarlords();
+        Warlorld warlorld = lookForWarlord();
+        if(warlorld!=null){
+            warlorld.getStrategy().moveUnits();
+        }
+    }
+    public int getSize(){
+        return troops.size();
+    }
+    private Warlorld lookForWarlord(){
+        for(Warrior troop : troops){
+            if(troop instanceof Warlorld warlorld){
+                return warlorld;
+            }
+        }
+        return null;
+    }
+    private void removeRedundantWarlords(){
+        for(Warrior troop : troops){
+            if(troop instanceof Warlorld warlorld){
+
+            }
+        }
     }
     @Override
     public String toString() {

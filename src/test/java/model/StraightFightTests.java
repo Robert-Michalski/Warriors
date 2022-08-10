@@ -1286,7 +1286,10 @@ class StraightFightTests {
     @Test
     @DisplayName("dd")
     void test30(){
-        var warlord = new Warlorld();
-        
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARLORD,2)
+                .lineUp();
+        army1.processStrategy();
+        System.out.println(army1.getSize());
     }
 }

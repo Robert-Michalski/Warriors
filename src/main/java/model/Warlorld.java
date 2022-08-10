@@ -7,11 +7,18 @@ public class Warlorld extends Defender{
     private int initialHealth = 60;
     private int attack = 3;
     private int defense = 2;
+    private static Warlorld instance;
     private final WarStrategy strategy = new WarlordStrategy();
-    public Warlorld() {
+    private Warlorld(){
         setHealth(initialHealth);
         setAttack(attack);
         setDefense(defense);
+    }
+    public static Warlorld getInstance(){
+        if(instance == null){
+            instance = new Warlorld();
+        }
+        return instance;
     }
 
     @Override
