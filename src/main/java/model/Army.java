@@ -1,5 +1,6 @@
 package model;
 
+import model.strategies.WarStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,11 +55,14 @@ public class Army {
         }
         return this;
     }
-
+    public void processStrategy(WarStrategy strategy){
+        strategy.moveUnits();
+    }
     @Override
     public String toString() {
         return "Army{" +
                 "troops=" + troops +
                 '}';
     }
+
 }

@@ -1,9 +1,13 @@
 package model;
 
+import model.strategies.WarStrategy;
+import model.strategies.WarlordStrategy;
+
 public class Warlorld extends Defender{
     private int initialHealth = 60;
     private int attack = 3;
     private int defense = 2;
+    private final WarStrategy strategy = new WarlordStrategy();
     public Warlorld() {
         setHealth(initialHealth);
         setAttack(attack);
@@ -53,6 +57,10 @@ public class Warlorld extends Defender{
     @Override
     public void setDefense(int defense) {
         this.defense = defense;
+    }
+
+    public WarStrategy getStrategy() {
+        return strategy;
     }
 
     @Override

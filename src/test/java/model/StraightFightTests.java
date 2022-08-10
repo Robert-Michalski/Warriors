@@ -1283,4 +1283,10 @@ class StraightFightTests {
         var result = Battle.straightFight(army1, army2);
         Assertions.assertFalse(result);
     }
+    @Test
+    @DisplayName("dd")
+    void test30(){
+        var warlord = new Warlorld();
+        
+    }
 }
