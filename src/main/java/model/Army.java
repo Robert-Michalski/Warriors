@@ -81,10 +81,10 @@ public class Army {
     public void shiftRight(Army army, Warrior warrior){
         //TODO rewrite to not use army in argument list
         int indexToRemove = army.getTroops().indexOf(warrior);
-        if(army.getTroops().indexOf(warrior)!=0) {
+//        if(army.getTroops().indexOf(warrior)!=0) {
             army.getTroops().add(0, warrior);
             army.getTroops().remove(++indexToRemove);
-        }
+//        }
 
     }
     public Warrior findFirstWhoCanFight(){

@@ -6,8 +6,8 @@ import model.strategies.WarlordStrategy;
 import java.util.Objects;
 
 public class Warlord extends Defender{
-    private int initialHealth = 60;
-    private int attack = 3;
+    private int initialHealth = 100;
+    private int attack = 4;
     private int defense = 2;
 //    private static Warlord instance;
     private final WarStrategy strategy = new WarlordStrategy();
