@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -1283,20 +1284,92 @@ class StraightFightTests {
         var result = Battle.straightFight(army1, army2);
         Assertions.assertFalse(result);
     }
-    @Test
-    @DisplayName("dd")
-    void test30(){
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.WARLORD,2)
-                .addUnits(Unit.UnitType.WARRIOR,2)
 
-                .addUnits(Unit.UnitType.WARLORD,2)
-                .addUnits(Unit.UnitType.WARRIOR,2)
-                .addUnits(Unit.UnitType.WARLORD,2)
-                .addUnits(Unit.UnitType.WARRIOR,2)
+    @Test
+    @DisplayName("Army contains only one warlord")
+    void test30() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARLORD, 2)
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .addUnits(Unit.UnitType.WARLORD, 2)
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .addUnits(Unit.UnitType.WARLORD, 2)
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .lineUp();
+        int count=0;
+        army1.processStrategy();
+        for (int i = 0; i < army1.getSize() - 1; i++) {
+            if(army1.getWarrior(i) instanceof Warlord){
+                count++;
+            }
+        }
+        Assertions.assertEquals(count,1);
+    }
+    @Test
+    @DisplayName("Changing places with lancer")
+    void test31(){
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.LANCER,1)
+                .addUnits(Unit.UnitType.LANCER,1)
+                .addUnits(Unit.UnitType.WARLORD,1)
+                .addUnits(Unit.UnitType.LANCER,1)
+                .lineUp();
+//        System.out.println("BEFORE CHANGE "+ army1.getTroops());
+//        System.out.println(army1.getSize());
+        army1.processStrategy();
+//        System.out.println("AFTER CHANGE "+ army1.getTroops());
+//        System.out.println(army1.getSize());
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(army1.getWarrior(0) instanceof Lancer),
+                () -> Assertions.assertTrue(army1.getWarrior(1) instanceof Lancer),
+                () -> Assertions.assertTrue(army1.getWarrior(2) instanceof Lancer)
+        );
+    }
+    @Test
+    @DisplayName("Changing places with lancer and healer")
+    void test32(){
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.HEALER,1)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.LANCER,1)
+                .addUnits(Unit.UnitType.HEALER,1)
+                .addUnits(Unit.UnitType.WARLORD,1)
+                .addUnits(Unit.UnitType.LANCER,1)
+                .addUnits(Unit.UnitType.HEALER,1)
                 .lineUp();
         army1.processStrategy();
-        System.out.println(army1.getSize());
-        System.out.println(army1.getTroops());
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(army1.getWarrior(0) instanceof Lancer),
+                () -> Assertions.assertTrue(army1.getWarrior(1) instanceof Lancer),
+                () -> Assertions.assertTrue(army1.getWarrior(2)instanceof Healer),
+                () -> Assertions.assertTrue(army1.getWarrior(3)instanceof Healer),
+                () -> Assertions.assertTrue(army1.getWarrior(4)instanceof Healer)
+        );
+    }
+    @Test
+    @DisplayName("If no lancers are given healer is still in second row after a unit that can attack")
+    void test33(){
+        var army = new Army()
+                .addUnits(Unit.UnitType.HEALER,1)
+                .addUnits(Unit.UnitType.HEALER,1)
+                .addUnits(Unit.UnitType.WARRIOR,1)
+                .addUnits(Unit.UnitType.WARLORD,1)
+                .lineUp();
+        army.processStrategy();
+        System.out.println(army.getTroops());
+        Assertions.assertFalse(army.getWarrior(0) instanceof Healer );
+        Assertions.assertTrue(army.getWarrior(1) instanceof Healer);
+        Assertions.assertTrue(army.getWarrior(2) instanceof Healer);
+    }
+    @Test
+    @DisplayName("Warlord should be last")
+    void test34() {
+        var army = new Army()
+                .addUnits(Unit.UnitType.WARLORD, 1)
+                .addUnits(Unit.UnitType.WARRIOR,1)
+                .addUnits(Unit.UnitType.WARRIOR,1)
+                .lineUp();
+        army.processStrategy();
     }
 }

@@ -75,10 +75,34 @@ public class Army {
         Warlord Warlord = lookForWarlord();
         removeRedundantWarlords();
         if (Warlord != null) {
-            Warlord.getStrategy().moveUnits();
+            Warlord.getStrategy().moveUnits(this);
         }
     }
+    public void shiftRight(Army army, Warrior warrior){
+        //TODO rewrite to not use army in argument list
+        int indexToRemove = army.getTroops().indexOf(warrior);
+        if(army.getTroops().indexOf(warrior)!=0) {
+            army.getTroops().add(0, warrior);
+            army.getTroops().remove(++indexToRemove);
+        }
 
+    }
+    public Warrior findFirstWhoCanFight(){
+        for(Warrior troop : troops){
+            if(!(troop instanceof Healer)){
+                return troop;
+            }
+        }
+        return null;
+    }
+    public boolean hasLancers(){
+        for(Warrior troop : troops){
+            if(troop instanceof Lancer){
+                return true;
+            }
+        }
+        return false;
+    }
     public int getSize() {
         return troops.size();
     }
