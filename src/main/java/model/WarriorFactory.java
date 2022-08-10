@@ -26,6 +26,9 @@ public class WarriorFactory {
             case ROOKIE -> {
                 return new Rookie();
             }
+            case WARLORD -> {
+                return new Warlorld();
+            }
             default -> throw new IllegalArgumentException();
         }
     }

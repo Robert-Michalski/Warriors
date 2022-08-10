@@ -4,7 +4,6 @@ public class Defender extends Warrior {
     private int initialHealth = 60;
     private int attack = 3;
     private int defense = 2;
-    private int health = initialHealth;
 
     public Defender() {
         setHealth(initialHealth);
@@ -19,7 +18,7 @@ public class Defender extends Warrior {
             logger.trace("Too little damage to go through defense");
         } else {
             super.reduceHealthBasedOnDamage(damage - getDefense());
-            logger.trace("Defender took {} damage", damage - getDefense());
+            logger.trace("{} took {} damage", this, damage - getDefense());
         }
     }
 
