@@ -3,23 +3,25 @@ package model;
 import model.strategies.WarStrategy;
 import model.strategies.WarlordStrategy;
 
-public class Warlorld extends Defender{
+import java.util.Objects;
+
+public class Warlord extends Defender{
     private int initialHealth = 60;
     private int attack = 3;
     private int defense = 2;
-    private static Warlorld instance;
+//    private static Warlord instance;
     private final WarStrategy strategy = new WarlordStrategy();
-    private Warlorld(){
+    public Warlord(){
         setHealth(initialHealth);
         setAttack(attack);
         setDefense(defense);
     }
-    public static Warlorld getInstance(){
-        if(instance == null){
-            instance = new Warlorld();
-        }
-        return instance;
-    }
+//    public static Warlord getInstance(){
+//        if(instance == null){
+//            instance = new Warlord();
+//        }
+//        return instance;
+//    }
 
     @Override
     public void receiveHit(int damage) {
@@ -71,8 +73,21 @@ public class Warlorld extends Defender{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Warlord Warlord = (Warlord) o;
+        return initialHealth == Warlord.initialHealth && attack == Warlord.attack && defense == Warlord.defense && Objects.equals(strategy, Warlord.strategy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(initialHealth, attack, defense, strategy);
+    }
+
+    @Override
     public String toString() {
-        return "Warlorld{" +
+        return "Warlord{" +
                 "health=" + getHealth() +
                 ", attack=" + getAttack() +
                 ", defense=" + getDefense() +

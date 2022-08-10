@@ -1288,8 +1288,15 @@ class StraightFightTests {
     void test30(){
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARLORD,2)
+                .addUnits(Unit.UnitType.WARRIOR,2)
+
+                .addUnits(Unit.UnitType.WARLORD,2)
+                .addUnits(Unit.UnitType.WARRIOR,2)
+                .addUnits(Unit.UnitType.WARLORD,2)
+                .addUnits(Unit.UnitType.WARRIOR,2)
                 .lineUp();
         army1.processStrategy();
         System.out.println(army1.getSize());
+        System.out.println(army1.getTroops());
     }
 }

@@ -33,53 +33,65 @@ public class Army {
         }
         return this;
     }
-    public Warrior getWarrior(int index){
+
+    public Warrior getWarrior(int index) {
         return troops.get(index);
     }
 
-    public Army removeDeadWarriors(){
-        for(ListIterator<Warrior> iterator = troops.listIterator(); iterator.hasNext();){
+    public Army removeDeadWarriors() {
+        for (ListIterator<Warrior> iterator = troops.listIterator(); iterator.hasNext(); ) {
             Warrior warrior = iterator.next();
-            if(!warrior.isAlive()){
+            if (!warrior.isAlive()) {
                 iterator.remove();
             }
         }
         return this;
     }
-    public void equipWarriorAtPosition(int position, IWeapon weapon){
+
+    public void equipWarriorAtPosition(int position, IWeapon weapon) {
         getWarrior(position).equipWeapon(weapon);
     }
+
     public Army addUnits(Unit.UnitType type, int quantity) {
         for (int i = 0; i < quantity; i++) {
             troops.add(warriorFactory.getInstance(type));
         }
         return this;
     }
-    public void processStrategy(){
-        removeRedundantWarlords();
-        Warlorld warlorld = lookForWarlord();
-        if(warlorld!=null){
-            warlorld.getStrategy().moveUnits();
+
+    private void removeRedundantWarlords() {
+        Warlord Warlord = lookForWarlord();
+        int warlordIndex = troops.indexOf(Warlord);
+        for (ListIterator<Warrior> iterator = troops.listIterator(); iterator.hasNext(); ) {
+            Warrior warrior = iterator.next();
+            if (warrior instanceof Warlord) {
+                if (warlordIndex != troops.indexOf(warrior))
+                    iterator.remove();
+            }
         }
     }
-    public int getSize(){
+
+    public void processStrategy() {
+        Warlord Warlord = lookForWarlord();
+        removeRedundantWarlords();
+        if (Warlord != null) {
+            Warlord.getStrategy().moveUnits();
+        }
+    }
+
+    public int getSize() {
         return troops.size();
     }
-    private Warlorld lookForWarlord(){
-        for(Warrior troop : troops){
-            if(troop instanceof Warlorld warlorld){
-                return warlorld;
+
+    private Warlord lookForWarlord() {
+        for (Warrior troop : troops) {
+            if (troop instanceof Warlord Warlord) {
+                return Warlord;
             }
         }
         return null;
     }
-    private void removeRedundantWarlords(){
-        for(Warrior troop : troops){
-            if(troop instanceof Warlorld warlorld){
 
-            }
-        }
-    }
     @Override
     public String toString() {
         return "Army{" +
