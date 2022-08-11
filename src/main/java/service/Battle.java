@@ -44,8 +44,10 @@ public class Battle {
         while (army1LastWarrior.isAlive() && army2LastWarrior.isAlive()) {
             if (fight(army1.getTroops().get(army1WarriorIndex), army2.getTroops().get(army2WarriorIndex))) {
                 army2WarriorIndex++;
+                army2.processStrategy();
             } else {
                 army1WarriorIndex++;
+                army1.processStrategy();
             }
         }
 
@@ -67,7 +69,13 @@ public class Battle {
         //army.isEmpty()
             logger.info("Round {}", round);
             for (int i = 0; i < army1.getTroops().size() && i<army2.getTroops().size(); i++) {
-                fight(army1.getWarrior(i), army2.getWarrior(i));
+                if(fight(army1.getWarrior(i), army2.getWarrior(i))){
+                    army2.processStrategy();
+                }
+                else {
+                    army1.processStrategy();
+                }
+//                fight(army1.getWarrior(i), army2.getWarrior(i));
             }
             round++;
             army1.removeDeadWarriors();

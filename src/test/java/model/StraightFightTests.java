@@ -1284,6 +1284,7 @@ class StraightFightTests {
         var result = Battle.straightFight(army1, army2);
         Assertions.assertFalse(result);
     }
+
     @Test
     @DisplayName("Warlord should be last")
     void test34() {
@@ -1337,7 +1338,7 @@ class StraightFightTests {
                 () -> Assertions.assertTrue(army.getWarrior(0) instanceof Lancer),
                 () -> Assertions.assertTrue(army.getWarrior(1) instanceof Healer),
                 () -> Assertions.assertTrue(army.getWarrior(2) instanceof Lancer),
-                () -> Assertions.assertTrue(army.getWarrior(army.getSize()-1) instanceof Warlord)
+                () -> Assertions.assertTrue(army.getWarrior(army.getSize() - 1) instanceof Warlord)
         );
     }
 
@@ -1355,26 +1356,29 @@ class StraightFightTests {
                 () -> Assertions.assertTrue(army.getWarrior(2) instanceof Warlord)
         );
     }
+
     @Test
     @DisplayName("If no lancers then healer is after first warriro who can fight")
-    void test39(){
+    void test39() {
         var army = new Army()
                 .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.WARLORD,1)
-                .addUnits(Unit.UnitType.WARRIOR,1)
+                .addUnits(Unit.UnitType.WARLORD, 1)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
                 .lineUp();
         army.processStrategy();
 
     }
+
     @Test
-    void test40(){
+    void test40() {
         var army = new Army()
-                .addUnits(Unit.UnitType.WARRIOR,1)
-                .addUnits(Unit.UnitType.WARLORD,3)
-                .addUnits(Unit.UnitType.HEALER,1)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.WARLORD, 3)
+                .addUnits(Unit.UnitType.HEALER, 1)
                 .lineUp();
         army.processStrategy();
     }
+
     @Test
     @DisplayName("Warlord smoke test")
     void test35() {
@@ -1407,10 +1411,136 @@ class StraightFightTests {
                 () -> Assertions.assertTrue(Battle.fight(myArmy, enemyArmy))
         );
     }
+
     @Test
-    @DisplayName("10. Fight :")
-    void test41(){
-        
+    @DisplayName("10. Fight: ")
+    void test41() {
+        //GIVEN
+        var unit1 = new Defender();
+        var unit2 = new Warlord();
+        //WHEN
+        var result = Battle.fight(unit1, unit2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("11. Fight: ")
+    void test42() {
+        //GIVEN
+        var unit1 = new Warlord();
+        var unit2 = new Vampire();
+        //WHEN
+        var result = Battle.fight(unit1, unit2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("12. Fight: ")
+    void test43() {
+        //GIVEN
+        var unit1 = new Warlord();
+        var unit2 = new Knight();
+        //WHEN
+        var result = Battle.fight(unit1, unit2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("23. Battle: ")
+    void test44() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARLORD, 1)
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .addUnits(Unit.UnitType.LANCER, 2)
+                .addUnits(Unit.UnitType.HEALER, 2)
+                .lineUp();
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARLORD, 1)
+                .addUnits(Unit.UnitType.VAMPIRE, 1)
+                .addUnits(Unit.UnitType.HEALER, 2)
+                .addUnits(Unit.UnitType.KNIGHT, 2)
+                .lineUp();
+        //WHEN
+        army1.processStrategy();
+        army2.processStrategy();
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("24. Battle: ")
+    void test45() {
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .addUnits(Unit.UnitType.LANCER, 2)
+                .addUnits(Unit.UnitType.DEFENDER, 1)
+                .addUnits(Unit.UnitType.WARLORD, 3)
+                .lineUp();
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARLORD, 2)
+                .addUnits(Unit.UnitType.VAMPIRE, 1)
+                .addUnits(Unit.UnitType.HEALER, 5)
+                .addUnits(Unit.UnitType.KNIGHT, 2)
+                .lineUp();
+        army1.processStrategy();
+        army2.processStrategy();
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertFalse(result);
+    }
+    @Test
+    @DisplayName("25. Battle: ")
+    void test46(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR,2)
+                .addUnits(Unit.UnitType.LANCER,3)
+                .addUnits(Unit.UnitType.DEFENDER,1)
+                .addUnits(Unit.UnitType.WARLORD,4)
+                .lineUp();
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARLORD,1)
+                .addUnits(Unit.UnitType.VAMPIRE,1)
+                .addUnits(Unit.UnitType.ROOKIE,1)
+                .addUnits(Unit.UnitType.KNIGHT,1)
+                .lineUp();
+        army1.equipWarriorAtPosition(0, Weapon.newSword());
+        army2.equipWarriorAtPosition(0, Weapon.newShield());
+        army1.processStrategy();
+        army2.processStrategy();
+        //WHEN
+        var result = Battle.fight(army1, army2);
+        //THEN
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("26. Battle: ")
+    void test47(){
+        //GIVEN
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR,2)
+                .addUnits(Unit.UnitType.LANCER,3)
+                .addUnits(Unit.UnitType.DEFENDER,1)
+                .addUnits(Unit.UnitType.WARLORD,1);
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARLORD, 5)
+                .addUnits(Unit.UnitType.VAMPIRE, 1)
+                .addUnits(Unit.UnitType.ROOKIE, 1)
+                .addUnits(Unit.UnitType.KNIGHT, 1);
+        army1.equipWarriorAtPosition(0,Weapon.newSword());
+        army2.equipWarriorAtPosition(0,Weapon.newShield());
+        army1.processStrategy();
+        army2.processStrategy();
+        //WHEN
+        var result = Battle.straightFight(army1, army2);
+        //THEN
+        Assertions.assertFalse(result);
     }
 
 }
