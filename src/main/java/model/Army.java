@@ -78,31 +78,56 @@ public class Army {
             Warlord.getStrategy().moveUnits(this);
         }
     }
-    public void shiftRight(Army army, Warrior warrior){
-        //TODO rewrite to not use army in argument list
-        int indexToRemove = army.getTroops().indexOf(warrior);
-//        if(army.getTroops().indexOf(warrior)!=0) {
-            army.getTroops().add(0, warrior);
-            army.getTroops().remove(++indexToRemove);
-//        }
+
+    public void shiftRight(Warrior warrior) {
+        Warrior behind = troops.get(troops.indexOf(warrior)+1);
+        if(behind==null)
+            return;
+
+        int warriorIndex = troops.indexOf(warrior);
+        int behindIndex = troops.indexOf(behind);
+        troops.add(++behindIndex, warrior);
+        troops.remove(warriorIndex);
+    }
+    public void moveToFront(Warrior warrior){
+        int warriorIndex = troops.indexOf(warrior);
+        for(int i=0; i< troops.size(); i++){
+            logger.trace("Unit at {} is {}",i, troops.get(i));
+        }
+        troops.add(0, warrior);
+        for(int i=0; i< troops.size(); i++){
+            logger.trace("Unit at {} is {}",i, troops.get(i));
+        }
+        logger.debug("Removing {}", troops.get(warriorIndex++));
+        troops.remove(warriorIndex);
+    }
+    public void moveBehind(Warrior unitToPutBehind){
+        int warriorIndex = troops.indexOf(unitToPutBehind);
+        troops.add(1, unitToPutBehind);
+        warriorIndex++;
+        troops.remove(warriorIndex);
+    }
+    public void moveFirstAttackerToTheFront(Army army){
 
     }
-    public Warrior findFirstWhoCanFight(){
-        for(Warrior troop : troops){
-            if(!(troop instanceof Healer)){
+    public Warrior findFirstWhoCanFight() {
+        for (Warrior troop : troops) {
+            if (!(troop instanceof Healer)) {
                 return troop;
             }
         }
         return null;
     }
-    public boolean hasLancers(){
-        for(Warrior troop : troops){
-            if(troop instanceof Lancer){
+
+    public boolean hasLancers() {
+        for (Warrior troop : troops) {
+            if (troop instanceof Lancer) {
                 return true;
             }
         }
         return false;
     }
+
     public int getSize() {
         return troops.size();
     }
