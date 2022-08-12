@@ -118,16 +118,6 @@ public class Army {
         }
         return null;
     }
-
-    public boolean hasLancers() {
-        for (Warrior troop : troops) {
-            if (troop instanceof Lancer) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public int getSize() {
         return troops.size();
     }

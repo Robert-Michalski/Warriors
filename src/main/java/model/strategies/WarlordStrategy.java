@@ -48,4 +48,5 @@ public class WarlordStrategy implements WarStrategy {
         army.moveToFront(warrior);
 
     }
+    
 }
