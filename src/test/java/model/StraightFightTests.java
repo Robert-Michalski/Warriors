@@ -1471,6 +1471,7 @@ class StraightFightTests {
         //THEN
         Assertions.assertTrue(result);
     }
+
     @Test
     @DisplayName("24. Battle: ")
     void test45() {
@@ -1494,21 +1495,22 @@ class StraightFightTests {
         //THEN
         Assertions.assertFalse(result);
     }
+
     @Test
     @DisplayName("25. Battle: ")
-    void test46(){
+    void test46() {
         //GIVEN
         var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR,2)
-                .addUnits(Unit.UnitType.LANCER,3)
-                .addUnits(Unit.UnitType.DEFENDER,1)
-                .addUnits(Unit.UnitType.WARLORD,4)
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .addUnits(Unit.UnitType.LANCER, 3)
+                .addUnits(Unit.UnitType.DEFENDER, 1)
+                .addUnits(Unit.UnitType.WARLORD, 4)
                 .lineUp();
         var army2 = new Army()
-                .addUnits(Unit.UnitType.WARLORD,1)
-                .addUnits(Unit.UnitType.VAMPIRE,1)
-                .addUnits(Unit.UnitType.ROOKIE,1)
-                .addUnits(Unit.UnitType.KNIGHT,1)
+                .addUnits(Unit.UnitType.WARLORD, 1)
+                .addUnits(Unit.UnitType.VAMPIRE, 1)
+                .addUnits(Unit.UnitType.ROOKIE, 1)
+                .addUnits(Unit.UnitType.KNIGHT, 1)
                 .lineUp();
         army1.equipWarriorAtPosition(0, Weapon.newSword());
         army2.equipWarriorAtPosition(0, Weapon.newShield());
@@ -1519,22 +1521,23 @@ class StraightFightTests {
         //THEN
         Assertions.assertTrue(result);
     }
+
     @Test
     @DisplayName("26. Battle: ")
-    void test47(){
+    void test47() {
         //GIVEN
         var army1 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR,2)
-                .addUnits(Unit.UnitType.LANCER,3)
-                .addUnits(Unit.UnitType.DEFENDER,1)
-                .addUnits(Unit.UnitType.WARLORD,1);
+                .addUnits(Unit.UnitType.WARRIOR, 2)
+                .addUnits(Unit.UnitType.LANCER, 3)
+                .addUnits(Unit.UnitType.DEFENDER, 1)
+                .addUnits(Unit.UnitType.WARLORD, 1);
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARLORD, 5)
                 .addUnits(Unit.UnitType.VAMPIRE, 1)
                 .addUnits(Unit.UnitType.ROOKIE, 1)
                 .addUnits(Unit.UnitType.KNIGHT, 1);
-        army1.equipWarriorAtPosition(0,Weapon.newSword());
-        army2.equipWarriorAtPosition(0,Weapon.newShield());
+        army1.equipWarriorAtPosition(0, Weapon.newSword());
+        army2.equipWarriorAtPosition(0, Weapon.newShield());
         army1.processStrategy();
         army2.processStrategy();
         //WHEN
@@ -1542,6 +1545,7 @@ class StraightFightTests {
         //THEN
         Assertions.assertFalse(result);
     }
+
 
 }
 

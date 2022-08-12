@@ -4,7 +4,7 @@ public class Lancer extends Warrior {
 
     private int initialHealth = 50;
     private int attack = 6;
-    private final int PIERCING = 50;
+    private int piercing = 50;
 
     public Lancer() {
         setHealth(initialHealth);
@@ -21,9 +21,9 @@ public class Lancer extends Warrior {
 
     public void hitWithPenalty(Warrior opponent) {
         if (!(opponent instanceof Defender defender)) {
-            opponent.getWarriorBehind().receiveHit((getAttack()*PIERCING)/100);
+            opponent.getWarriorBehind().receiveHit((getAttack()*piercing)/100);
         } else {
-            opponent.getWarriorBehind().receiveHit(((getAttack()-defender.getDefense())*PIERCING)/100);
+            opponent.getWarriorBehind().receiveHit(((getAttack()-defender.getDefense())*piercing)/100);
         }
 
     }
@@ -53,16 +53,16 @@ public class Lancer extends Warrior {
         this.attack = attack;
     }
 
-    public int getPIERCING() {
-        return PIERCING;
+    public int getPiercing() {
+        return piercing;
     }
 
     @Override
     public String toString() {
         return "Lancer{" +
                 "health=" + getHealth() +
-                ", attack=" + attack +
-                ", PIERCING=" + PIERCING +
+                ", attack=" + getAttack() +
+                ", PIERCING=" + getPiercing() +
                 '}';
     }
 }
