@@ -1,7 +1,5 @@
 package model;
 
-import model.*;
-
 public class WarriorFactory {
     public Warrior getInstance(Unit.UnitType type) {
         switch (type) {
@@ -31,5 +29,6 @@ public class WarriorFactory {
             }
             default -> throw new IllegalArgumentException();
         }
+
     }
 }

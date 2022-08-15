@@ -1,6 +1,5 @@
 package model;
 
-import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import service.Battle;
 import java.util.stream.Stream;
 
 
-class StraightFightTests {
+class WarlordTests {
     @Test
     @DisplayName("Smoke show")
     void smokeShow() {
