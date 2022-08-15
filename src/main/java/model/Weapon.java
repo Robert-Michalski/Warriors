@@ -1,5 +1,6 @@
 package model;
 
+import interfaces.IWeapon;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -7,35 +8,35 @@ import lombok.ToString;
 @Builder
 @Getter
 @ToString
-public class Weapon implements IWeapon{
+public class Weapon implements IWeapon {
 
     private int health;
     private int attack;
     private int defense;
     private int vampirism;
     private int healPower;
-    private static final Weapon.WeaponBuilder Sword =
+    private static final WeaponBuilder Sword =
             Weapon.builder()
                     .health(5)
                     .attack(2);
-    private static final Weapon.WeaponBuilder Shield =
+    private static final WeaponBuilder Shield =
             Weapon.builder()
                     .health(20)
                     .attack(-1)
                     .defense(2);
-    private static final Weapon.WeaponBuilder GreatAxe =
+    private static final WeaponBuilder GreatAxe =
             Weapon.builder()
                     .health(-15)
                     .attack(5)
                     .defense(-2)
                     .vampirism(10);
-    private static final Weapon.WeaponBuilder Katana =
+    private static final WeaponBuilder Katana =
             Weapon.builder()
                     .health(-20)
                     .attack(6)
                     .defense(-5)
                     .vampirism(50);
-    private static final Weapon.WeaponBuilder MagicWand =
+    private static final WeaponBuilder MagicWand =
             Weapon.builder()
                     .health(30)
                     .attack(3)

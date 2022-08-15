@@ -1,26 +1,25 @@
 package model;
 
-public class Warrior implements Unit, IWarrior {
-    private int initialHealth = 50;
-    private int attack = 5;
-    private int health;
+import interfaces.IWarrior;
+import interfaces.IWeapon;
+import interfaces.command.HealCommand;
+import interfaces.command.ICommand;
 
+public class Warrior implements IWarrior {
+    private int attack = 5;
+    private int initialHealth = 50;
+    private int health;
     Warrior warriorBehind = null;
     Warrior warriorInFront = null;
 
     public Warrior() {
-        setHealth(getInitialHealth());
+        this.health = initialHealth;
     }
 
     @Override
-    public void reduceHealthBasedOnDamage(int damage) {
-        health -= damage;
-    }
-
-    @Override
-    public void hit(Warrior opponent) {
+    public void hit(IWarrior opponent) {
         IWarrior.super.hit(opponent);
-        process(this);
+        process(new HealCommand(), this);
     }
 
     @Override
@@ -30,13 +29,62 @@ public class Warrior implements Unit, IWarrior {
         growAttackByAmount(weapon.getAttack());
         logger.info("new statistics {}", this);
     }
+    @Override
+    public void process(ICommand command, IWarrior warrior) {
+        if (getWarriorBehind() != null) {
+            warrior.process(command, warrior.getWarriorBehind());
+        }
+    }
 
-    public Warrior getWarriorBehind() {
+    @Override
+    public void reduceHealthBy(int attack) {
+        int healthBeforeAttack = this.getHealth();
+        health -= attack;
+        int healthAfterAttack = this.getHealth();
+        int amount = healthBeforeAttack - healthAfterAttack;
+        logger.trace("{} took {} damage", this, amount);
+    }
+    public void growInitialHealthByAmount(int amount) {
+        setInitialHealth(getInitialHealth() + amount);
+        setHealth(getInitialHealth());
+    }
+
+    public void growAttackByAmount(int amount) {
+        setAttack(getAttack() + amount);
+    }
+    @Override
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    public IWarrior getWarriorBehind() {
         return warriorBehind;
     }
 
     public void setWarriorBehind(Warrior warriorBehind) {
         this.warriorBehind = warriorBehind;
+    }
+
+    public IWarrior getWarriorInFront() {
+        return warriorInFront;
+    }
+
+    public void setWarriorInFront(Warrior warriorInFront) {
+        this.warriorInFront = warriorInFront;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public int getInitialHealth() {
@@ -47,52 +95,11 @@ public class Warrior implements Unit, IWarrior {
         this.initialHealth = initialHealth;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public void growInitialHealthByAmount(int amount) {
-        setInitialHealth(getInitialHealth() + amount);
-        setHealth(getInitialHealth());
-    }
-
-    public void growAttackByAmount(int amount) {
-        setAttack(getAttack() + amount);
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public Warrior getWarriorInFront() {
-        return warriorInFront;
-    }
-
-    public void setWarriorInFront(Warrior warriorInFront) {
-        this.warriorInFront = warriorInFront;
-    }
-
     @Override
     public String toString() {
-        return getClass().getName().substring(6) + "{" +
-                "health=" + getHealth() +
-                " attack=" + getAttack() +
+        return "Warrior{" +
+                "health = " + health +
+                " attack = " + attack +
                 '}';
-    }
-
-
-    @Override
-    public void process(Warrior warrior) {
-        if (warriorBehind != null) {
-            warrior.process(warrior.getWarriorBehind());
-        }
     }
 }

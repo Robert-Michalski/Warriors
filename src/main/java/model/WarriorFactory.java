@@ -1,8 +1,8 @@
 package model;
 
 public class WarriorFactory {
-    public Warrior getInstance(Unit.UnitType type) {
-        switch (type) {
+    public Warrior getInstance(Unit.UnitType type){
+        switch(type){
             case WARRIOR -> {
                 return new Warrior();
             }
@@ -12,23 +12,24 @@ public class WarriorFactory {
             case DEFENDER -> {
                 return new Defender();
             }
-            case VAMPIRE -> {
-                return new Vampire();
-            }
             case LANCER -> {
                 return new Lancer();
             }
             case HEALER -> {
                 return new Healer();
             }
-            case ROOKIE -> {
-                return new Rookie();
+            case VAMPIRE -> {
+                return new Vampire();
             }
             case WARLORD -> {
                 return new Warlord();
             }
-            default -> throw new IllegalArgumentException();
+            case ROOKIE -> {
+                return new Rookie();
+            }
+            default -> {
+                throw new IllegalArgumentException("NO SUCH TYPE");
+            }
         }
-
     }
 }

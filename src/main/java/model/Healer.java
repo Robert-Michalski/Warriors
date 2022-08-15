@@ -1,15 +1,29 @@
 package model;
 
-public class Healer extends Warrior {
+import interfaces.CanHeal;
+import interfaces.HasHealth;
+import interfaces.IWarrior;
+import interfaces.IWeapon;
+import interfaces.command.HealCommand;
+import interfaces.command.ICommand;
+
+public class Healer extends Warrior implements CanHeal {
     private int initialHealth = 60;
     private int attack = 0;
+    private int health;
     private int healPower = 2;
 
     public Healer() {
-        setHealth(initialHealth);
+        health = initialHealth;
     }
 
-    public void heal(Warrior warrior) {
+    @Override
+    public int getHealPower() {
+        return healPower;
+    }
+
+    @Override
+    public void heal(HasHealth warrior) {
         logger.trace("Healing {} for {} units", warrior, getHealPower());
         warrior.setHealth(warrior.getHealth() + getHealPower());
         if (warrior.getHealth() > warrior.getInitialHealth()) {
@@ -21,28 +35,40 @@ public class Healer extends Warrior {
     }
 
     @Override
-    public void equipWeapon(IWeapon weapon) {
-        growHealPowerByAmount(weapon.getHealPower());
-        super.equipWeapon(weapon);
-    }
-    public void growHealPowerByAmount(int amount){
-        setHealPower(getHealPower()+amount);
-    }
-    @Override
-    public void hit(Warrior opponent) {
-        logger.trace("Healer does not hit");
-    }
-
-    @Override
-    public void process(Warrior warrior) {
-        if (warriorInFront != null) {
-            heal(warriorInFront);
+    public void process(ICommand command, IWarrior warrior) {
+        if (command instanceof HealCommand) {
+            if (warriorInFront != null) {
+                heal(warriorInFront);
+            }
         }
-        super.process(warrior);
+        if (getWarriorBehind() != null)
+            super.process(command, warrior);
     }
 
-    public void setHealPower(int healPower) {
-        this.healPower = healPower;
+    @Override
+    public void equipWeapon(IWeapon weapon) {
+        growHealPowerBy(weapon.getHealPower());
+        super.equipWeapon(weapon);
+
+    }
+
+    private void growHealPowerBy(int amount) {
+        healPower += amount;
+    }
+
+    @Override
+    public void reduceHealthBy(int attack) {
+        this.health -= attack;
+    }
+
+    @Override
+    public int getInitialHealth() {
+        return initialHealth;
+    }
+
+    @Override
+    public void setInitialHealth(int initialHealth) {
+        this.initialHealth = initialHealth;
     }
 
     @Override
@@ -56,25 +82,26 @@ public class Healer extends Warrior {
     }
 
     @Override
-    public int getInitialHealth() {
-        return initialHealth;
+    public int getHealth() {
+        return health;
     }
 
     @Override
-    public void setInitialHealth(int initialHealth) {
-        this.initialHealth = initialHealth;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
-    public int getHealPower() {
-        return healPower;
+    public void setHealPower(int healPower) {
+        this.healPower = healPower;
     }
 
     @Override
     public String toString() {
         return "Healer{" +
-                "health=" + getHealth() +
-                ", attack=" + getAttack() +
-                ", healPower=" + getHealPower() +
+                "initialHealth=" + initialHealth +
+                ", attack=" + attack +
+                ", health=" + health +
+                ", healPower=" + healPower +
                 '}';
     }
 }

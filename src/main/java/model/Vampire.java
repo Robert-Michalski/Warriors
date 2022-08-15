@@ -1,61 +1,53 @@
 package model;
 
-public class Vampire extends Warrior {
+import interfaces.HasVampirism;
+import interfaces.IWarrior;
+import interfaces.IWeapon;
+
+public class Vampire extends Warrior implements HasVampirism {
     private int initialHealth = 40;
     private int attack = 4;
     private int vampirism = 50;
+    private int health;
 
     public Vampire() {
-        setHealth(initialHealth);
+        health = initialHealth;
     }
 
     @Override
-    public void hit(Warrior opponent) {
-        int x1 = opponent.getHealth();
+    public void hit(IWarrior opponent) {
+        int healthBeforeAttack = opponent.getHealth();
         super.hit(opponent);
-        int x2 = opponent.getHealth();
-        healSelfByAmount(((x1 - x2) * vampirism) / 100);
-        logger.trace("{} heals himself for {} units", this, ((x1 - x2) * vampirism) / 100);
+        int healthAfterAttack = opponent.getHealth();
+        int amount = healthBeforeAttack - healthAfterAttack;
+        healSelfBy(amount * vampirism / 100);
     }
 
-    public void healSelfByAmount(int amount) {
-        this.setHealth(this.getHealth() + amount);
-        if (this.getHealth() > this.initialHealth) {
-            this.setHealth(this.initialHealth);
-            logger.trace("{} will not overheal, his health is full", this);
+    @Override
+    public void healSelfBy(int amount) {
+        if (amount + health > initialHealth) {
+            health = initialHealth;
+            logger.trace("{} has recovered to full hp", this);
+        } else {
+            logger.trace("Vampire heals for {}", amount * vampirism / 100);
+            this.health += amount;
+            logger.trace("Vampire now has {} health", getHealth());
         }
-
     }
 
     @Override
     public void equipWeapon(IWeapon weapon) {
-        growVampirismByAmount(weapon.getVampirism());
+        growVampirismBy(weapon.getVampirism());
         super.equipWeapon(weapon);
-    }
 
-    public void growVampirismByAmount(int amount) {
-        setVampirism(getVampirism() + amount);
     }
-
-    public void setVampirism(int vampirism) {
-        this.vampirism = vampirism;
-        if (this.vampirism < 0) {
-            this.vampirism = 0;
-        }
-    }
-
-    public int getVampirism() {
-        return vampirism;
+    private void growVampirismBy(int amount) {
+        vampirism += amount;
     }
 
     @Override
-    public int getAttack() {
-        return attack;
-    }
-
-    @Override
-    public void setAttack(int attack) {
-        this.attack = attack;
+    public void reduceHealthBy(int attack) {
+        this.health -= attack;
     }
 
     @Override
@@ -69,11 +61,41 @@ public class Vampire extends Warrior {
     }
 
     @Override
+    public int getAttack() {
+        return attack;
+    }
+
+    @Override
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    @Override
+    public int getVampirism() {
+        return vampirism;
+    }
+
+    public void setVampirism(int vampirism) {
+        this.vampirism = vampirism;
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    @Override
     public String toString() {
         return "Vampire{" +
-                "health=" + getHealth() +
+                "initialHealth=" + initialHealth +
                 ", attack=" + attack +
                 ", vampirism=" + vampirism +
+                ", health=" + health +
                 '}';
     }
 }

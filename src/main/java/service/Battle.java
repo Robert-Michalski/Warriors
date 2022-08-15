@@ -66,7 +66,7 @@ public class Battle {
         logger.info("Straight Fight started !");
         int round = 1;
         while (!army1.getTroops().isEmpty() && !army2.getTroops().isEmpty()) {
-        //army.isEmpty()
+            //army.isEmpty()
             logger.info("Round {}", round);
             for (int i = 0; i < army1.getTroops().size() && i<army2.getTroops().size(); i++) {
                 if(fight(army1.getWarrior(i), army2.getWarrior(i))){

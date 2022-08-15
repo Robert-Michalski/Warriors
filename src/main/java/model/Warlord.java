@@ -1,5 +1,6 @@
 package model;
 
+import interfaces.IWeapon;
 import model.strategies.WarStrategy;
 import model.strategies.WarlordStrategy;
 
@@ -9,12 +10,11 @@ public class Warlord extends Defender{
     private int initialHealth = 100;
     private int attack = 4;
     private int defense = 2;
+    private int health;
 //    private static Warlord instance;
     private final WarStrategy strategy = new WarlordStrategy();
     public Warlord(){
-        setHealth(initialHealth);
-        setAttack(attack);
-        setDefense(defense);
+        health = initialHealth;
     }
 //    public static Warlord getInstance(){
 //        if(instance == null){
@@ -23,9 +23,16 @@ public class Warlord extends Defender{
 //        return instance;
 //    }
 
+
     @Override
-    public void receiveHit(int damage) {
-        super.receiveHit(damage);
+    public void reduceHealthBy(int attack) {
+        if(attack > getDefense()){
+            logger.trace("{} takes {} damage", this, attack - getDefense());
+            this.health -= attack - getDefense();
+        }
+        else {
+            logger.trace("Too little dmg to go pass through defense");
+        }
     }
 
     @Override
@@ -34,16 +41,10 @@ public class Warlord extends Defender{
     }
 
     @Override
-    public void growDefenseByAmount(int amount) {
-        super.growDefenseByAmount(amount);
-    }
-
-    @Override
     public int getInitialHealth() {
         return initialHealth;
     }
 
-    @Override
     public void setInitialHealth(int initialHealth) {
         this.initialHealth = initialHealth;
     }
@@ -53,7 +54,6 @@ public class Warlord extends Defender{
         return attack;
     }
 
-    @Override
     public void setAttack(int attack) {
         this.attack = attack;
     }
@@ -63,13 +63,22 @@ public class Warlord extends Defender{
         return defense;
     }
 
-    @Override
     public void setDefense(int defense) {
         this.defense = defense;
     }
 
     public WarStrategy getStrategy() {
         return strategy;
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     @Override

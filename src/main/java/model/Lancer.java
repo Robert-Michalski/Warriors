@@ -1,36 +1,38 @@
 package model;
 
-public class Lancer extends Warrior {
+import interfaces.IWarrior;
+import interfaces.IWeapon;
 
+public class Lancer extends Warrior {
     private int initialHealth = 50;
     private int attack = 6;
     private int piercing = 50;
+    private int health;
 
     public Lancer() {
-        setHealth(initialHealth);
+        this.health = initialHealth;
     }
 
     @Override
-    public void hit(Warrior opponent) {
-        super.hit(opponent);
+    public void hit(IWarrior opponent) {
+        logger.trace("{} hits {}", this, opponent);
+        int healthBeforeAttack = opponent.getHealth();
+        opponent.reduceHealthBy(getAttack());
+        int healthAfterAttack = opponent.getHealth();
         if (opponent.getWarriorBehind() != null) {
-            logger.trace("{} pierces and hits {}", this, opponent.getWarriorBehind());
-            hitWithPenalty(opponent);
+            logger.trace("{} pierces and attacks {} for {} damage", this, opponent.getWarriorBehind(), getAttack() * piercing / 100);
+            int total = healthBeforeAttack - healthAfterAttack;
+            opponent.getWarriorBehind().reduceHealthBy(total * piercing / 100);
         }
     }
-
-    public void hitWithPenalty(Warrior opponent) {
-        if (!(opponent instanceof Defender defender)) {
-            opponent.getWarriorBehind().receiveHit((getAttack()*piercing)/100);
-        } else {
-            opponent.getWarriorBehind().receiveHit(((getAttack()-defender.getDefense())*piercing)/100);
-        }
-
-    }
-
     @Override
     public void equipWeapon(IWeapon weapon) {
         super.equipWeapon(weapon);
+    }
+
+    @Override
+    public void reduceHealthBy(int attack) {
+        this.health -= attack;
     }
 
     @Override
@@ -57,12 +59,27 @@ public class Lancer extends Warrior {
         return piercing;
     }
 
+    public void setPiercing(int piercing) {
+        this.piercing = piercing;
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     @Override
     public String toString() {
         return "Lancer{" +
-                "health=" + getHealth() +
-                ", attack=" + getAttack() +
-                ", PIERCING=" + getPiercing() +
+                "initialHealth=" + initialHealth +
+                ", attack=" + attack +
+                ", piercing=" + piercing +
+                ", health=" + health +
                 '}';
     }
 }

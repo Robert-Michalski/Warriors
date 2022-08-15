@@ -1,35 +1,49 @@
 package model;
 
-public class Defender extends Warrior {
+import interfaces.HasDefense;
+import interfaces.IWeapon;
+
+public class Defender extends Warrior implements HasDefense {
+    private int attack = 4;
     private int initialHealth = 60;
-    private int attack = 3;
     private int defense = 2;
+    private int health;
 
     public Defender() {
-        setHealth(initialHealth);
-        setAttack(attack);
-        setDefense(defense);
+        health = initialHealth;
     }
 
     @Override
-    public void receiveHit(int damage) {
-        if (damage < getDefense()) {
-            reduceHealthBasedOnDamage(0);
-            logger.trace("Too little damage to go through defense");
+    public void reduceHealthBy(int attack) {
+        if (attack > getDefense()) {
+            logger.trace("{} takes {} damage", this, attack - getDefense());
+            this.health -= attack - getDefense();
         } else {
-            super.reduceHealthBasedOnDamage(damage - getDefense());
-            logger.trace("{} took {} damage", this, damage - getDefense());
+            logger.trace("Too little dmg to go pass through defense");
         }
     }
 
     @Override
     public void equipWeapon(IWeapon weapon) {
-        growDefenseByAmount(weapon.getDefense());
+        this.growDefenseBy(weapon.getDefense());
         super.equipWeapon(weapon);
     }
 
-    public void growDefenseByAmount(int amount) {
-        setDefense(getDefense() + amount);
+    private void growDefenseBy(int amount) {
+        setDefense(getDefense()+amount);
+        if(getDefense()<0)
+            setDefense(0);
+    }
+
+
+    @Override
+    public int getAttack() {
+        return attack;
+    }
+
+    @Override
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 
     @Override
@@ -42,23 +56,32 @@ public class Defender extends Warrior {
         this.initialHealth = initialHealth;
     }
 
+    @Override
     public int getDefense() {
         return defense;
     }
 
     public void setDefense(int defense) {
         this.defense = defense;
-        if (this.defense < 0) {
-            this.defense = 0;
-        }
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     @Override
     public String toString() {
         return "Defender{" +
-                "health=" + getHealth() +
-                ", attack=" + getAttack() +
-                ", defense=" + getDefense() +
+                "attack=" + attack +
+                ", initialHealth=" + initialHealth +
+                ", defense=" + defense +
+                ", health=" + health +
                 '}';
     }
 }
