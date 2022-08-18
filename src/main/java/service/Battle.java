@@ -10,6 +10,8 @@ public class Battle {
         throw new IllegalArgumentException();
     }
 
+    static Logger logger = LoggerFactory.getLogger(Battle.class);
+
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
         int round = 0;
         if (warrior2 == null) {
@@ -18,7 +20,6 @@ public class Battle {
         if (warrior1 == null) {
             return false;
         }
-        Logger logger = LoggerFactory.getLogger("FIGHT");
         logger.debug("Fight between {} and {} has started", warrior1, warrior2);
 //        logger.debug("Round: {}", round);
         while (warrior1.isAlive() && warrior2.isAlive()) {
@@ -33,7 +34,6 @@ public class Battle {
     }
 
     public static boolean fight(Army army1, Army army2) {
-        Logger logger = LoggerFactory.getLogger("FIGHT");
         logger.debug("Fight between {} and {} has started", army1, army2);
         int army1Length = army1.getTroops().size();
         int army2Length = army2.getTroops().size();
@@ -65,7 +65,6 @@ public class Battle {
         if (army2.getTroops().isEmpty()) {
             return true;
         }
-        Logger logger = LoggerFactory.getLogger("Straight Fight");
         logger.info("Straight Fight started !");
         int round = 1;
         while (!army1.getTroops().isEmpty() && !army2.getTroops().isEmpty()) {

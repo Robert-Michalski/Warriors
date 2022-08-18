@@ -1,7 +1,37 @@
 
 M
 src/main/java/model/Unit.java,6\0\60591e40ef52e000bee7dd8947b2c8fbffcb2f90
-O
-src/main/java/model/Weapon.java,5\9\598c1ecef2b742a613d2f572e142c76bb1163311
 W
 'src/main/java/model/WarriorFactory.java,b\2\b2334b730015c95970a7332def9e17b580b7065a
+\
+,src/main/java/interfaces/CanWieldWeapon.java,e\7\e72a5a5c56022dae7149d7241a3597046793c9cd
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+O
+src/main/java/model/Rookie.java,1\2\124f75f893a2465c86be8381acd65e9100e17b81
+Q
+!src/main/java/model/Defender.java,4\b\4bcf9835ca6ee413fbd6e8d76af2a93dab09c581
+O
+src/main/java/model/Lancer.java,3\6\3639e61e0678d4379ab718edcdb8b05ab0d1a931
+S
+#src/test/resources/logback-test.xml,1\e\1ed7d9f38cb28fab5fedaa18ebddcc542ac558d7
+O
+src/main/java/model/Knight.java,5\7\577d100d0fb918b13808ba1b1ccaff1f35eb7c39
+P
+ src/main/java/model/Warlord.java,2\0\20f18de5391f5e868c2b82355bbfc09e177f14d1
+W
+'src/main/java/interfaces/HasHealth.java,7\0\701e023448c00800084006ae10d8b8bfd7ae046a
+U
+%src/main/java/interfaces/CanHeal.java,d\1\d155dfef5828ff750ac2188a90327d6c1b4a5d02
+O
+src/main/java/model/Healer.java,5\9\5948f1e0df52389495912b696263370771495283
+W
+'src/main/java/interfaces/CanAttack.java,7\5\75b3b864a65c62055a348e5e69b50c979bbb34a4
+P
+ src/main/java/model/Vampire.java,7\8\78b1f5607c5de37ed5f17dc131173c8e832a9eec
+Z
+*src/main/java/interfaces/HasVampirism.java,9\9\990461e4a5791e1385b434355a8aac149c134376
+U
+%src/main/java/interfaces/IWeapon.java,a\2\a2e24f68f45a208cb10fb4b4839a06f9025b8bf1
+V
+&src/main/java/interfaces/IWarrior.java,b\0\b07c5ee529214aaa6da0922363a7fd919eb021f0
