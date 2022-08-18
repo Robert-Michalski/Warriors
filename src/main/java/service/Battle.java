@@ -11,6 +11,7 @@ public class Battle {
     }
 
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
+        int round = 0;
         if (warrior2 == null) {
             return true;
         }
@@ -19,6 +20,7 @@ public class Battle {
         }
         Logger logger = LoggerFactory.getLogger("FIGHT");
         logger.debug("Fight between {} and {} has started", warrior1, warrior2);
+//        logger.debug("Round: {}", round);
         while (warrior1.isAlive() && warrior2.isAlive()) {
             warrior1.hit(warrior2);
             if (warrior2.isAlive()) {
@@ -26,6 +28,7 @@ public class Battle {
             }
         }
         logger.debug("{} won fight", warrior1.isAlive() ? warrior1 : warrior2);
+        round++;
         return warrior1.isAlive();
     }
 
@@ -68,11 +71,10 @@ public class Battle {
         while (!army1.getTroops().isEmpty() && !army2.getTroops().isEmpty()) {
             //army.isEmpty()
             logger.info("Round {}", round);
-            for (int i = 0; i < army1.getTroops().size() && i<army2.getTroops().size(); i++) {
-                if(fight(army1.getWarrior(i), army2.getWarrior(i))){
+            for (int i = 0; i < army1.getTroops().size() && i < army2.getTroops().size(); i++) {
+                if (fight(army1.getWarrior(i), army2.getWarrior(i))) {
                     army2.processStrategy();
-                }
-                else {
+                } else {
                     army1.processStrategy();
                 }
 //                fight(army1.getWarrior(i), army2.getWarrior(i));

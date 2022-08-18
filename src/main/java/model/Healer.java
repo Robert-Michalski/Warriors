@@ -24,25 +24,31 @@ public class Healer extends Warrior implements CanHeal {
 
     @Override
     public void heal(HasHealth warrior) {
-        logger.trace("Healing {} for {} units", warrior, getHealPower());
+        logger.debug("Healing {} for {} units", warrior, getHealPower());
+        if(warrior.isAlive())
         warrior.setHealth(warrior.getHealth() + getHealPower());
         if (warrior.getHealth() > warrior.getInitialHealth()) {
             warrior.setHealth(warrior.getInitialHealth());
             logger.trace("{} has full hp}", warrior);
         } else {
-            logger.trace("{} was healed and now has {} health}", warrior, warrior.getHealth());
+            logger.debug("{} was healed and now has {} health}", warrior, warrior.getHealth());
         }
     }
 
     @Override
     public void process(ICommand command, IWarrior warrior) {
         if (command instanceof HealCommand) {
-            if (warriorInFront != null) {
+            if (warriorInFront != null && warriorInFront.isAlive()) {
                 heal(warriorInFront);
             }
         }
         if (getWarriorBehind() != null)
             super.process(command, warrior);
+    }
+
+    @Override
+    public void hit(IWarrior opponent) {
+        logger.debug("Healer does not hit");
     }
 
     @Override

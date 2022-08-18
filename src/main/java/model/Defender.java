@@ -4,7 +4,7 @@ import interfaces.HasDefense;
 import interfaces.IWeapon;
 
 public class Defender extends Warrior implements HasDefense {
-    private int attack = 4;
+    private int attack = 3;
     private int initialHealth = 60;
     private int defense = 2;
     private int health;

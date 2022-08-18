@@ -9,7 +9,7 @@ public interface CanAttack{
     int getAttack();
 
     default void hit(IWarrior opponent) {
-        logger.trace("{} attacks {}", this, opponent);
+        logger.debug("{} attacks {}", this, opponent);
         opponent.reduceHealthBy(this.getAttack());
 
     }

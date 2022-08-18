@@ -1545,6 +1545,51 @@ class WarlordTests {
         Assertions.assertFalse(result);
     }
 
+    @Test
+    void test48() {
+        var army3 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.LANCER, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .lineUp();
+        var army4 = new Army()
+                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.LANCER, 2)
+                .lineUp();
+        Battle.fight(army3, army4);
+    }
 
+    @Test
+    void test49() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.LANCER, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .lineUp();
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .lineUp();
+
+        Battle.fight(army1, army2);
+    }
+    @Test
+    void test50(){
+        var army3 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.LANCER, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.DEFENDER, 2)
+                .lineUp();
+        var army4 = new Army()
+                .addUnits(Unit.UnitType.VAMPIRE, 3)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .addUnits(Unit.UnitType.LANCER, 2)
+                .lineUp();
+        Battle.fight(army3, army4);
+    }
 }
 

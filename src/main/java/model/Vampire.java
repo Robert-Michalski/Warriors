@@ -3,6 +3,7 @@ package model;
 import interfaces.HasVampirism;
 import interfaces.IWarrior;
 import interfaces.IWeapon;
+import interfaces.command.HealCommand;
 
 public class Vampire extends Warrior implements HasVampirism {
     private int initialHealth = 40;
@@ -16,23 +17,21 @@ public class Vampire extends Warrior implements HasVampirism {
 
     @Override
     public void hit(IWarrior opponent) {
-        int healthBeforeAttack = opponent.getHealth();
+        int x1 = opponent.getHealth();
         super.hit(opponent);
-        int healthAfterAttack = opponent.getHealth();
-        int amount = healthBeforeAttack - healthAfterAttack;
-        healSelfBy(amount * vampirism / 100);
+        int x2 = opponent.getHealth();
+        healSelfByAmount(((x1 - x2) * vampirism) / 100);
+        logger.debug("{} heals himself for {} units", this, ((x1 - x2) * vampirism) / 100);
+        //process(new HealCommand(), this);
     }
 
-    @Override
-    public void healSelfBy(int amount) {
-        if (amount + health > initialHealth) {
-            health = initialHealth;
-            logger.trace("{} has recovered to full hp", this);
-        } else {
-            logger.trace("Vampire heals for {}", amount * vampirism / 100);
-            this.health += amount;
-            logger.trace("Vampire now has {} health", getHealth());
+    public void healSelfByAmount(int amount) {
+        this.setHealth(this.getHealth() + amount);
+        if (this.getHealth() > this.initialHealth) {
+            this.setHealth(this.initialHealth);
+            logger.debug("{} will not overheal, his health is full", this);
         }
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package model;
 
 import interfaces.IWarrior;
 import interfaces.IWeapon;
+import interfaces.command.HealCommand;
 
 public class Lancer extends Warrior {
     private int initialHealth = 50;
@@ -15,15 +16,16 @@ public class Lancer extends Warrior {
 
     @Override
     public void hit(IWarrior opponent) {
-        logger.trace("{} hits {}", this, opponent);
+        logger.debug("{} hits {}", this, opponent);
         int healthBeforeAttack = opponent.getHealth();
         opponent.reduceHealthBy(getAttack());
         int healthAfterAttack = opponent.getHealth();
         if (opponent.getWarriorBehind() != null) {
-            logger.trace("{} pierces and attacks {} for {} damage", this, opponent.getWarriorBehind(), getAttack() * piercing / 100);
+            logger.debug("{} pierces and attacks {} for {} damage", this, opponent.getWarriorBehind(), getAttack() * piercing / 100);
             int total = healthBeforeAttack - healthAfterAttack;
             opponent.getWarriorBehind().reduceHealthBy(total * piercing / 100);
         }
+        process(new HealCommand(), this);
     }
     @Override
     public void equipWeapon(IWeapon weapon) {
@@ -33,6 +35,7 @@ public class Lancer extends Warrior {
     @Override
     public void reduceHealthBy(int attack) {
         this.health -= attack;
+        logger.debug("{} took {} damage", this, attack);
     }
 
     @Override
