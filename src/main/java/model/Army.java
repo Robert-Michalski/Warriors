@@ -59,8 +59,8 @@ public class Army {
     }
 
     private void removeRedundantWarlords() {
-        Warlord Warlord = lookForWarlord();
-        int warlordIndex = troops.indexOf(Warlord);
+        Warlord warlord = lookForWarlord();
+        int warlordIndex = troops.indexOf(warlord);
         for (ListIterator<Warrior> iterator = troops.listIterator(); iterator.hasNext(); ) {
             Warrior warrior = iterator.next();
             if (warrior instanceof Warlord) {

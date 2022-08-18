@@ -1517,7 +1517,5 @@ class WarlordTests {
         //THEN
         Assertions.assertFalse(result);
     }
-
-
 }
 
