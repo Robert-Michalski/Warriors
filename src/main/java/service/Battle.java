@@ -13,7 +13,6 @@ public class Battle {
     static Logger logger = LoggerFactory.getLogger(Battle.class);
 
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
-        int round = 0;
         if (warrior2 == null) {
             return true;
         }
@@ -21,7 +20,6 @@ public class Battle {
             return false;
         }
         logger.debug("Fight between {} and {} has started", warrior1, warrior2);
-//        logger.debug("Round: {}", round);
         while (warrior1.isAlive() && warrior2.isAlive()) {
             warrior1.hit(warrior2);
             if (warrior2.isAlive()) {
@@ -29,7 +27,6 @@ public class Battle {
             }
         }
         logger.debug("{} won fight", warrior1.isAlive() ? warrior1 : warrior2);
-        round++;
         return warrior1.isAlive();
     }
 
@@ -76,7 +73,6 @@ public class Battle {
                 } else {
                     army1.processStrategy();
                 }
-//                fight(army1.getWarrior(i), army2.getWarrior(i));
             }
             round++;
             army1.removeDeadWarriors();
