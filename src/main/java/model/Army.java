@@ -71,10 +71,10 @@ public class Army {
     }
 
     public void processStrategy() {
-        Warlord Warlord = lookForWarlord();
+        Warlord warlord = lookForWarlord();
         removeRedundantWarlords();
-        if (Warlord != null) {
-            Warlord.getStrategy().moveUnits(this);
+        if (warlord != null) {
+            warlord.getStrategy().moveUnits(this);
         }
     }
 
@@ -123,8 +123,8 @@ public class Army {
 
     private Warlord lookForWarlord() {
         for (Warrior troop : troops) {
-            if (troop instanceof Warlord Warlord) {
-                return Warlord;
+            if (troop instanceof Warlord warlord) {
+                return warlord;
             }
         }
         return null;
