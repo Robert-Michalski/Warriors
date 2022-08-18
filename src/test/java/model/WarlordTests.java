@@ -793,123 +793,95 @@ class WarlordTests {
     }
 
     @Test
-    @DisplayName("Given straight fight between armies of 2 warriors then first army wins")
-    void test01() {
+    @DisplayName("Given Straight Fight Between 2 Armies Each Having 1 Warrior Then First Army Wins")
+    void GivenStraightFightBetween2ArmiesEachHaving1WarriorThenFirstArmyWins() {
+        //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1);
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1);
+        //WHEN
         var result = Battle.straightFight(army1, army2);
+        //THEN
         Assertions.assertTrue(result);
     }
 
     @Test
-    @DisplayName("Given straight fight between two armies one having 1 warrior second having 2 warriors then second army wins")
-    void test02() {
+    @DisplayName("Given straight fight between two armies one having 1 warrior second having 2 warriors then first army looses")
+    void GivenStraightFightBetweenTwoArmiesOneHaving1WarriorSecondHaving2WarriorsThenFirstArmyLooses() {
+        //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1);
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 2);
+        //WHEN
         var result = Battle.straightFight(army1, army2);
+        //THEN
         Assertions.assertFalse(result);
-    }
-
-    @Test
-    @DisplayName("Given straight fight between two armies one having 1 lancer second having 2 warriors" +
-            " then lancer attacks only one enemy")
-    void test03() {
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.LANCER, 1);
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 2);
-        var result = Battle.straightFight(army1, army2);
-        Assertions.assertFalse(result);
-        //TODO how to check it ?
     }
 
     @Test
     @DisplayName("Given straight fight between two armies one having warrior second having" +
-            "warrior and heaelr then healer will not heal warrior so they will loose")
-    void test04() {
+            "warrior and healer then first army wins")
+    void GivenStraightFightBetweenTwoArmiesOneHavingWarriorSecondHavingWarriorAndHealerThenFirstArmyWins() {
+        //GIVEN
         var army1 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1);
         var army2 = new Army()
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .addUnits(Unit.UnitType.HEALER, 1);
+        //WHEN
         var result = Battle.straightFight(army1, army2);
+        //THEN
         Assertions.assertTrue(result);
     }
 
-
     @Test
-    @DisplayName("Given empty army vs army of two warriors then army 2 wins")
-    void test06() {
-        var army1 = new Army();
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 2);
-        var result = Battle.straightFight(army1, army2);
-        Assertions.assertFalse(result);
-    }
-
-    //    @Test
-//    @DisplayName("Test from site")
-//    void test08() {
-//        var army1 = new Army()
-//                .addUnits(Unit.UnitType.LANCER, 7)
-//                .addUnits(Unit.UnitType.VAMPIRE, 3)
-//                .addUnits(Unit.UnitType.HEALER, 1)
-//                .addUnits(Unit.UnitType.WARRIOR, 4)
-//                .addUnits(Unit.UnitType.HEALER, 1)
-//                .addUnits(Unit.UnitType.DEFENDER, 2);
-//        var army2 = new Army()
-//                .addUnits(Unit.UnitType.WARRIOR, 4)
-//                .addUnits(Unit.UnitType.DEFENDER, 4)
-//                .addUnits(Unit.UnitType.HEALER, 1)
-//                .addUnits(Unit.UnitType.VAMPIRE, 6)
-//                .addUnits(Unit.UnitType.LANCER, 4);
-//        var result = Battle.straightFight(army1, army2);
-//        System.out.println("army1 "+army1.getTroops());
-//        System.out.println("army2 "+army2.getTroops());
-//        Assertions.assertFalse(result);
-//    }
-    @Test
-    @DisplayName("Warrior equips a sword and has proper statistics")
-    void test10() {
+    @DisplayName("Given Warrior equips a sword then he has proper statistics")
+    void GivenWarriorEquipsASwordThenHeHasProperStatistics() {
+        //GIVEN
         var warrior = new Warrior();
         var sword = Weapon.newSword();
         var expectedHealth = warrior.getHealth() + sword.getHealth();
         var expectedAttack = warrior.getAttack() + sword.getAttack();
+        //WHEN
         warrior.equipWeapon(sword);
+        //THEN
         Assertions.assertSame(expectedHealth, warrior.getHealth());
         Assertions.assertSame(expectedAttack, warrior.getAttack());
     }
 
     @Test
-    @DisplayName("Defender equips a Shield and has proper statistics")
-    void test11() {
+    @DisplayName("Given Defender equips a shield then he has proper statistics")
+    void GivenDefenderEquipsAShieldThenHeHasProperStatistics() {
+        //GIVEN
         var defender = new Defender();
         var shield = Weapon.newShield();
         var expectedHealth = defender.getHealth() + shield.getHealth();
         var expectedAttack = defender.getAttack() + shield.getAttack();
         var expectedDefense = defender.getDefense() + shield.getDefense();
+        //WHEN
         defender.equipWeapon(shield);
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertSame(expectedHealth, defender.getHealth()),
                 () -> Assertions.assertSame(expectedAttack, defender.getAttack()),
                 () -> Assertions.assertSame(expectedDefense, defender.getDefense())
         );
-        //TODO fix log why he knows about defense = 4 before it should happen ?
     }
 
     @Test
-    @DisplayName("Vampire equips GreatAxe and has proper statistics")
-    void test12() {
+    @DisplayName("Given Vampire equips GreatAxe then he has proper statistics")
+    void GivenVampireEquipsAGreatAxeThenHeHasProperStatistics() {
+        //GIVEN
         var vampire = new Vampire();
         var greatAxe = Weapon.newGreatAxe();
         var expectedHealth = vampire.getHealth() + greatAxe.getHealth();
         var expectedAttack = vampire.getAttack() + greatAxe.getAttack();
         var expectedVampirism = vampire.getVampirism() + greatAxe.getVampirism();
+        //WHEN
         vampire.equipWeapon(greatAxe);
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertSame(expectedHealth, vampire.getHealth()),
                 () -> Assertions.assertSame(expectedAttack, vampire.getAttack()),
@@ -918,14 +890,17 @@ class WarlordTests {
     }
 
     @Test
-    @DisplayName("Vampire equips Katana and has proper statistics")
-    void test13() {
+    @DisplayName("Given Vampire equips a Katana then he has proper statistics")
+    void GivenVampireEquipsAKatanaThenHeHasProperStatistics() {
+        //GIVEN
         var vampire = new Vampire();
         var katana = Weapon.newKatana();
         var expectedHealth = vampire.getHealth() + katana.getHealth();
         var expectedAttack = vampire.getAttack() + katana.getAttack();
         var expectedVampirism = vampire.getVampirism() + katana.getVampirism();
+        //WHEN
         vampire.equipWeapon(katana);
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertSame(expectedHealth, vampire.getHealth()),
                 () -> Assertions.assertSame(expectedAttack, vampire.getAttack()),
@@ -934,14 +909,17 @@ class WarlordTests {
     }
 
     @Test
-    @DisplayName("Defender equips Katana and has proper statistics")
-    void test14() {
+    @DisplayName("Given Defender equips a Katana then he has proper statistics")
+    void GivenDefenderEquipsAKatanaThenHeHasProperStatistics() {
+        //GIVEN
         var defender = new Defender();
         var katana = Weapon.newKatana();
         var expectedHealth = defender.getHealth() + katana.getHealth();
         var expectedAttack = defender.getAttack() + katana.getAttack();
         var expectedDefense = 0;
+        //WHEN
         defender.equipWeapon(katana);
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertSame(expectedHealth, defender.getHealth()),
                 () -> Assertions.assertSame(expectedAttack, defender.getAttack()),
@@ -950,14 +928,17 @@ class WarlordTests {
     }
 
     @Test
-    @DisplayName("Healer equips MagicWand and has proper statistics")
-    void test15() {
+    @DisplayName("Given Healer equips MagicWand then he has proper statistics")
+    void GivenHealerEquipsAMagicWandThenHeHasProperStatistics() {
+        //GIVEN
         var healer = new Healer();
         var wand = Weapon.newMagicWand();
         var expectedHealth = healer.getHealth() + wand.getHealth();
         var expectedAttack = healer.getAttack() + wand.getAttack();
         var expectedHealPower = healer.getHealPower() + wand.getHealPower();
+        //WHEN
         healer.equipWeapon(wand);
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertSame(expectedHealth, healer.getHealth()),
                 () -> Assertions.assertSame(expectedAttack, healer.getAttack()),
@@ -967,13 +948,16 @@ class WarlordTests {
     }
 
     @Test
-    @DisplayName("Lancer equips Sword and has proper statistics")
-    void test16() {
+    @DisplayName("Given Lancer equips a sword then he has proper statistics")
+    void GivenLancerEquipsASwordThenHeHasProperStatistics() {
+        //GIVEN
         var lancer = new Lancer();
         var sword = Weapon.newSword();
         var expectedHealth = lancer.getHealth() + sword.getHealth();
         var expectedAttack = lancer.getAttack() + sword.getAttack();
+        //WHEN
         lancer.equipWeapon(sword);
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertSame(expectedHealth, lancer.getHealth()),
                 () -> Assertions.assertSame(expectedAttack, lancer.getAttack())
@@ -982,8 +966,9 @@ class WarlordTests {
     }
 
     @Test
-    @DisplayName("Knight gets 2 super weapons")
-    void test17() {
+    @DisplayName("Given Knight equips two custom weapons then he has proper statistics")
+    void GivenKnightEquipsTwoCustomWeaponsThenHeHasProperStatistics() {
+        //GIVEN
         var knight = new Knight();
         var superWeapon = Weapon.builder()
                 .health(50)
@@ -994,8 +979,10 @@ class WarlordTests {
                 .build();
         var expectedHealth = knight.getHealth() + superWeapon.getHealth() + superWeapon.getHealth();
         var expectedAttack = knight.getAttack() + superWeapon.getAttack() + superWeapon.getAttack();
+        //WHEN
         knight.equipWeapon(superWeapon);
         knight.equipWeapon(superWeapon);
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertEquals(expectedHealth, knight.getHealth()),
                 () -> Assertions.assertEquals(expectedAttack, knight.getAttack())
@@ -1285,8 +1272,9 @@ class WarlordTests {
     }
 
     @Test
-    @DisplayName("Warlord should be last")
-    void test34() {
+    @DisplayName("Given an army then Warlord should be in last position")
+    void GivenAnArmyThenWarlordShouldBeInLastPosition() {
+        //GIVEN
         var army = new Army()
                 .addUnits(Unit.UnitType.WARLORD, 1)
                 .addUnits(Unit.UnitType.WARRIOR, 1)
@@ -1297,34 +1285,38 @@ class WarlordTests {
                 .addUnits(Unit.UnitType.WARLORD, 1)
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .lineUp();
+        //WHEN
         army.processStrategy();
         army2.processStrategy();
         System.out.println("after shift " + army2.getTroops());
+        //THEN
         Assertions.assertTrue(army.getWarrior(army.getSize() - 1) instanceof Warlord);
         Assertions.assertTrue(army2.getWarrior(army2.getSize() - 1) instanceof Warlord);
     }
 
     @Test
-    @DisplayName("Lancers are always in the front")
-    void test36() {
+    @DisplayName("Given army with at least 1 lancer then lancer is in front of the army")
+    void GivenArmyWithAtLeast1LancerThenLancerIsInFrontOfTheArmy() {
+        //GIVEN
         var army = new Army()
                 .addUnits(Unit.UnitType.WARLORD, 1)
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .addUnits(Unit.UnitType.LANCER, 1)
                 .addUnits(Unit.UnitType.LANCER, 1)
                 .lineUp();
+        //WHEN
         army.processStrategy();
+        //THEN
         Assertions.assertAll(
                 () -> Assertions.assertTrue(army.getWarrior(0) instanceof Lancer),
                 () -> Assertions.assertTrue(army.getWarrior(1) instanceof Lancer),
                 () -> Assertions.assertTrue(army.getWarrior(army.getSize() - 1) instanceof Warlord)
         );
-        System.out.println(army.getTroops());
     }
 
     @Test
-    @DisplayName("Healers are behind first lancer")
-    void test37() {
+    @DisplayName("Given Lancer and Healer in an Army then Lancer is first and Healer is behind him")
+    void GivenLancerAndHealerInAnArmyThenLancerIsFirstAndHealerIsBehindHim() {
         var army = new Army()
                 .addUnits(Unit.UnitType.WARLORD, 1)
                 .addUnits(Unit.UnitType.WARRIOR, 1)
@@ -1341,42 +1333,23 @@ class WarlordTests {
         );
     }
 
-    @Test
-    void test38() {
-        var army = new Army()
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.WARLORD, 1)
-                .addUnits(Unit.UnitType.LANCER, 1)
-                .lineUp();
-        army.processStrategy();
-        Assertions.assertAll(
-                () -> Assertions.assertTrue(army.getWarrior(0) instanceof Lancer),
-                () -> Assertions.assertTrue(army.getWarrior(1) instanceof Healer),
-                () -> Assertions.assertTrue(army.getWarrior(2) instanceof Warlord)
-        );
-    }
 
     @Test
-    @DisplayName("If no lancers then healer is after first warriro who can fight")
-    void test39() {
+    @DisplayName("Given no lancers are present in army then first warrior that can fight will be in front")
+    void GivenNoLancersArePresentInArmyThenFirstWarriorThatCanFightWillBeInFront() {
+        //GIVEN
         var army = new Army()
                 .addUnits(Unit.UnitType.HEALER, 1)
                 .addUnits(Unit.UnitType.WARLORD, 1)
                 .addUnits(Unit.UnitType.WARRIOR, 1)
                 .lineUp();
+        //WHEN
         army.processStrategy();
+        //THEN
+        Assertions.assertTrue(army.getWarrior(0) instanceof Warrior);
 
     }
 
-    @Test
-    void test40() {
-        var army = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.WARLORD, 3)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .lineUp();
-        army.processStrategy();
-    }
 
     @Test
     @DisplayName("Warlord smoke test")
@@ -1545,51 +1518,6 @@ class WarlordTests {
         Assertions.assertFalse(result);
     }
 
-    @Test
-    void test48() {
-        var army3 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.LANCER, 1)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.DEFENDER, 2)
-                .lineUp();
-        var army4 = new Army()
-                .addUnits(Unit.UnitType.VAMPIRE, 3)
-                .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.LANCER, 2)
-                .lineUp();
-        Battle.fight(army3, army4);
-    }
 
-    @Test
-    void test49() {
-        var army1 = new Army()
-                .addUnits(Unit.UnitType.LANCER, 1)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .lineUp();
-        var army2 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .lineUp();
-
-        Battle.fight(army1, army2);
-    }
-    @Test
-    void test50(){
-        var army3 = new Army()
-                .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.LANCER, 1)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.DEFENDER, 2)
-                .lineUp();
-        var army4 = new Army()
-                .addUnits(Unit.UnitType.VAMPIRE, 3)
-                .addUnits(Unit.UnitType.WARRIOR, 1)
-                .addUnits(Unit.UnitType.HEALER, 1)
-                .addUnits(Unit.UnitType.LANCER, 2)
-                .lineUp();
-        Battle.fight(army3, army4);
-    }
 }
 
