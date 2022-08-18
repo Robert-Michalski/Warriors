@@ -35,3 +35,13 @@ U
 %src/main/java/interfaces/IWeapon.java,a\2\a2e24f68f45a208cb10fb4b4839a06f9025b8bf1
 V
 &src/main/java/interfaces/IWarrior.java,b\0\b07c5ee529214aaa6da0922363a7fd919eb021f0
+U
+%src/test/java/model/WarlordTests.java,4\6\46ffac4e32ca4c92dd6cd0f3b60740e68e9c59e2
+P
+ src/main/java/model/Warrior.java,6\a\6a713405c113fc57c7998695fc2ffcb98641f66e
+O
+src/main/java/model/Weapon.java,5\9\598c1ecef2b742a613d2f572e142c76bb1163311
+M
+src/main/java/model/Army.java,e\d\ed35fb0ea162adc4bd9c95ec9a789cc99c8eb1af
+Q
+!src/main/java/service/Battle.java,8\8\8803fe46ab9b1a326cd0e2cf7a44aed7b9eea242
