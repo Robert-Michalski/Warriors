@@ -1517,15 +1517,36 @@ class WarlordTests {
         //THEN
         Assertions.assertFalse(result);
     }
+
     @Test
-    void test48(){
+    void test48() {
         var army1 = new Army()
-                .addUnits(Unit.UnitType.ARCHER, 1)
-                .addUnits(Unit.UnitType.WARRIOR,1).lineUp();
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .addUnits(Unit.UnitType.ARCHER, 1).lineUp();
         var army2 = new Army()
                 .addUnits(Unit.UnitType.KNIGHT, 10).lineUp();
-        army1.getWarrior(0).hit(army2.getWarrior(0));
+        Battle.fight(army1, army2);
         System.out.println(army2);
+    }
+
+    @Test
+    void test49() {
+        var unit1 = new Archer();
+        var unit2 = new Warrior();
+        unit1.hit(unit2);
+        System.out.println(unit2);
+    }
+
+    @Test
+    void test50() {
+        var army1 = new Army()
+                .addUnits(Unit.UnitType.ARCHER, 1)
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .lineUp();
+        var army2 = new Army()
+                .addUnits(Unit.UnitType.WARRIOR, 1)
+                .lineUp();
+        Battle.fight(army1, army2);
     }
 }
 

@@ -40,9 +40,14 @@ public class Warrior implements IWarrior {
                 logger.debug("{} attacks {}", arrowRainCommand.getArcher(), warrior);
                 warrior.reduceHealthBy(arrowRainCommand.getArcher().getAttack());
                 if (getWarriorBehind() != null) {
-                    if(arrowRainCommand.getArcher().getAttack()>0)
-                    arrowRainCommand.getArcher().setAttack(arrowRainCommand.getArcher().getAttack()-1);
+                    if(arrowRainCommand.getArcher().getAttack()>0) {
+                        arrowRainCommand.getArcher().setAttack(arrowRainCommand.getArcher().getAttack() - 1);
+                    }
+                    if(arrowRainCommand.getArcher().getArrows()>0 && arrowRainCommand.getArcher().getAttack()>0)
                     warrior.process(new ArrowRainCommand(arrowRainCommand.getArcher()), warrior.getWarriorBehind());
+                    else {
+                        arrowRainCommand.getArcher().setAttack(arrowRainCommand.getArcher().getInitialAttack());
+                    }
                 }
             }
         }
