@@ -6,5 +6,6 @@ public interface IWeapon {
     int getDefense();
     int getVampirism();
     int getHealPower();
+    int getArrows();
 
 }

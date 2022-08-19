@@ -2,6 +2,7 @@ package model;
 
 import interfaces.HasPiercing;
 import interfaces.IWarrior;
+import interfaces.IWeapon;
 import interfaces.command.ArrowRainCommand;
 import interfaces.command.ICommand;
 
@@ -30,6 +31,14 @@ public class Archer extends Warrior {
         }
     }
 
+    @Override
+    public void equipWeapon(IWeapon weapon) {
+        addArrows(weapon.getArrows());
+        super.equipWeapon(weapon);
+    }
+    public void addArrows(int amount){
+        this.arrows += amount;
+    }
     @Override
     public void reduceHealthBy(int attack) {
         this.health -= attack;

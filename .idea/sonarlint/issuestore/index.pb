@@ -27,7 +27,5 @@ P
  src/main/java/model/Vampire.java,7\8\78b1f5607c5de37ed5f17dc131173c8e832a9eec
 Z
 *src/main/java/interfaces/HasVampirism.java,9\9\990461e4a5791e1385b434355a8aac149c134376
-U
-%src/main/java/interfaces/IWeapon.java,a\2\a2e24f68f45a208cb10fb4b4839a06f9025b8bf1
 V
 &src/main/java/interfaces/IWarrior.java,b\0\b07c5ee529214aaa6da0922363a7fd919eb021f0

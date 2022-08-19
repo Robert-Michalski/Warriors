@@ -15,7 +15,7 @@ public class Weapon implements IWeapon {
     private int defense;
     private int vampirism;
     private int healPower;
-    private int destruction=1;
+    private int arrows;
     private static final WeaponBuilder Sword =
             Weapon.builder()
                     .health(5)
@@ -42,20 +42,33 @@ public class Weapon implements IWeapon {
                     .health(30)
                     .attack(3)
                     .healPower(3);
-    public static IWeapon newSword(){
+    private static final WeaponBuilder Quiver =
+            Weapon.builder()
+                    .attack(2)
+                    .arrows(3);
+
+    public static IWeapon newSword() {
         return Weapon.Sword.build();
     }
-    public static IWeapon newShield(){
+
+    public static IWeapon newShield() {
         return Weapon.Shield.build();
     }
-    public static IWeapon newGreatAxe(){
+
+    public static IWeapon newGreatAxe() {
         return Weapon.GreatAxe.build();
     }
-    public static IWeapon newKatana(){
+
+    public static IWeapon newKatana() {
         return Weapon.Katana.build();
     }
-    public static IWeapon newMagicWand(){
+
+    public static IWeapon newMagicWand() {
         return Weapon.MagicWand.build();
+    }
+
+    public static IWeapon newQuiver() {
+        return Weapon.Quiver.build();
     }
 
 
