@@ -15,6 +15,7 @@ public class Weapon implements IWeapon {
     private int defense;
     private int vampirism;
     private int healPower;
+    private int destruction=1;
     private static final WeaponBuilder Sword =
             Weapon.builder()
                     .health(5)
