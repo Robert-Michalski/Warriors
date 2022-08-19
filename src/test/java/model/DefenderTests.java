@@ -42,9 +42,9 @@ public class DefenderTests {
         var army2 = new Army()
                 .addUnits(Unit.UnitType.LANCER, 1);
         //WHEN
-        army2.getTroops().get(0).hit(army1.getTroops().get(0));
+        army2.getWarrior(0).hit(army1.getTroops().get(0));
         //THEN
-        Assertions.assertSame(60, army1.getTroops().get(1).getHealth());
+        Assertions.assertSame(60, army1.getWarrior(1).getHealth());
     }
 
     @Test
@@ -73,9 +73,9 @@ public class DefenderTests {
         var army2 = new Army()
                 .addUnits(Unit.UnitType.LANCER, 1);
         //WHEN
-        army2.getTroops().get(0).hit(army1.getTroops().get(0));
+        army2.getWarrior(0).hit(army1.getWarrior(0));
         //THEN
-        Assertions.assertSame(48, army1.getTroops().get(1).getHealth());
+        Assertions.assertSame(48, army1.getWarrior(1).getHealth());
     }
 
 }
