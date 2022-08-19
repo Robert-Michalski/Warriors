@@ -6,19 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class DefenderTests {
     @Test
-    @DisplayName("Given Vampire attacks Defender then Defenders looses 2 health")
-    void GivenVampireAttacksDefenderThenDefenderLooses2Health() {
-        //GIVEN
-        var vampire = new Vampire();
-        var defender = new Defender();
-        var damageReduction = vampire.getAttack() - defender.getDefense();
-        var expectedHealth = defender.getInitialHealth() - damageReduction;
-        //WHEN
-        vampire.hit(defender);
-        //THEN
-        Assertions.assertSame(expectedHealth, defender.getHealth());
-    }
-    @Test
     @DisplayName("Given Rookie attacks Defender then Defender looses 0 health")
     void GivenRookieAttacksDefenderThenDefenderLooses0Health() {
         //GIVEN
@@ -44,6 +31,7 @@ public class DefenderTests {
         //THEN
         Assertions.assertSame(expectedHealth, defender.getHealth());
     }
+
     @Test
     @DisplayName("Given army of two defenders and army of 1 lancer when lancer hits first defender then second gets no damage")
     void GivenArmyOf2DefendersAndArmyOf1LancerThenWhenLancerHitsFirstDefenderSecondLoosesNoHealth() {
@@ -58,6 +46,21 @@ public class DefenderTests {
         //THEN
         Assertions.assertSame(60, army1.getTroops().get(1).getHealth());
     }
+
+    @Test
+    @DisplayName("Given Vampire attacks Defender then Defenders looses 2 health")
+    void GivenVampireAttacksDefenderThenDefenderLooses2Health() {
+        //GIVEN
+        var vampire = new Vampire();
+        var defender = new Defender();
+        var damageReduction = vampire.getAttack() - defender.getDefense();
+        var expectedHealth = defender.getInitialHealth() - damageReduction;
+        //WHEN
+        vampire.hit(defender);
+        //THEN
+        Assertions.assertSame(expectedHealth, defender.getHealth());
+    }
+
 
     @Test
     @DisplayName("Given army with defender and warrior and army with lancer then warrior looses correct amount of health")

@@ -84,7 +84,7 @@ class BattleTests {
 
     }
 
-  
+
 
     @Test
     @DisplayName("Given Lancer hits Warrior then Warrior looses correct amount of health")
