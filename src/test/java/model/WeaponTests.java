@@ -7,6 +7,64 @@ import service.Battle;
 
 public class WeaponTests {
     @Test
+    void SmokeShowWeapons() {
+        var ogre = new Warrior();
+        var lancelot = new Knight();
+        var richard = new Defender();
+        var eric = new Vampire();
+        var freelancer = new Lancer();
+        var priest = new Healer();
+        var sword = Weapon.newSword();
+        var shield = Weapon.newShield();
+        var axe = Weapon.newGreatAxe();
+        var katana = Weapon.newKatana();
+        var wand = Weapon.newMagicWand();
+        var wunderWaffe = Weapon.builder()
+                .health(50)
+                .attack(10)
+                .defense(5)
+                .vampirism(150)
+                .healPower(8)
+                .build();
+        ogre.equipWeapon(sword);
+        ogre.equipWeapon(shield);
+        ogre.equipWeapon(wunderWaffe);
+        lancelot.equipWeapon(wunderWaffe);
+        richard.equipWeapon(shield);
+        eric.equipWeapon(wunderWaffe);
+        freelancer.equipWeapon(axe);
+        freelancer.equipWeapon(katana);
+        priest.equipWeapon(wand);
+        priest.equipWeapon(shield);
+
+        var myArmy = new Army()
+                .addUnits(Unit.UnitType.KNIGHT, 1)
+                .addUnits(Unit.UnitType.LANCER, 1)
+                .lineUp();
+        var enemyArmy = new Army()
+                .addUnits(Unit.UnitType.VAMPIRE, 1)
+                .addUnits(Unit.UnitType.HEALER, 1)
+                .lineUp();
+        myArmy.equipWarriorAtPosition(0, axe);
+        myArmy.equipWarriorAtPosition(1, wunderWaffe);
+        enemyArmy.equipWarriorAtPosition(0, katana);
+        enemyArmy.equipWarriorAtPosition(1, wand);
+
+        Assertions.assertAll(
+                () -> Assertions.assertSame(125, ogre.getHealth()),
+                () -> Assertions.assertSame(17, lancelot.getAttack()),
+                () -> Assertions.assertSame(4, richard.getDefense()),
+                () -> Assertions.assertEquals(200, eric.getVampirism()),
+                () -> Assertions.assertSame(15, freelancer.getHealth()),
+                () -> Assertions.assertSame(5, priest.getHealPower()),
+                () -> Assertions.assertFalse(Battle.fight(ogre, eric)),
+                () -> Assertions.assertFalse(Battle.fight(priest, richard)),
+                () -> Assertions.assertTrue(Battle.fight(lancelot, freelancer)),
+                () -> Assertions.assertTrue(Battle.fight(myArmy, enemyArmy))
+        );
+        System.out.println(myArmy.getTroops());
+    }
+    @Test
     @DisplayName("Given Warrior equips a sword then he has proper statistics")
     void GivenWarriorEquipsASwordThenHeHasProperStatistics() {
         //GIVEN
