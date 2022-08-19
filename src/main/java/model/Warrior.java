@@ -43,7 +43,7 @@ public class Warrior implements IWarrior {
                     if(arrowRainCommand.getArcher().getAttack()>0) {
                         arrowRainCommand.getArcher().setAttack(arrowRainCommand.getArcher().getAttack() - 1);
                     }
-                    if(arrowRainCommand.getArcher().getArrows()>0 && arrowRainCommand.getArcher().getAttack()>0)
+                    if(arrowRainCommand.getArcher().getArrowsPacks()>0 && arrowRainCommand.getArcher().getAttack()>0)
                     warrior.process(new ArrowRainCommand(arrowRainCommand.getArcher()), warrior.getWarriorBehind());
                     else {
                         arrowRainCommand.getArcher().setAttack(arrowRainCommand.getArcher().getInitialAttack());

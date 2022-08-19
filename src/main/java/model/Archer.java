@@ -1,17 +1,15 @@
 package model;
 
-import interfaces.HasPiercing;
 import interfaces.IWarrior;
 import interfaces.IWeapon;
 import interfaces.command.ArrowRainCommand;
-import interfaces.command.ICommand;
 
 public class Archer extends Warrior {
     private int initialHealth = 40;
     private int health;
     private int initialAttack = 6;
     private int attack = 6;
-    private int arrows = 3;
+    private int arrowsPacks = 3;
 
     public Archer() {
         this.health = initialHealth;
@@ -22,9 +20,9 @@ public class Archer extends Warrior {
         if (getWarriorInFront() == null) {
             logger.debug("archer cannot attack if he has no cover");
         } else {
-            if (arrows > 0) {
+            if (arrowsPacks > 0) {
                 opponent.process(new ArrowRainCommand(this), opponent);
-                arrows -= 1;
+                arrowsPacks -= 1;
             } else {
                 logger.debug("archer has no arrows");
             }
@@ -33,11 +31,11 @@ public class Archer extends Warrior {
 
     @Override
     public void equipWeapon(IWeapon weapon) {
-        addArrows(weapon.getArrows());
+        addArrows(weapon.getArrowsPacks());
         super.equipWeapon(weapon);
     }
     public void addArrows(int amount){
-        this.arrows += amount;
+        this.arrowsPacks += amount;
     }
     @Override
     public void reduceHealthBy(int attack) {
@@ -82,12 +80,12 @@ public class Archer extends Warrior {
                 '}';
     }
 
-    public int getArrows() {
-        return arrows;
+    public int getArrowsPacks() {
+        return arrowsPacks;
     }
 
-    public void setArrows(int arrows) {
-        this.arrows = arrows;
+    public void setArrowsPacks(int arrowsPacks) {
+        this.arrowsPacks = arrowsPacks;
     }
 
     public int getInitialAttack() {

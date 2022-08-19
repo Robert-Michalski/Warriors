@@ -15,7 +15,7 @@ public class Weapon implements IWeapon {
     private int defense;
     private int vampirism;
     private int healPower;
-    private int arrows;
+    private int arrowsPacks;
     private static final WeaponBuilder Sword =
             Weapon.builder()
                     .health(5)
@@ -45,7 +45,7 @@ public class Weapon implements IWeapon {
     private static final WeaponBuilder Quiver =
             Weapon.builder()
                     .attack(2)
-                    .arrows(3);
+                    .arrowsPacks(3);
 
     public static IWeapon newSword() {
         return Weapon.Sword.build();
