@@ -2,6 +2,7 @@ package model;
 
 import interfaces.IWarrior;
 import interfaces.IWeapon;
+import interfaces.command.ArrowRainCommand;
 import interfaces.command.HealCommand;
 import interfaces.command.ICommand;
 
@@ -29,12 +30,24 @@ public class Warrior implements IWarrior {
         growAttackByAmount(weapon.getAttack());
         logger.info("new statistics {}", this);
     }
+
     @Override
     public void process(ICommand command, IWarrior warrior) {
         if (getWarriorBehind() != null) {
+            if(!(command instanceof ArrowRainCommand))
             warrior.process(command, warrior.getWarriorBehind());
+            if(command instanceof ArrowRainCommand arrowRainCommand){
+                logger.debug("{} attacks {}", arrowRainCommand.getArcher(), warrior);
+                warrior.reduceHealthBy(arrowRainCommand.getArcher().getAttack());
+                if (getWarriorBehind() != null) {
+                    warrior.process(new ArrowRainCommand(arrowRainCommand.getArcher()), warrior.getWarriorBehind());
+                }
+            }
         }
+
     }
+
+
 
     @Override
     public void reduceHealthBy(int attack) {
@@ -44,6 +57,7 @@ public class Warrior implements IWarrior {
         int amount = healthBeforeAttack - healthAfterAttack;
         logger.trace("{} took {} damage", this, amount);
     }
+
     public void growInitialHealthByAmount(int amount) {
         setInitialHealth(getInitialHealth() + amount);
         setHealth(getInitialHealth());
@@ -52,6 +66,7 @@ public class Warrior implements IWarrior {
     public void growAttackByAmount(int amount) {
         setAttack(getAttack() + amount);
     }
+
     @Override
     public int getAttack() {
         return attack;

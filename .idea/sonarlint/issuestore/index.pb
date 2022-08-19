@@ -1,8 +1,4 @@
 
-M
-src/main/java/model/Unit.java,6\0\60591e40ef52e000bee7dd8947b2c8fbffcb2f90
-W
-'src/main/java/model/WarriorFactory.java,b\2\b2334b730015c95970a7332def9e17b580b7065a
 \
 ,src/main/java/interfaces/CanWieldWeapon.java,e\7\e72a5a5c56022dae7149d7241a3597046793c9cd
 7

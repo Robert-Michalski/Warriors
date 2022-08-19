@@ -27,6 +27,9 @@ public class WarriorFactory {
             case ROOKIE -> {
                 return new Rookie();
             }
+            case ARCHER -> {
+                return new Archer();
+            }
             default -> {
                 throw new IllegalArgumentException("NO SUCH TYPE");
             }

@@ -1,4 +1,15 @@
 package interfaces.command;
 
-public class ArrowRainCommand implements ICommand{
+import model.Archer;
+
+public class ArrowRainCommand implements ICommand {
+    Archer archer;
+
+    public ArrowRainCommand(Archer archer) {
+        this.archer = archer;
+    }
+
+    public Archer getArcher() {
+        return archer;
+    }
 }

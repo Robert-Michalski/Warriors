@@ -5,11 +5,10 @@ import interfaces.IWarrior;
 import interfaces.command.ArrowRainCommand;
 import interfaces.command.ICommand;
 
-public class Archer extends Warrior implements HasPiercing {
+public class Archer extends Warrior{
     private int initialHealth = 40;
     private int health;
     private int attack = 2;
-    private int piercing = 50;
 
     public Archer() {
         this.health=initialHealth;
@@ -17,7 +16,7 @@ public class Archer extends Warrior implements HasPiercing {
 
     @Override
     public void hit(IWarrior opponent) {
-        opponent.process(new ArrowRainCommand(), opponent);
+        opponent.process(new ArrowRainCommand(this), opponent);
     }
 
     @Override
@@ -51,11 +50,10 @@ public class Archer extends Warrior implements HasPiercing {
     }
 
     @Override
-    public int getPiercing() {
-        return piercing;
-    }
-
-    public void setPiercing(int piercing) {
-        this.piercing = piercing;
+    public String toString() {
+        return "Archer{" +
+                "health=" + health +
+                ", attack=" + attack +
+                '}';
     }
 }
