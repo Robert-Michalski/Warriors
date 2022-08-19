@@ -8,7 +8,7 @@ import interfaces.command.ICommand;
 public class Archer extends Warrior{
     private int initialHealth = 40;
     private int health;
-    private int attack = 2;
+    private int attack = 6;
 
     public Archer() {
         this.health=initialHealth;
